@@ -1,0 +1,344 @@
+************************************************************************************************************************
+const App=()=> {
+  
+  const [data,setData]=useState({uname:'',pwd:''});
+  const submit=()=>{
+   alert(data.uname+"  "+data.pwd);
+  };
+  const f1=(event)=>{
+    const {name,value}=event.target;
+    setData(({...data,[name]:value}));
+  };
+  
+  return( 
+ <div>
+ <h1> Shankar I Love you , Miss you </h1> 
+ <form onSubmit={submit}>
+
+  Username <input type="text" name="uname" value={data.uname} onChange={f1}/> <br></br>
+  Password <input type="text" name="pwd" value={data.pwd}  onChange={f1}/><br></br>
+  <button type="submit"> Submit </button>
+ </form>
+</div>
+);
+}
+export default App;
+
+***********************************************************************************************************
+
+const Test=()=>{
+const [data,setData]=useState([{uname:'',pwd:'',cert:'',gender:''}]);
+const [temp,setTemp]=useState({uname:'',pwd:'',cert:'',gender:''});
+const f1=(e)=>{
+  const {name,value,type}= e.target;
+  //
+  let u= {...temp,[name]:value};
+  setTemp(u);
+  
+
+
+}
+const add=(e)=>{
+e.preventDefault();
+  setData([...data, temp]);
+}
+
+const display=(e)=>{
+  e.preventDefault();
+alert(temp.uname+"  "+temp.pwd+"  "+temp.cert+"  "+temp.gender);
+
+}
+    return(
+
+<div>
+<form>
+    Uname <input type="text" name="uname" onChange={f1}/><br />
+  pwd <input type="text" name="pwd" onChange={f1} /><br />
+
+<select name="cert" onChange={f1}> 
+  <option value="Dip"> Diploma </option>
+  <option value="PG Dip"> Pg Diploma </option>
+  <option value="Adv Dip"> Adv Diploma </option>
+
+</select>
+   <input type="checkbox" name="courses" value="c" />  C < br />
+   <input type="checkbox" name="courses" value="c++" /> C++  < br />
+   <input type="checkbox" name="courses" value="java" /> Java < br />
+<input type="radio" name="gender" value="Male"  /> Male < br/>
+<input type="radio" name="gender" value="Female"  /> FeMale < br/>
+<button onClick={add}> Add </button>
+<button onClick={display}> Display </button>
+</form>
+
+<table  border="1">
+
+        {
+          data.map((val,ind)=>(<>
+          <tr>
+            <td> {val.uname}  </td>
+             <td> {val.pwd}  </td> 
+              <td> {val.cert} </td>
+              <td> {val.gender} </td>
+              </tr>
+                 </>
+          
+          ))
+        }
+  
+
+
+</table>
+
+
+</div>
+
+    )
+
+}
+export {customer,user,f1};
+export default Test;
+
+*****************************************************************************************************************************
+
+
+import { useState } from "react";
+
+const Demo=()=>{
+
+   const data={cid:0,cname:'',courses:[],gender:'',cert:''};
+   const [mydata,setData]= useState(data);
+   const handleChange=(e)=>{
+   const {name,value,type,checked}= e.target;
+   
+       if(type==='checkbox'){
+       const mycourses={...mydata,courses:checked?[...mydata.courses,value]: mydata.courses.filter((c)=>c!==value)};
+      setData(mycourses);  
+    }
+       else
+
+         setData({...mydata,[name]:value});
+    
+   }
+   const show=(e)=>{
+    e.preventDefault();
+        alert(JSON.stringify(mydata));
+   }
+    return(
+ <div>
+        <h1> Hey Demo  </h1>
+
+         <form onSubmit={show}>
+           Cid  <input type="text" name="cid"  onChange={handleChange} /> <br />
+           Cname <input type="text" name="cname" onChange={handleChange}  /> < br />
+          <input type="checkbox" name="courses" value="C" onChange={handleChange} /> C <br />
+          <input type="checkbox" name="courses" value="C++" onChange={handleChange} />  C++ <br />
+          <input type="checkbox" name="courses" value="Java" onChange={handleChange} /> Java <br />
+
+          <input type="radio" name="gender" value="Male" onChange={handleChange} /> Male <br />
+          <input type="radio" name="gender" value="Female" onChange={handleChange} /> Female <br />
+
+           <select name="cert" onChange={handleChange} >
+
+            <option value="Dip" > Diploma </option>
+            <option value="Pg Dip" > Pg Diploma </option>
+            <option value="Adv Dip" > Adv Diploma </option>
+
+           </select>
+  <button type="submit" > Submit </button>
+
+         </form>
+
+</div>
+
+)
+
+}
+export default Demo;
+
+*********************************************************************************************************
+
+
+function App() {
+ 
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+
+  const handleChange = (value) => {
+    setEmail(value);
+    let regex=/^[0-9]{10}$/;
+    if (value==='') {
+      setError('Name must be in range 1..10');
+    } else {
+      setError('');
+    }
+  };
+
+  return (
+    <div>
+      <h3>Validation</h3>
+      <input type="email" placeholder="Email" value={email} onChange={(e) => handleChange(e.target.value)} />
+      {error && <p style={{ color: 'red' }}>Rakesh {error}</p>}
+    </div>
+  );
+
+  
+}
+
+
+export default App;
+*************************************************************************************************************************
+
+function App() {
+ 
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [mobNo, setMobNo]= useState(0);
+  const [cust,setCust]= useState({email:'',mobNo:0});
+  const handleChange = (event) => {
+    const {name,value}=event.target;
+      
+    setCust({...cust,[name]:value});
+       if(name==='email' &&  value.trim()==='saba'){
+      
+      setError('Email must be enetered');
+       }
+       else if(name==='mobNo' && value==='1234'){
+        setError('Mob invalie');
+       }
+      else
+      setError('');
+
+       
+  };
+  const f1=(e)=>{
+        alert(JSON.stringify(cust));
+        e.preventDefault();
+  }
+
+  return (
+    <div>
+      <h3>Validation</h3>
+      <h1> {cust.email}  {cust.mobNo} {error} </h1>
+    <form onSubmit={f1}>
+      <input name="email"   onChange={handleChange} />
+      <input name="mobNo" onChange={handleChange} />
+      
+      {error && <p style={{ color: 'red' }}>Rakesh {error}</p>}
+    <button type="submit"> Submit </button>
+    </form>
+    </div>
+  );
+
+  
+}
+
+
+export default App;
+************************************************************************************************
+npm install react-hook-form
+
+
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+ const MyForm=()=> {
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+
+    alert(  'Form Data:'+data.name+"  "+data.email);
+  };
+
+  return (
+
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        
+        <label>Name:</label>
+        <input 
+          {...register('name', { 
+            required: 'Name is required' ,
+            
+          
+        
+        })}
+        />
+        {errors.name && <p>{errors.name.name} :- {errors.name.message}</p>}
+      </div>
+
+      <div>
+        <label>Email:</label>
+        <input
+          {...register('email', {
+            required: 'Email is required',
+            pattern: {
+              value: /^\S+@\S+$/i,
+              message: 'Invalid email format',
+            },
+          })}
+        />
+        {errors.email && <p>{errors.email.message}</p>}
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+export default MyForm;
+
+************************************************************************************************
+npm install formik yup
+
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+
+// Validation schema using Yup
+const validationSchema = Yup.object({
+  username: Yup.string()
+    .required('Username is required'),
+  password: Yup.string()
+    .min(6, 'Password must be at least 6 characters')
+    .required('Password is required'),
+});
+
+function FormikLoginForm() {
+  return (
+    <div style={{ padding: '20px' }}>
+      <h2>Login Form</h2>
+      <Formik
+        initialValues={{ username: '', password: '' }}
+        validationSchema={validationSchema}
+        onSubmit={(values) => {
+          alert(`Logged in as ${values.username}`);
+        }}
+      >
+        <Form>
+          <div>
+            <label>Username:</label>
+            <Field name="username" type="text" />
+            <ErrorMessage name="username" component="div" style={{ color: 'red' }} />
+          </div>
+
+          <div>
+            <label>Password:</label>
+            <Field name="password" type="password" />
+            <ErrorMessage name="password" component="div" style={{ color: 'red' }} />
+          </div>
+
+          <button type="submit">Login</button>
+        </Form>
+      </Formik>
+    </div>
+  );
+}
+
+export default FormikLoginForm;
+
+************************************************************************************************************************************

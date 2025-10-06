@@ -1,0 +1,702 @@
+AWS
+
+1. Compute    
+          EC2
+          Lamda
+          Elastic Beanstalk
+2. Storage
+        S3 Simple Storage Service
+        Elastic Block Store( EBS)
+3. Database ( serverless service) 
+     RDS--
+    Aurora mysql ,postgresql,SQL, SqlServer
+   dynamo Db-- no sql
+
+4. Network & Content Delivery
+   VPC-- Virtual Private cloud
+  Cloud Front
+  ELB
+  API gateway
+
+
+
+5. Analytics
+
+6. ML
+
+
+7. Security
+          Iam -- Identity and Access Management
+          KMS--Key Management Service  ( Encry & Decrypt data) 
+8. Containers
+
+9. Monitoring
+
+
+********************************************************************************
+https://docs.github.com/en/copilot/tutorials
+
+***********************************************************************************
+SonarQube
+
+Name: SonarLint
+Location: https://eclipse-uc.sonarlint.org
+
+************************************************************************************
+https://labs.play-with-docker.com
+
+
+
+hub.docker.com
+
+docker -v
+
+docker pull hello-world
+
+docker run hello-world
+
+docker images
+
+docker ps
+
+// to see all the containers
+docker ps -a
+ // to see docker container running
+docker ps
+// to stop container
+
+docker stop <containerid>
+
+// to remove container
+
+docker rm <container-id>
+
+// to remove image
+ docker rmi <image-name> or<imageid>
+docker rmi  hello-world
+
+
+docker run -d --name test -e MYSQL_ROOT_PASSWORD=cts -p3308:3306  mysql:8.0
+
+
+
+docker exec -it a57e2bfeb36d   mysql -uroot -p
+
+ docker pull nginx
+
+docker run -d --name mynginx -p 9091:80  nginx:latest
+                   // you should see now http://localhost:9091 nginx default web page
+
+
+docker run -d --name mynginx1 -p 9092:80 -v /d/dockerdemo/janu.html:/usr/share/nginx/html/janu.html:ro nginx:latest
+		// http://localhost:9092/janu.html    
+
+docker pull ubuntu
+
+docker run -d --name mybunty  ubuntu
+
+docker run -it --name mybunty ubuntu
+
+
+docker run --name javaContainer -it -d openjdk
+
+docker exec -it javaContainer jshell
+
+
+1. create Dockerfile in manoj folder
+
+FROM openjdk:17
+COPY . /app
+WORKDIR /app
+RUN javac Main.java
+CMD ["java", "Main"]
+
+2. create Main.java file 
+
+
+3. docker build -t my-java-app .
+
+4. docker run my-java-app
+
+
+docker network create mynetwork
+
+docker run -d --network mynetwork --name app1 nginx
+docker run -d --network mynetwork --name app2 nginx
+
+
+docker run -it --rm --network mynetwork busybox sh
+
+ping app2
+
+
+// rest application
+
+docker build -t my-java-app .
+
+docker run -d -p 9091:8080 my-java-app
+
+// docker-compose
+
+docker-compose up -d --build
+docker-compose down -v
+docker-compose logs -f app
+
+  or
+
+docker-compose down –v  ( -v optional)
+docker-compose build --no-cache
+docker-compose up –d
+
+
+
+
+****************************************************************************************************************
+npm cache clean --force
+npm config set registry https://registry.npmmirror.com
+npm create vite@latest
+cd vite-project
+npm install 
+npm run dev
+
+npm config set registry https://registry.npmjs.org
+***********************************************************************************************************************
+
+		   <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
+	  <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+
+	@Bean
+	public SecurityFilterChain secure(HttpSecurity http) throws Exception {
+		  http
+		  .authorizeHttpRequests()
+		  .requestMatchers("/secure")
+		  .authenticated()
+		  .anyRequest()
+		  .permitAll()
+		  .and()
+		  .formLogin()
+		  .defaultSuccessUrl("/basiclogin",true)
+		  .permitAll()
+		  .and()
+		  .logout()
+		  .permitAll()
+		  .and()
+		  .oauth2Login()
+		  .defaultSuccessUrl("/oauthlogin")
+		  .permitAll();
+		  
+		  return http.build();
+	
+		
+	}
+
+@GetMapping("/secure")
+	public String getName(Authentication awt) {
+		if(awt instanceof UsernamePasswordAuthenticationToken)
+		return "basic login";
+		if( awt instanceof OAuth2AuthenticationToken)
+			return "oauth Login";
+		return "other";
+	}
+
+spring.security.oauth2.client.registration.github.client-id=Ov23liWZCggJPldO0UsP
+spring.security.oauth2.client.registration.github.client-secret=2f0c823bc10e5bc84d88fc591cbc95b366e9d389
+
+
+Resource Owner :- YOu (user)
+Client--  Your Photo app
+Authorization Server--Google Oauth Server
+Resource Server--Google Photos
+
+http://localhost:9091/hello
+http://localhost:9091/login/oauth2/code/github
+
+
+
+
+************************************************************************************************
+logging.level.com.cts=DEBUG
+
+logging.level.com.cts.service=INFO
+
+logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n
+
+logging.pattern.file=%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+
+logging.file.name=logs/app.log
+
+
+Trace
+Debug
+Info
+Warn
+Error
+
+************************************************************************************
+<dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-core</artifactId>
+    <version>5.7.0</version>
+    <scope>test</scope>
+</dependency>
+
+<dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-junit-jupiter</artifactId>
+    <version>5.7.0</version> 
+    <scope>test</scope>
+</dependency>
+
+
+
+@ExtendWith(MockitoExtension.class)
+
+@Suite
+@SelectClasses({MyTest.class, MyTest1.class})
+
+
+
+*******************************
+http://localhost:8080
+http://localhost:8080/login/oauth2/code/github
+
+************************************************
+ConfigServer
+
+
+	<dependency>
+        	<groupId>org.springframework.cloud</groupId>
+        	<artifactId>spring-cloud-config-server</artifactId>
+    	</dependency>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>2024.0.2</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+server.port=9091
+
+application.yml
+
+spring:
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:./config-repo
+
+
+Note:- create a folder config-repo in project path and create  myclientservice.yml
+
+mymessage:
+  msg: Hello from local config
+
+
+
+
+
+MyClientService
+
+	<dependency>
+        	<groupId>org.springframework.cloud</groupId>
+        	<artifactId>spring-cloud-starter-config</artifactId>
+    	</dependency>
+
+<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>2024.0.2</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+
+server.port=9092
+
+spring:
+  application:
+    name: myservice
+  config:
+    import: configserver:http://localhost:9091
+
+
+
+
+
+*************************************************************************************************************
+
+	@Bean
+	public SecurityFilterChain secureFilter(HttpSecurity http) throws Exception{
+		
+		http
+		 .formLogin()
+		 .defaultSuccessUrl("/hello",true)
+		 .permitAll()
+		 .and()
+		 .logout()
+		 .permitAll()
+		 .and()
+		 .authorizeHttpRequests()
+         .requestMatchers("/admin").hasRole("admin")
+         .requestMatchers("/user").hasRole("user")
+         .anyRequest().authenticated();
+		return http.build();
+
+
+	}
+	
+	@Bean
+	public UserDetailsService userDetailService() {
+		return new InMemoryUserDetailsManager(
+				User.withUsername("anil")
+				.password(passwordEncoder().encode("anil"))
+				.authorities("ROLE_admin")
+				.build(),
+				
+				User.withUsername("vinod")
+				.password(passwordEncoder().encode("vinod"))
+				.authorities("ROLE_user")
+				.build()
+				
+				
+				
+				);
+	}
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+
+
+
+
+
+    <dependency>
+	<groupId>io.github.resilience4j</groupId>
+	<artifactId>resilience4j-spring-boot2</artifactId>
+	<version>2.2.0</version>
+    </dependency>
+
+
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-gateway</artifactId>
+		</dependency>
+
+spring.application.name=MSGateway
+server.port=8305
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+eureka.instance.prefer-ip-address=true
+eureka.instance.ip-address=127.0.0.1
+
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: MSConsumer
+          uri: lb://MS1
+          predicates:
+            - Path=/empconsumer/viewemp
+
+        - id: MSProducer
+          uri: lb://MS2
+          predicates:
+            - Path=/empproducer/searchemp
+
+
+
+
+
+
+
+               spring boot version 3.2.8
+
+
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>2023.0.0</version> 
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://localhost:9091/swagger-ui/index.html
+http://localhost:9091/v3/api-docs
+
+
+
+  <dependency>
+    <groupId>org.springdoc</groupId>
+    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    <version>2.0.4</version>
+</dependency>
+
+
+
+
+Eureka Server
+
+server.port=8761
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+eureka.instance.hostname=localhost
+
+
+server.port=8301
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+eureka.instance.hostname=localhost
+
+
+server.port=8300
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+
+
+
+	<dependency>
+    		<groupId>org.springframework.cloud</groupId>
+    		<artifactId>spring-cloud-starter-openfeign</artifactId>
+	  </dependency>
+
+
+@EnableFeignClients
+
+
+@FeignClient(name = "emp-producer")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  	<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-data-jpa</artifactId>
+	</dependency>
+
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+
+
+
+spring.datasource.url=jdbc:mysql://localhost:3306/demo
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.username=root
+spring.datasource.password=root
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+
+come within 11 15am
+
+tea break;
+
+
+
+
+	@GetMapping("/sort")
+	public List<Employee> sortEmployee(){
+		Sort s = Sort.by("eName").descending();
+		return repo.findAll(s);
+	}
+	
+	@GetMapping("/page")
+	public List<Employee> pageEmployee(){
+		Pageable pg= PageRequest.of(1, 2);
+		Page<Employee> p= repo.findAll(pg);
+		List<Employee> al= p.getContent();
+		return al;
+		
+	
+	}
+
+
+
+
+@ManyToMany
+@JoinTable(
+    name = "empdept", // Name of the join table
+    joinColumns = @JoinColumn(name = "emp_id"), // Foreign key in join table referencing the owning entity
+    inverseJoinColumns = @JoinColumn(name = "dept_id") // Foreign key referencing the inverse entity
+)
+private Set<Department> departments;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<bean id="t1" class="com.aditi.Triangle">
+	<property name="name" value="obtuse"/>
+	<property name="point" ref="p1"/>
+	<property name="names">
+	 <list>
+	<value> abc </value>
+	 </list>
+	</property>
+   </bean>
+
+<bean id="t1" class="com.aditi.Triangle">
+	<property name="name" value="obtuse"/>
+	<property name="point" ref="p1"/>
+	<property name="names">
+	 <list>
+	<ref  bean="p1" />
+	  <ref  bean="p2" />
+	 </list>
+	</property>
+   </bean>
+
+
+<bean id="t1" class="com.aditi.Triangle">
+	<property name="name" value="obtuse"/>
+	<property name="point" ref="p1"/>
+	<property name="names">
+	 <map>
+	<entry key="1" value-ref="p1" ></entry>
+	<entry key="2" value-ref="p2" ></entry>
+	 </map>
+	</property>
+   </bean>
+
+
+--add-opens java.base/java.lang=ALL-UNNAMED
+
+C:\Users\2399534\Downloads\Open Source_Pivotal Software_Spring Tool Suite_4.29.1_spring-tool-suite-4-4.29.1\sts-4.29.1.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.6.v20250130-0529\jre

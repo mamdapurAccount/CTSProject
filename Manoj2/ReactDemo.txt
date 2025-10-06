@@ -1,0 +1,887 @@
+<h1 className='demo-h1'> Hello {customer} , Hello {user.uname}, YOur password {user.pwd}  {f1()} How are you  </h1>
+<h2 style={{color:'red',backgroundColor:'blue'}}> {f1()}</h2>
+
+
+1. npm create vite@latest my-vite-app
+
+
+You’ll be prompted to choose:
+
+Project name → my-vite-app (or any name you like)
+Framework → Select React
+Variant → Choose JavaScript or TypeScript
+
+
+2. cd my-vite-app
+
+3. npm install (install dependencies )
+
+4. npm run dev
+
+
+
+const Greet=()=>{
+
+    return (
+  <h1> Hello Gundu Bandu Kaka is Learning</h1>
+    );
+};
+
+export default Greet;
+
+
+const UserCard=({uname,age})=>{
+
+return(
+<div>
+    <h2> {uname}</h2>
+    <h2> {age}</h2>
+</div>
+);
+
+};
+
+export default UserCard;
+
+
+
+const UserCard=(props)=>{
+
+return(
+<div>
+    <h2> {props.uname}</h2>
+    <h2> {props.age}</h2>
+</div>
+);
+
+};
+
+export default UserCard;
+******************************************************************************
+
+
+function App() {
+
+  const f1=(data,n)=>{
+        alert(' child Data '+data+"  "+n);
+  }
+
+
+<Child cData={f1} />
+
+
+***************************************************************************
+
+const Child=({cData})=>{
+  const f2=()=>{
+    cData('Data coming from Child',10);
+  };
+
+  return(
+
+  <div>
+
+ <button onClick={f2}> Send </button>
+  </div>
+)
+}
+
+export default Child;
+**************************************************************************************************
+
+
+
+import { useState } from "react";
+
+const Counter=()=>{
+  const [n,setValue]=useState(0);
+  const [str,setName]=useState('Bebo');
+
+  const changeText=()=>{
+    setName('Text Changed Lolo');
+  }
+  const incrData=()=>{
+    setValue(n+1);
+  }
+  const decrData=()=>{
+    setValue(n-1);
+  }
+
+return(
+<div>
+<h1> Counter Example</h1>
+<h2> {n} </h2>
+<h2> {str} </h2>
+  <button onClick={changeText}> Change Test </button> 
+  <button onClick={incrData}> Increase </button>
+
+  <button onClick={decrData}> Decrease </button>
+
+</div>
+);
+}
+
+export default Counter;
+
+************************************************************************************************************************
+
+function App() {
+  const [arcnt,setArcnt]=useState([{cid:101,cname:"India",pop:10000},{cid:102,cname:"Australia",pop:100}]);
+  const [view,setview] = useState([])
+  const handleCountry=()=>{
+    setArcnt([...arcnt,{cid:103,cname:"china",pop:20000}]);
+  }
+  
+  const handleUpdate=()=>{
+      setArcnt(arcnt.map((c)=>c.cid===102?{...c,cname:'Korea'}:c));
+
+  }
+  const handleSearch=()=>{
+    let s= arcnt.filter((c)=>c.cid===102)
+    if(s.length>0)
+    setview(s);
+  else
+  alert('sorry ');
+
+
+  }
+  const handleDelete=()=>{
+    setArcnt(arcnt.filter((v)=>v.cid!==102))
+  }
+    return(
+      <div>
+<table  border="1">
+
+        {
+          arcnt.map((val,ind)=>(<>
+          <tr>
+            <td> {val.cid}  </td>
+             <td> {val.cname}  </td> 
+              <td> {val.pop} </td>
+              </tr>
+                 </>
+          
+          ))
+        }
+  
+
+
+</table>
+        {
+          arcnt.map((val,ind)=>(
+            <ul>
+            <li>{val.cid} {val.cname} {val.pop}</li>
+            </ul>
+          ))
+        }
+        <h1>*************************************</h1>
+
+        {
+          view.map((val,ind)=>(
+            <ul>
+            <li>{val.cid} {val.cname} {val.pop}</li>
+            </ul>
+          ))
+        }
+
+        <button onClick={handleCountry}>add</button>
+        <button onClick={handleUpdate}>Update</button>
+        <button onClick={handleSearch}>Search</button>
+        <button onClick={handleDelete}>Delete</button>
+      </div>
+    );
+
+}
+
+export default App;
+
+*****************************************************************************************************************
+App.js
+
+import {createContext} from react;
+export const LoginContext = createContext();
+
+
+<LoginContext.Provider value={true}>
+ <div>
+  <Maincomponent />
+
+ </div>
+</LoginContext.Provider>
+
+
+
+
+MainComponent.js
+
+import {LoginContext} from './App';
+import {usecontext} from 'react';
+
+const login= useContext(LoginContext) ;
+console.log(login);
+
+*****************************************************************************************************************************
+
+npm install react-router-dom
+
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+
+const App=()=> {
+
+  return( 
+ <div>
+  <h1> Router Example </h1>
+  <Router>
+  <Link to="/greet"> Greet </Link>
+  
+  <Link to="/usercard"> Card </Link>
+  <Link to="/counter"> Counter </Link>
+    <Routes>
+    <Route path='/greet' element={<Greeting/>} /> 
+      <Route path='/usercard' element={<UserCard/>} /> 
+      <Route path='/counter' element={<Counter/>} />
+      </Routes>
+    
+   </Router>
+
+
+
+</div>
+);};
+
+export default App;
+
+
+********************************************************************************************************************************
+
+
+ const [val,setValue]=useState('Bandu');
+   const show=()=>alert(' Hey '+val);
+   const f1=(event)=>setValue(event.target.value);
+    return (
+      <div>
+  <h1> Hello Gundu Bandu Kaka is Learning</h1>
+  <input type="text" value={val}  onChange={f1}/> 
+  <button onClick={show}> Click Here </button>
+  </div>
+    );
+
+******************************************************************************************************************************
+
+ const [data,setVal]=useState('');
+   const [arr,setData]=useState(['gundu','bandu','lotu','janu']);
+   const add=()=>setData([...arr,data]);
+   const changeval=(event)=>{
+    
+    setVal(event.target.value);
+   };
+
+    return (
+      <div>
+  <h1> Hello Gundu Bandu Kaka is Learning</h1>
+  <input type="text" onChange={changeval} value={data}/>
+  <button onClick={add}> Add Data </button>
+
+  {arr.map((data,index)=>
+     (
+      <li>{data}</li>
+  )
+  )}
+  </div>
+    );
+
+*****************************************************************************************************************************************
+import { useState } from "react";
+const MyDemo=()=>{
+    const [frm,setFrm]=useState({cid:0,cname:'',amt:0});
+   
+const f1=(event)=>{
+    const {name,value}= event.target;
+   setFrm({...frm,[name]:value});
+}
+const show=()=>{
+   alert(frm.cid+'  '+frm.cname+' '+frm.amt);
+}
+return(
+
+<div>
+     
+Cid <input type="text" name="cid" onChange={f1} /><br />
+Cname <input type="text" name="cname" onChange={f1} /><br />
+Amt <input type="text" name="amt" onChange={f1}/><br />
+<button onClick={show}> Show </button>
+
+</div>
+)
+  }
+
+export default MyDemo;
+*******************************************************************************************************************************
+const App=()=> {
+        const user={uname:'bebo',pwd:'lolo'};
+        const [state,setData]=useState(user);
+  const add=(pdata)=>{
+        setData(pdata=>({...pdata,pwd:'sana'}));
+  };
+
+  return( 
+ <div>
+ <h1> Shankar I Love you , Miss you ,{state.uname}, {state.pwd}</h1> 
+ <button onClick={add}>Add </button>
+</div>
+);
+}
+export default App;
+
+*****************************************************************************************************************
+
+const App=()=> {
+     const cust={cid:1,cname:'deepu',age:20};
+     const mcust={...cust,cname:'preeti'};
+
+        const users=[
+          {uname:'bebo',pwd:'lolo'},
+          {uname:'saba',pwd:'qamar'},
+          {uname:'nida',pwd:'aayesha'},
+        ] ;
+        const [state,setData]=useState(users);
+        const [flag,setFlag]= useState(false);
+        const [original]= useState(users);
+        const [user,setUser]= useState({uname:'',pwd:''});
+
+        const add=()=>{
+         let newuser={uname:'shaista',pwd:'lodhi'};
+         setUser(newuser);
+         setData([...state,newuser]);
+
+         };
+          
+         
+        
+        const update=(uname)=>{
+          const updatedusers= state.map((d)=>d.uname===uname?{...d,pwd:'saijal'}:d);
+          setData(updatedusers);
+        }
+        const search=(name)=>{
+             const newdata=state.filter((d)=>d.uname===name);
+             setData(newdata);
+        }
+    const show=()=>{
+      setFlag(true);
+      
+    };
+  const hide=()=> {
+    setFlag(false);
+  }
+  return( 
+ <div>
+ <h1> Shankar I Love you , Miss you, {mcust.cid}, {mcust.cname}, {mcust.age} </h1> 
+ <button onClick={show}>Show </button>
+ <button onClick={hide}>Hide </button>
+ <button onClick={()=>search('saba')}> Search </button>
+ <button onClick={()=>update('saba')}> Update </button>
+ <button onClick={add}> Add </button>
+{ flag && (
+  <>
+   { state.map((d,index)=>(<li key={index}> {d.uname}, {d.pwd}</li>))  }
+   </>
+
+)}
+</div>
+);
+}
+export default App;
+
+******************************************************************************************************************
+
+
+const MyDemo=()=>{
+const uname1={uname:'saba',pwd:'qamar'};
+const uname2={uname:'sana',pwd:'amjad'};
+const uname3={uname:'aayesha',pwd:'takia'};
+
+const [course,setCourse]= useState('');
+const [courses, setCourses]= useState([]);
+const arr=[uname1,uname2,uname3];
+const [myname,setMyName]=useState({uname:'',pwd:''});
+
+const f1=(event)=>{
+  const {name,value}= event.target;
+   setMyName({...myname,[name]:value});
+}
+
+const add=(event)=>{
+  setCourse(event.target.value);
+
+}
+const show=(event)=>{
+  const {checked,value}= event.target;
+  if(checked)
+    setCourses([...courses,value]);
+  
+else 
+      setCourses(courses.filter(course => course !== value));
+
+
+}
+const display=()=>{
+  for( let c of courses)
+    alert(c);
+}
+return(
+
+<div>
+  <h1> {myname.uname}, {myname.pwd}</h1>
+    {
+      courses.map((d)=><li>{d}</li>)
+    }
+  <p> selected Course {course} </p>  
+    
+    <ol>
+   { 
+    arr.map((data,index)=><li>{data.uname}{data.pwd} </li>)
+          
+  
+}
+  Uname <input type="text" name="uname" onChange={f1}/><br />
+  pwd <input type="text" name="pwd" onChange={f1} /><br />
+<button onClickC={add}> Add </button>
+</ol>
+<select name="course" onChange={add}> 
+  <option value="Dip"> Diploma </option>
+  <option value="PG Dip"> Pg Diploma </option>
+  <option value="Adv Dip"> Adv Diploma </option>
+
+</select>
+   <input type="checkbox" name="c" value="c" onChange={show}/>  C < br />
+   <input type="checkbox" name="c++" value="c++" onChange={show}/> C++  < br />
+   <input type="checkbox" name="java" value="java" onChange={show}/> Java < br />
+
+<button onClick={display}> Display </button>
+</div>
+)
+  }
+
+export default MyDemo;
+
+*********************************************************************************************************************************************
+
+import { useReducer } from "react";
+const Greeting=()=>{
+  const reducer=(state,action)=>{
+    if(action.type==='incr')
+      return { count:state.count+1};
+
+    if(action.type==='decr')
+      return { count:state.count+1};
+    
+  };
+  const initialState={'count':1};
+  const [state,dispatch]= useReducer(reducer,initialState);
+  
+  
+     
+    
+      const f1=()=>{
+      dispatch({type:'incr'});
+      };
+      const f2=()=>{
+     dispatch({type:'decr'});
+      }
+    return (
+      <div>
+  <h1> Hello Gundu Bandu Kaka is Learning, {state.count}</h1>
+  <button onClick={f1}> Increment </button>
+  <button onClick={f2}> Decrement </button>
+
+ </div>
+)};
+
+export default Greeting;
+
+*******************************************************************************************************
+
+import { useReducer } from "react";
+const Greeting=()=>{
+   const reducer=(state,action)=>{
+        if(action.type==='uname') return {...state, pwd:'saba'  }
+        if(action.type==='pwd') return { ...state, pwd:'aayesha'  }
+   }
+
+    const initialState={username:'bebo',pwd:'lolo'};
+    const [state,dispatch]=useReducer(reducer,initialState);
+   const f1=()=>{
+          dispatch({type:'uname'});
+
+   }
+   const f2=()=> {
+    dispatch({type:'pwd'});
+   }
+
+    return (
+      <div>
+  <h1> Hello Gundu Bandu Kaka is Learning, {state.username} , {state.pwd}</h1>
+  <button onClick={f1}> Change Pwd saba </button>
+  <button onClick={f2}> change Pwd aayesha </button>
+ </div>
+)};
+
+export default Greeting;
+
+*************************************************************************************************************
+  // useEffect Hook
+
+const App=()=> {
+  
+    const [msg,setMsg]= useState('Hey Message');
+    useEffect(()=>{
+          setTimeout( ()=>{ 
+            setMsg('Hi Iam Changed ');
+          },5000)
+    });
+
+   return( 
+ <div>
+     <h1> {msg}</h1>
+   
+ </div>
+);
+}
+export default App;
+
+
+
+
+******************************************************************************************************
+
+npm install axios
+
+
+import { useState,useEffect} from 'react';
+import axios from 'axios';
+const Greeting=()=>{
+
+    const [data,setData]= useState([]);
+  
+    useEffect( ()=>{
+      axios.get('http://localhost:9091/product/getproducts')
+           .then(res=> setData(res.data))
+           .catch((e)=>console.log(e));
+
+    },[])
+    return (
+      <div>
+  <h1> Hello Gundu Bandu Kaka is Learning</h1>
+  { data.map((d)=> (
+    <li> {d.prodId} , {d.prodName} ,{ d.prodRate}, {d.prodQuantity}</li>
+  ))}
+  
+ </div>
+)};
+
+export default Greeting;
+
+*********************************************************************************************************
+
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import Greeting from './Greeting';
+
+test('renders greeting message with name', () => {
+  render(<Greeting name="Manoj" />);
+  const greetingElement = screen.getByText(/Hello, Manoj!/i);
+  expect(greetingElement).toBeInTheDocument();
+});
+
+import React from 'react';
+
+function Greeting({ name }) {
+  return <h1>Hello, {name}!</h1>;
+}
+
+export default Greeting;
+
+
+
+
+
+
+
+
+
+
+
+
+***************************************************************************************************
+
+  Jasmine & Karma
+
+npm i --save-dev @types/jest
+
+tsconfig.ts     "compilerOptions":{
+		    "types": ["jest"]
+                   }
+
+ng test --include=**/my-component.spec.ts
+
+
+**************************************************************************************************
+
+
+npm install @ngrx/store @ngrx/effects
+npm install --save-dev @types/node
+
+npm cache clean --force
+
+1. user.actions.ts
+
+
+import { createAction, props } from '@ngrx/store';
+
+export const updateUser = createAction(
+  '[User] Update',
+  props<{ user: { name: string; age: number; email: string } }>()
+);
+
+export const resetUser = createAction('[User] Reset');
+
+
+2. user.reducer.ts
+
+import { createReducer, on } from '@ngrx/store';
+import { updateUser, resetUser } from './user.actions';
+
+export interface UserState {
+  name: string;
+  age: number;
+  email: string;
+}
+
+export const initialState: UserState = {
+  name: '',
+  age: 0,
+  email: ''
+};
+
+const _userReducer = createReducer(
+  initialState,
+  on(updateUser, (state, { user }) => ({ ...state, ...user })),
+  on(resetUser, state => initialState)
+);
+
+export function userReducer(state, action) {
+  return _userReducer(state, action);
+}
+
+
+
+app.module.ts
+
+
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { StoreModule } from '@ngrx/store';
+import { userReducer } from './user.reducer';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    StoreModule.forRoot({ user: userReducer })
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { updateUser, resetUser } from './user.actions';
+import { UserState } from './user.reducer';
+
+@Component({
+  selector: 'app-root',
+  template: `
+    <div>
+      <h1>User Profile</h1>
+      <div>Name: {{ user$ | async?.name }}</div>
+      <div>Age: {{ user$ | async?.age }}</div>
+      <div>Email: {{ user$ | async?.email }}</div>
+      <button (click)="updateUser()">Update User</button>
+      <button (click)="resetUser()">Reset User</button>
+    </div>
+  `
+})
+export class AppComponent {
+  user$ = this.store.select('user');
+
+  constructor(private store: Store<{ user: UserState }>) {}
+
+  updateUser() {
+    const newUser = { name: 'John Doe', age: 30, email: 'john.doe@example.com' };
+    this.store.dispatch(updateUser({ user: newUser }));
+  }
+
+  resetUser() {
+    this.store.dispatch(resetUser());
+  }
+}
+
+
+*************************************************************************************************************************
+  Second.js
+c:/> npm init
+
+const user={ username:'lotu',pwd:'janu'};
+const cust={cid:101,cname:'aayesha'};
+module.exports={user,cust};
+
+
+First.js
+
+const { user,cust}= require('./Second');
+//const fs= require('fs');
+// fs.readFile('Bandu.txt','utf8',(e,d)=>console.log(e,d));
+
+
+//const r=fs.readFileSync('Bandu.txt');
+//console.log(r.toString());
+
+//const r=f.writeFile('Gundu.txt','All the best for German',(e)=>console.log('error'));
+
+//f.writeFile('Gundu.txt','All the best gundmari',{flag:'a'},(e)=>console.log(e));
+//const r=fs.writeFileSync('Gundu.txt','Gundu German Calling ');
+
+//console.log('File writen');
+console.log(' Hey Mannu u got it '+JSON.stringify(user));
+console.log(' Hey Dada u got it '+JSON.stringify(cust));
+
+c:\Manoj> npm install express
+
+const h= require('http');
+const fs= require('fs');
+const port= process.env.Port || 9091;
+const server = h.createServer((req,res)=> {
+    res.setHeader('Content-Type','text/html');
+    if(req.url=='/home')
+    res.end('<h1> Hi Shankar Dada Iam Learning Node, I Miss You dada </h1>');
+    if(req.url=='/janu')
+       {
+       const data= fs.readFileSync('Janu.html');
+       res.end(data);
+       }
+});
+
+
+server.listen(port,()=>console.log('Server running'));
+
+
+
+const ev= require('events');
+const myemitter= new ev();
+myemitter.on('greet',(str)=>console.log('Hello Evenc'+str));
+
+myemitter.emit('greet','Bebo')
+
+
+
+
+*********************************************************************************************************
+const p= new Promise((resolve,reject)=>{
+   const s="Bandu";
+   if(s=='Bandu')
+    resolve('Welcome');
+else
+reject('Sorry not allowed')
+}
+
+);
+p.then((temp)=>console.log('success '+temp)).catch((e)=>console.log('error'));
+
+
+
+function delay(ms){
+    return new Promise((resolve)=>{ console.log('time set'); setTimeout(resolve,ms) });
+
+}
+
+
+// delay(2000).then( ()=> console.log('After 2 sec') )
+// .catch((e)=>console.log(e));
+
+// const fs = require('fs').promises;
+
+
+const f= require('fs').promises;
+
+const p=f.readFile('Gund.txt','utf-8');
+p.then((d)=>console.log(d)).catch((e)=>console.log(e));
+
+
+
+// function readFile(fname) {
+//     return fs.readFile(fname, 'utf8');
+// }
+
+// readFile('Band.txt')
+//     .then(data => {
+//         console.log('File content:', data.toString());
+//     })
+//     .catch(error => {
+//         console.error('Error reading file:');
+//     });
+
+
+// function f2(){
+//     console.log('hey Janu Nidhi');
+// }
+
+// setTimeout(f2,3000);
+
+
+// const fs = require('fs').promises;
+
+//  async function readFile(filePath) {
+//     try {
+//         const data = await fs.readFile(filePath, 'utf8');
+//         console.log('File content:', data);
+//     } catch (error) {
+//         console.error('Error reading file:', error);
+//     }
+// }
+
+// readFile('Bandu.txt');
+
+// console.log(' Reading done');
+
+
+function delay(m){
+      return new Promise((res)=> setTimeout(res,m));
+}
+
+f1();
+async function f1(){
+
+await delay(2000);
+console.log('2 sec have passed');
+}
+
+
+console.log('Main RIP');
+
+
+*************************************************************************************************************************************
+
+const h= require('express');
+const p= require('path')
+
+const app= h();
+app.get('/',(req,res)=>res.sendFile(p.join(__dirname,'Jay.html')));
+app.listen(9091,()=>console.log('running'));
+
+
+*************************************************************************************************************************************
+
+

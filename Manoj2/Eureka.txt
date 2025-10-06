@@ -1,0 +1,262 @@
+Eureka Server
+
+server.port=8761
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+eureka.instance.hostname=localhost
+
+****************************************************************
+Eureka Client1 
+
+server.port=8301
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+eureka.instance.hostname=localhost
+
+
+************************************************************
+Eureka Client2
+
+server.port=8300
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+
+
+***************************************************************
+			<dependency>
+				    <groupId>org.springframework.cloud</groupId>
+				    <artifactId>spring-cloud-starter-openfeign</artifactId>
+			</dependency>
+
+
+
+**************************************************************
+<dependency>
+    <groupId>io.github.resilience4j</groupId>
+    <artifactId>resilience4j-spring-boot2</artifactId>
+    <version>2.2.0</version> 
+</dependency>
+
+
+
+
+*****************************************************************
+
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-gateway</artifactId>
+			</dependency>
+
+   application.yaml
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: MSProducer
+        uri: lb://service1
+        predicates:
+          - Path=/prd/getallemps
+          
+      - id: MSConsumer
+        uri: lb://service2
+        predicates:
+          - Path=/cns/getallemps
+
+
+application.properties
+
+server.port=8305
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+
+// if service not identifed  
+
+eureka.instance.prefer-ip-address=true
+eureka.instance.ip-address=127.0.0.1
+
+******************************************************************
+MSConfig
+
+	
+ 	<dependency>
+	        <groupId>org.springframework.cloud</groupId>
+	        <artifactId>spring-cloud-config-server</artifactId>
+	       
+	    </dependency>
+
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>2023.0.0</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+
+application.yml
+
+server:
+  port: 8888
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: <git URL >
+          default-label: master
+          clone-on-start: true
+
+Microservice
+
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>2023.0.1</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+
+
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-config</artifactId>
+</dependency>
+
+application.yml
+
+spring:
+  application:
+    name: user-service
+  profiles:
+    active: dev
+  config:
+    import: configserver:http://localhost:8888
+
+*************************************************************************************
+
+Oauth 2.0
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+
+application.properties
+
+server.port=2025
+spring.security.user.name=manoj
+spring.security.user.password=12345
+spring.security.oauth2.client.registration.github.client-id=Ov23liv4z3WjNnNw5Cp6
+spring.security.oauth2.client.registration.github.client-secret=82e1bf2679d0420098a5253f67d9b4c338395b16
+
+
+****************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hateoas
+
+<dependency>
+    <groupId>org.springframework.hateoas</groupId>
+    <artifactId>spring-hateoas</artifactId>
+</dependency>
+
+
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.stereotype.Component;
+
+@Component
+public class BookResourceAssembler implements org.springframework.hateoas.server.RepresentationModelAssembler<Book, EntityModel<Book>> {
+    @Override
+    public EntityModel<Book> toModel(Book book) {
+        EntityModel<Book> bookResource = EntityModel.of(book);
+        Link selfLink = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(BookController.class).getBookById(book.getId())).withSelfRel();
+        Link updateLink = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(BookController.class).updateBook(book.getId(), null)).withRel("update");
+        bookResource.add(selfLink, updateLink);
+        return bookResource;
+    }
+}
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class BookController {
+
+    @Autowired
+    private BookResourceAssembler assembler;
+
+    @GetMapping("/books/{id}")
+    public EntityModel<Book> getBookById(@PathVariable Long id) {
+        Book book = bookService.findById(id);
+        return assembler.toModel(book);
+    }
+}
+
+
+
+
+
+
+
+

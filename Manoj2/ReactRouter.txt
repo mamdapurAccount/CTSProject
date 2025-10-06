@@ -1,0 +1,157 @@
+npm install react-router react-router-dom
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import {  Routes, Route, BrowserRouter } from 'react-router-dom';
+import Login  from './Login';
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+    <Routes>
+       <Route path='/*' element={<App />}/>
+       <Route path='/login' element={<Login />}/>
+    </Routes>
+    
+
+    </BrowserRouter>
+  </React.StrictMode>
+);
+
+reportWebVitals();
+
+******************************************************************************************************
+import { BrowserRouter as Router, Routes, Route, Link,useNavigate } from 'react-router-dom';
+
+import './App.css';
+import Test  from './Test';
+import MyDemo from './MyDemo';
+import Login from './Login';
+
+
+function App() {
+  const user={uname:'nida',pwd:'sana'};
+   const uname='bebo';
+   const pwd='lolo';
+   const nav= useNavigate();
+  const login=()=>{
+   nav('/login',{ state:{uname,pwd}});
+   
+  }
+  return (
+   <div>
+  <h1> Router Example </h1>
+  
+  <Link to="/test"> Test </Link>
+  
+  <Link to="/mydemo"> MyDemo </Link>
+  
+    <Routes>
+    <Route path='test' element={<Test user={user} />} /> 
+      <Route path='mydemo' element={<MyDemo/>} />
+      
+      
+      </Routes>
+    
+   
+  <button onClick={login}> Login </button>
+
+
+</div>
+
+  );
+}
+
+export default App;
+
+
+*******************************************************************
+import { useLocation  } from "react-router-dom";
+const Login =()=>{
+
+   const loc= useLocation();
+   const str= loc.state;
+    return(
+
+   <h1> Login Succesful ,Welcome  {str.uname} </h1>
+
+    )
+};
+export default Login;
+
+**************************************************************************8
+import logo from './logo.svg';
+import './App.css';
+function App() {
+  
+  return (
+   <div>
+  <img src={logo} height="200"  width="200" alt="sorry"/>
+</div>
+
+  );
+}
+
+export default App;
+***********************************************************************
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode> 
+    <Router>
+      <Routes>
+        <Route path='/' element={<Login />} />
+        <Route path="/home/" element={<App />} >
+         
+              <Route path="demo" element={<Demo />} />
+                      <Route path="math" element={<Math />} />
+        </Route>
+             
+      </Routes>
+    </Router>
+  
+
+
+  </React.StrictMode>
+);
+
+function App() {
+ 
+    
+
+  return(
+    <div>
+      
+      <h1>This is App component</h1>
+       <Link to='demo'> Demo </Link>
+       <Link to='math'> Math </Link>
+         <Outlet/>
+         
+
+    </div>
+  )
+}
+
+
+const Login=()=>{
+    const nav=useNavigate();
+    
+    const loginFunction=()=>{
+        nav("/home",{state:{ uname:"velachery",pwd:"chennai"  }  });
+      
+    }
+    
+    return(
+        <div>
+            <center>
+              
+            <br/><br/><br/><br/><br/><br/><br/>
+            <button onClick={loginFunction}>Login</button>
+            </center>
+        </div>
+    );
+}
+
+*****************************************************************************************

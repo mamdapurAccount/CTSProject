@@ -1,0 +1,252 @@
+****************************************************************
+declare
+
+  a number(5):=25;
+begin
+
+ if a>30 then
+dbms_output.put_line('Yes');
+elsif a>20 then
+dbms_output.put_line('No');
+elsif a>10 then
+dbms_output.put_line('error');
+else
+dbms_output.put_line('def');
+end if;
+end;
+*************************************************************
+declare
+a number(5):=20;
+begin
+case when a=10 then
+         dbms_output.put_line('10');
+when a=20 then
+         dbms_output.put_line('20');
+
+when a=30 then
+         dbms_output.put_line('30');
+
+else dbms_output.put_line('error');
+end case;
+end;
+************************************************************
+declare
+
+  type emprecord is record( eno number(5), ename varchar2(20));
+
+ e emprecord;
+begin
+e.eno:=10;
+e.ename:='Sana';
+dbms_output.put_line(e.eno||'    '||e.ename);
+end;
+****************************************************************
+DECLARE
+   TYPE grade_list IS VARRAY(5) OF NUMBER(3); -- Vector data type
+   v_grades grade_list := grade_list(85, 90, 78);
+BEGIN
+   FOR i IN 1 .. v_grades.COUNT LOOP
+      DBMS_OUTPUT.PUT_LINE('Grade ' || i || ': ' || v_grades(i));
+   END LOOP;
+END;
+
+*************************************************************
+
+declare
+ type myarray is varray(5) of varchar2(20);
+
+arr myarray:= myarray('saba','anil','baba');
+
+begin
+for i in 1..arr.count loop
+dbms_output.put_line(arr(i));
+end loop;
+end;
+***********************************************************
+declare
+ type myarray is varray(3) of number;
+  arr myarray:=myarray();
+begin
+arr.extend(3);
+arr(1):=100;
+arr(2):=200;
+arr(3):=300;
+
+for i in 1..arr.count loop 
+dbms_output.put_line(arr(i));
+end loop;
+end;
+****************************************************************
+declare
+ type myarray is varray(3) of varchar2(20);
+  arr myarray:=myarray();
+begin
+arr.extend(3);
+arr(1):='saba';
+arr(2):='sana';
+arr(3):='kunal';
+
+for i in 1..arr.count loop 
+dbms_output.put_line(arr(i));
+end loop;
+end;
+**********************************************************************
+INSERT INTO file_store (id, file_name, file_data, description)
+VALUES (
+    1,
+    'example.txt',
+    EMPTY_BLOB(),
+    EMPTY_CLOB()
+);
+
+
+DECLARE
+    l_blob BLOB;
+    l_clob CLOB;
+BEGIN
+    -- Lock the row for update
+    SELECT file_data, description
+    INTO l_blob, l_clob
+    FROM file_store
+    WHERE id = 1
+    FOR UPDATE;
+
+    -- Write binary data to BLOB (as raw bytes)
+    DBMS_LOB.WRITEAPPEND(l_blob, LENGTH(UTL_RAW.CAST_TO_RAW('Hello BLOB')), UTL_RAW.CAST_TO_RAW('Hello BLOB'));
+
+    -- Write text data to CLOB
+    DBMS_LOB.WRITEAPPEND(l_clob, LENGTH('This is sample text for CLOB.'), 'This is sample text for CLOB.');
+
+    -- Commit changes
+    COMMIT;
+END;
+
+
+SELECT file_name, 
+       UTL_RAW.CAST_TO_VARCHAR2(DBMS_LOB.SUBSTR(file_data, 20)) AS file_blob,
+       DBMS_LOB.SUBSTR(description, 50) AS file_clob
+FROM file_store
+WHERE id = 1;
+
+************************************************************************************
+declare
+psal number(1);
+begin
+select sal into psal from emp_tbl where eno=2;
+exception when zero_divide then
+dbms_output.put_line('zero didivide');
+when no_data_found then
+dbms_output.put_line('no data');
+
+when too_many_rows then
+dbms_output.put_line(' toomany rows ');
+
+when value_error then
+dbms_output.put_line('sorry');
+end;
+
+***********************************************************
+
+declare
+  type rcursor is ref cursor;
+
+   mycursor rcursor;
+
+temp emp_tbl%rowtype;
+
+begin
+
+  open mycursor for select * from emp_tbl;
+   loop
+  fetch mycursor into temp;   
+exit when mycursor%notfound;
+  dbms_output.put_line(temp.eid||'   '||temp.ename);
+  end loop;
+  dbms_output.put_line('**************************************');
+  open mycursor for select * from emp_tbl where manager=2;
+   loop
+  fetch mycursor into temp;   
+exit when mycursor%notfound;
+  dbms_output.put_line(temp.eid||'   '||temp.ename);
+  end loop;
+   end;
+*****************************************************************************
+create or replace procedure p1(n number) as
+psal number(5);
+begin
+
+select sal into psal from emp_tbl where eno=n;
+dbms_output.put_line(psal);
+end;
+***********************************************************************************
+
+
+create or replace procedure p1( n in number  , psal out number ) as
+begin
+
+select sal into psal from emp_tbl where eno=n;
+
+end;
+
+variable a number
+execute p1(5,:a)
+print a
+
+***********************************************************************
+create or replace function f1( n in number   ) return number as
+psal number(5);
+begin
+select sal into psal from emp_tbl where eno=n;
+return psal;
+end;
+
+variable a number
+execute :a:=f1(8)
+print a
+
+************************************************************************
+
+create or replace package kle as
+procedure p2(n number);
+function f2(n number) return number ;
+end ;
+
+**********************************************************************
+create or replace package body kle as
+
+procedure p2( n number) as
+
+psal number(5);
+begin
+select sal into psal from emp_tbl
+where eno=n;
+dbms_output.put_line(psal);
+end p2;
+
+function f2( n number) return number as
+
+psal number(5);
+begin
+select sal into psal from emp_tbl
+where eno=n;
+
+return psal;
+end f2;
+end kle;
+
+execute kle.p2(8);
+variable a number
+execute :a:=kle.f2(8);
+print a
+
+**********************************************************************************
+
+create or replace trigger t1 
+after insert or update on dept
+for each row
+begin
+
+dbms_output.put_line(:old.ename||'  '||:new.ename);
+end;
+
+************************************************************************************

@@ -1,0 +1,312 @@
+
+npm install -g json-server
+
+Create db.json file:
+
+{
+  "books": [
+    {
+      "id": "1",
+      "bname": "Java",
+      "bprice": 100
+    },
+    {
+      "id": "2",
+      "bname": "Python",
+      "bprice": 120
+    }
+  ]
+}
+
+
+json-server --watch db.json --port 4000
+
+http://localhost:4000/users
+
+************************************************************************************************************************
+Manoj Demonstrated in class
+
+import { useEffect, useState } from 'react';
+import axios from "axios";
+
+import './App.css';
+function App() {
+     const [books,setBooks]= useState([]);
+   const [book,setBook]= useState({});
+     const WEBURL='http://localhost:4000/books';
+     const getBooks=async ()=>{
+     
+       try{
+       const response= await axios.get(WEBURL);
+          setBooks(response.data);
+       }
+   catch(e){
+  console.log(' error');
+   }
+
+  }
+
+  const add=async ()=>{
+  try{
+      const response=await axios.post(WEBURL,{id:4,bname:'Python',bprice:500});
+      //alert(JSON.stringify(response.data));
+
+      setBooks([...books,response.data]);
+  }
+  catch(e){
+console.log(' errro ')
+  }
+  }
+
+  const modify = async ()=>{
+    try{
+       const response = await axios.put(WEBURL+"/2", {id:2,bname:'Topology',bprice:200});
+     setBooks(books.map((b,i)=>b.id===2?response.data:b));
+    alert(' Book Modfied '+JSON.stringify(response.data));
+
+    }
+
+    catch(e){
+      console.log(e);
+    }
+  }  
+  const del = async ()=>{
+            
+    try{
+            const response = await axios.delete(WEBURL+"/5");
+            setBooks(books.filter((b)=>b.id!==45));
+            alert('Book deleted');
+
+  
+    }
+    catch(e){
+
+    }
+  }
+
+     const search=async ()=>{
+      try{
+              const response=await axios.get(WEBURL+"/47");
+              
+            
+             setBook(response.data);
+         
+      }
+      catch(e){
+  alert('sorry ')
+      }
+     }
+
+   useEffect(  
+     ()=> {getBooks()},[]
+
+     )
+   const show=()=>{
+    getBooks();
+   }
+
+
+  return(
+
+    <div>
+      <h1> Book Management </h1>
+    {JSON.stringify(book)}
+      { 
+      books.map((d,i)=><li key={i}>{d.id} {d.bname} {d.bprice}</li> )
+      }
+
+      <button onClick={show} className='btn btn-primary'> Show </button>  
+      <button onClick={add} className='btn btn-info' > Add </button>
+      <button onClick={modify} className='btn btn-success' > Modify </button>
+      <button onClick={del}> Delete </button>
+   <button onClick={search}> Search </button>
+    </div>
+  )
+
+  
+}
+
+
+export default App;
+
+
+
+
+
+
+***************************************************************************************************************
+Integrating with Spring boot 
+
+import { useEffect, useState } from 'react';
+import axios from "axios";
+
+import './App.css';
+function App() {
+     const [products,setProducts]= useState([]);
+   const [product,setProduct]= useState({});
+     const WEBURL='http://localhost:9091/product';
+     const getProducts=async ()=>{
+     
+       try{
+       const response= await axios.get(WEBURL+'/products');
+          setProducts(response.data);
+       }
+   catch(e){
+  console.log(' error');
+   }
+
+  }
+
+  const add=async ()=>{
+  try{
+      const response=await axios.post(WEBURL+"/addproduct",{productId:3,productName:'Sambhar',productRate:500,productQty:10});
+      //alert(JSON.stringify(response.data));
+
+      setProducts([...products,response.data]);
+  }
+  catch(e){
+console.log(' errro ')
+  }
+  }
+
+  const modify = async ()=>{
+    try{
+       const response = await axios.put(WEBURL+"/modproduct", {productId:3,productName:'Lemon',productRate:500,productQty:10});
+     setProducts(products.map((b,i)=>b.productId===3?response.data:b));
+    alert(' Book Modfied '+JSON.stringify(response.data));
+
+    }
+
+    catch(e){
+      console.log(e);
+    }
+  }  
+  const del = async ()=>{
+            
+    try{
+            const response = await axios.delete(WEBURL+"/delproduct/3");
+            setProducts(products.filter((b)=>b.id!==3));
+            alert('Book deleted');
+
+  
+    }
+    catch(e){
+
+    }
+  }
+
+     const search=async ()=>{
+      try{
+              const response=await axios.get(WEBURL+"/pid/3");
+              
+            
+             setProduct(response.data);
+         
+      }
+      catch(e){
+  alert('sorry ')
+      }
+     }
+
+   useEffect(  
+     ()=> {getProducts()},[]
+
+     )
+   const show=()=>{
+    getProducts();
+   }
+
+
+  return(
+
+    <div>
+      <h1> Product Management </h1>
+   <input type="text" value={product.productId} /> <br />
+   <input type="text" value={product.productName} /> <br />
+    {JSON.stringify(product)}
+    <h2> Product name :- {product.productName} </h2>
+    <h2> Product Rate :- {product.productRate} </h2>
+      { 
+      products.map((d,i)=><li key={i}>{d.productId} {d.productName} {d.productRate} {d.productQty} </li> )
+      }
+
+      <button onClick={show} className='btn btn-primary'> Show </button>  
+      <button onClick={add} className='btn btn-info' > Add </button>
+      <button onClick={modify} className='btn btn-success' > Modify </button>
+      <button onClick={del}> Delete </button>
+   <button onClick={search}> Search </button>
+    </div>
+  )
+
+  
+}
+
+
+export default App;
+
+
+
+
+*************************************************************************************************************
+function App() {
+  const [users, setUsers] = useState([]);
+  const [editingUser, setEditingUser] = useState(null);
+
+  // Fetch all users
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get(API_URL);
+      setUsers(response.data);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  // Add new user
+  const addUser = async (user) => {
+    try {
+      const response = await axios.post(API_URL, user);
+      setUsers([...users, response.data]);
+    } catch (error) {
+      console.error('Error adding user:', error);
+    }
+  };
+
+  // Update user
+  const updateUser = async (updatedUser) => {
+    try {
+      const response = await axios.put(`${API_URL}/${updatedUser.id}`, updatedUser);
+      setUsers(users.map((u) => (u.id === updatedUser.id ? response.data : u)));
+      setEditingUser(null);
+    } catch (error) {
+      console.error('Error updating user:', error);
+    }
+  };
+
+//Delete User
+  const deleteUser = async (id) => {
+    try {
+      await fetch(`${API_URL}/${id}`, {
+        method: 'DELETE',
+      });
+      setUsers(users.filter((u) => u.id !== id));
+    } catch (error) {
+      console.error('Delete error:', error);
+    }
+  };
+
+  return (
+    <Container>
+      <Typography variant="h4" gutterBottom sx={{ mt: 3 }}>
+        React CRUD (fetch + Material UI)
+      </Typography>
+      <UserForm onSubmit={editingUser ? updateUser : addUser} editingUser={editingUser} />
+      <Divider sx={{ my: 3 }} />
+      <UserList users={users} onEdit={setEditingUser} onDelete={deleteUser} />
+    </Container>
+  );
+}

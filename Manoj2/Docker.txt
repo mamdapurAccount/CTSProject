@@ -1,0 +1,170 @@
+open commandprompt as administrator
+
+c:\> bcdedit /set hypervisorlaunchtype auto
+
+wsl --install
+
+docker login
+
+
+Docker build - t springboot-rest-api-docker.jar .
+        or
+docker buildx build -t springboot-rest-api-docker:latest .
+  
+
+Docker run -p 9090:8080 springboot-rest-api-docker.jar
+  or
+docker run -d -p 9090:8080 springboot-rest-api-docker:latest
+
+To push the docker image to dockerhub
+
+// to give the tag name
+docker tag <imagename> <tagname>/imagename
+// here tagname is the dockerhub account name
+
+docker tag spring-boot-docker.jar manatharv/springboot-rest-api-docker.jar
+
+docker push tagname/dockerimagename
+docker push manatharv/spring-boot-docker.jar
+docker rmi manatharv/spring-boot-docker.jar
+docker pull manatharv/spring-boot-docker.jar
+
+docker run -p 9090:8080 manatharv/springboot-rest-api-docker.jar 
+
+
+docker container
+
+docker stop <containerid>
+docker rm <containerid>
+
+
+//   start from here 
+
+hub.docker.com
+
+
+docker -v
+
+docker pull hello-world
+
+docker run hello-world
+
+docker images
+
+docker ps
+
+// to see all the containers
+docker ps -a
+ // to see docker container running
+docker ps
+// to stop container
+
+docker stop <containerid>
+
+// to remove container
+
+docker rm <container-id>
+
+// to remove image
+ docker rmi <image-name> or<imageid>
+docker rmi  hello-world
+
+
+docker run -d --name test -e MYSQL_ROOT_PASSWORD=cts -p3308:3306  mysql:8.0
+
+
+
+docker exec -it a57e2bfeb36d   mysql -uroot -p
+
+ docker pull nginx
+
+docker run -d --name mynginx -p 9091:80  nginx:latest
+                   // you should see now http://localhost:9091 nginx default web page
+
+
+docker run -d --name mynginx1 -p 9092:80 -v /d/dockerdemo/janu.html:/usr/share/nginx/html/janu.html:ro nginx:latest
+		// http://localhost:9092/janu.html    
+
+docker pull ubuntu
+
+docker run -d --name mybunty  ubuntu
+
+docker run -it --name mybunty ubuntu
+
+
+docker run --name javaContainer -it -d openjdk
+
+docker exec -it javaContainer jshell
+
+
+1. create Dockerfile in manoj folder
+
+FROM openjdk:17
+COPY . /app
+WORKDIR /app
+RUN javac Main.java
+CMD ["java", "Main"]
+2. create Main.java file 
+
+
+3. docker build -t my-java-app .
+
+4. docker run my-java-app
+
+
+docker network create mynetwork
+
+docker run -d --network mynetwork --name app1 nginx
+docker run -d --network mynetwork --name app2 nginx
+
+
+docker run -it --rm --network mynetwork busybox sh
+
+ping app2
+
+
+// rest application
+
+docker build -t my-java-app .
+
+docker run -d -p 9091:8080 my-java-app
+
+// docker-compose
+
+docker-compose up -d --build
+docker-compose down -v
+docker-compose logs -f app
+
+  or
+
+docker-compose down –v  ( -v optional)
+docker-compose build --no-cache
+docker-compose up –d
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

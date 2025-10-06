@@ -1,0 +1,47 @@
+@Configuration
+@EnableWebSecurity
+public class SpringConfig {
+
+	@Bean
+	public SecurityFilterChain secureFilter(HttpSecurity http) throws Exception{
+		
+		http
+		 .formLogin()
+		 .defaultSuccessUrl("/hello",true)
+		 .permitAll()
+		 .and()
+		 .logout()
+		 .permitAll()
+		 .and()
+		 .authorizeHttpRequests()
+         .requestMatchers("/admin").hasRole("admin")
+         .requestMatchers("/user").hasRole("user")
+         .anyRequest().authenticated();
+		return http.build();
+
+
+	}
+	
+	@Bean
+	public UserDetailsService userDetailService() {
+		return new InMemoryUserDetailsManager(
+				User.withUsername("anil")
+				.password(passwordEncoder().encode("anil"))
+				.authorities("ROLE_admin")
+				.build(),
+				
+				User.withUsername("vinod")
+				.password(passwordEncoder().encode("vinod"))
+				.authorities("ROLE_user")
+				.build()
+				
+				
+				
+				);
+	}
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+}
