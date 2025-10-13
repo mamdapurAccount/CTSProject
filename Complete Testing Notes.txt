@@ -1,0 +1,150 @@
+1. Setting Up Jest in React App
+
+Create a React App with TypeScript (optional)
+
+npx create-react-app react-testing-demo --template typescript
+cd react-testing-demo
+
+Or without TypeScript:
+
+npx create-react-app react-testing-demo
+cd react-testing-demo
+
+Step 2: Install Testing Libraries
+Jest comes by default in CRA, but we add:
+
+npm install --save-dev @testing-library/react @testing-library/jest-dom @testing-library/user-event
+
+Optional:-
+
+npm install --save-dev jest
+npm install --save-dev enzyme
+npm install --save-dev enzyme-adapter-react
+npm install --save-dev react-test-renderer
+
+
+
+2. Writing Simple Unit Tests
+
+File: src/utils/math.ts
+
+export const add = (a: number, b: number) => a + b;
+export const multiply = (a: number, b: number) => a * b;
+
+
+Test: src/utils/math.test.ts
+
+import { add, multiply } from './math';
+
+test('adds 2 + 3 to equal 5', () => {
+  expect(add(2, 3)).toBe(5);
+});
+
+test('multiplies 2 * 4 to equal 8', () => {
+  expect(multiply(2, 4)).toBe(8);
+});
+
+
+Run tests:
+
+npm test
+
+=================================================================================================
+
+3. Testing Components, Props, and State
+
+Component: src/components/Greeting.js
+
+import React from 'react';
+
+const Greeting = ({ name }) => {
+  return <h1>Hello, {name}!</h1>;
+};
+
+export default Greeting;
+
+4.Test Case
+
+src/components/Greeting.test.js
+
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import Greeting from './Greeting';
+
+test('renders greeting with name', () => {
+  render(<Greeting name="Rakesh" />);
+  const greetingElement = screen.getByText(/Hello, Rakesh!/i);
+  expect(greetingElement).toBeInTheDocument();
+});
+
+
+Run
+Npm test
+
+========================================================================================================
+
+4. Testing User Interactions (React Testing Library)
+
+Component: src/components/Counter.js
+
+import React, { useState } from 'react';
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <h2 data-testid="count">{count}</h2>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+};
+
+export default Counter;
+
+Test: src/components/Counter.test.js
+
+import { render, screen, fireEvent } from '@testing-library/react';
+import Counter from './Counter';
+
+test('increments counter on button click', () => {
+  render(<Counter />);
+  const button = screen.getByText('Increment');
+  const count = screen.getByTestId('count');
+  expect(count.textContent).toBe('0');
+  
+  fireEvent.click(button);
+  expect(count.textContent).toBe('1');
+});
+
+You can also use user-event (recommended):
+import userEvent from '@testing-library/user-event';
+
+5. Overview of E2E Testing with Cypress
+
+npm install cypress --save-dev
+
+
+npx cypress open
+
+
+Add a basic E2E test
+
+File: cypress/e2e/home.cy.js
+
+describe('Home Page', () => {
+  it('loads and shows counter', () => {
+    cy.visit('http://localhost:3000');
+    cy.contains('Increment').click();
+    cy.get('[data-testid="count"]').should('have.text', '1');
+  });
+});
+
+
+# Run unit/component tests
+npm test
+
+# Run Cypress E2E tests (in new terminal)
+npx cypress open
+
+
+

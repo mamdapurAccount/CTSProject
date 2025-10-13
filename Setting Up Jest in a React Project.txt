@@ -1,0 +1,153 @@
+1. Setting Up Jest in a React Project
+If you're using Create React App (CRA), Jest and RTL come pre-installed.
+
+If not:
+npm install --save-dev jest babel-jest @babel/preset-env @babel/preset-react react-test-renderer
+
+
+Update your package.json:
+
+"scripts": {
+  "test": "jest"
+}
+
+
+Add a jest.config.js if needed:
+
+module.exports = {
+  testEnvironment: 'jsdom',
+};
+
+
+2. Writing Simple Unit Tests
+Create sum.js:
+
+const add = (a, b) => a + b;
+module.exports = add;
+
+
+Test file sum.test.js:
+
+const add = require('./sum');
+
+test('adds two numbers', () => {
+  expect(sum(2, 3)).toBe(5);
+});
+
+Run it with:
+
+npm test
+
+
+3. Testing Components, Props, and State (with RTL)
+
+Component Greeting.js:
+
+const Greeting = ({ name }) => <h1>Hello, {name}!</h1>;
+export default Greeting;
+
+Test file Greeting.test.js:
+
+import { render, screen } from '@testing-library/react';
+import Greeting from './Greeting';
+
+test('displays correct greeting', () => {
+  render(<Greeting name="Ada" />);
+  expect(screen.getByText(/Hello, Ada!/i)).toBeInTheDocument();
+});
+
+
+4. Testing User Interactions with React Testing Library
+Component Counter.js:
+
+import { useState } from 'react';
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <>
+      <p data-testid="count">{count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </>
+  );
+};
+
+export default Counter;
+
+
+Test file Counter.test.js:
+
+import { render, screen, fireEvent } from '@testing-library/react';
+import Counter from './Counter';
+
+test('increments counter on click', () => {
+  render(<Counter />);
+  fireEvent.click(screen.getByText(/Increment/i));
+  expect(screen.getByTestId('count')).toHaveTextContent('1');
+});
+
+
+5. Overview of E2E Testing with Cypress
+
+Cypress is a powerful end-to-end testing framework, and it’s become a go-to for modern web apps—especially those built with React. Here’s why developers like it:
+
+Real Browser Testing
+Cypress runs directly in the browser, allowing you to see your tests execute in real time. You can literally watch your app behave as Cypress clicks buttons, types into fields, or checks for content.
+
+Fast, Reliable, and Flaky-Test Resistant
+Because it’s tied so closely to the browser and has complete control over the DOM, Cypress tends to be faster and more stable than Selenium-based tools.
+
+Automatic Waits
+No more adding manual waits or retries for elements to appear—it waits for DOM elements, animations, and XHR requests automatically before running commands.
+
+Developer-Friendly Syntax
+Tests are easy to write and understand:
+
+js
+cy.visit('/');
+cy.get('button').click();
+cy.contains('Success!');
+
+Time Travel & Snapshots
+During test runs, Cypress takes snapshots of your app—so you can hover over each step and see what your UI looked like at that moment. It’s like debugging through a time machine.
+
+Hot Reloading
+Change your test code and the test runner immediately re-runs it—no restart needed.
+
+
+
+Install Cypress:
+
+npm install --save-dev cypress
+
+Add script:
+
+"scripts": {
+  "cypress:open": "cypress open"
+}
+
+
+App.JS
+
+function App() {
+  return (
+    <div>
+      <h1>Welcome</h1>
+    </div>
+  );
+}
+
+Create E2E test: cypress/e2e/homepage.cy.js
+
+describe('Homepage', () => {
+  it('loads successfully', () => {
+    cy.visit('http://localhost:3000');
+    cy.contains('Welcome');
+  });
+});
+
+
+Start dev server (npm start), then run Cypress:
+
+npm run cypress:open
+
