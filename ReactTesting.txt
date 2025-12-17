@@ -1,0 +1,100 @@
+
+1. npm i -D vitest jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event
+
+2. Package.json 
+
+ "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "test": "vitest --environment=jsdom",
+    "test:watch": "vitest --environment=jsdom --watch",
+    "test:ui": "vitest --environment=jsdom --ui"
+
+  }
+
+
+
+2. 
+
+// Math.jsx
+
+export const add = (a, b) => a + b;
+export const multiply = (a, b) => a * b;
+
+//Math.test.jsx
+
+import { add, multiply } from './Math';
+import { test, expect } from 'vitest'
+test('adds 2 + 3 to equal 5', () => {
+  expect(add(2, 3)).toBe(5);
+});
+
+test('multiplies 2 * 4 to equal 8', () => {
+  expect(multiply(2, 4)).toBe(8);
+});
+
+
+npm test
+
+
+// Greeting.jsx
+
+const Greeting = ({ name }) => {
+  return <h1>Hello, {name}!</h1>;
+};
+
+export default Greeting;
+
+
+// Greeting.test.jsx
+
+import { render, screen } from '@testing-library/react'
+import Greeting from './Greeting';
+import { test, expect } from 'vitest'
+import * as matchers from '@testing-library/jest-dom/matchers' 
+expect.extend(matchers)
+test('renders greeting with name', () => {
+  render(<Greeting name="Manoj" />);
+  const greetingElement = screen.getByText(/Hello, Manoj!/i);
+  expect(greetingElement).toBeInTheDocument();
+});
+
+
+// Counter.jsx
+
+import React, { useState } from 'react';
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <h2 data-testid="count">{count}</h2>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+};
+
+export default Counter;
+
+
+// Counter.test.jsx
+
+import { render, screen, fireEvent } from '@testing-library/react';
+import Counter from './Counter';
+import { test, expect } from 'vitest'
+import * as matchers from '@testing-library/jest-dom/matchers' 
+expect.extend(matchers)
+test('increments counter on button click', () => {
+  render(<Counter />);
+  const button = screen.getByText('Increment');
+  const count = screen.getByTestId('count');
+  expect(count.textContent).toBe('0');
+  
+  fireEvent.click(button);
+  expect(count.textContent).toBe('1');
+});
+
+
+
