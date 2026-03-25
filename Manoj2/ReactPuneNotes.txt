@@ -1,0 +1,975 @@
+rafce
+
+**************************************************************************
+ // App Code 
+
+  const f3=(str)=>{
+  alert(str);
+    }
+
+return(
+<>
+<Customer cData={f3}></Customer>
+
+// Customer.jsx
+ const Customer=({cData})=>{
+
+
+    const f1=()=>{
+        cData('chid coming');
+    }
+    return(
+<button onClick={f1}> Send</button>
+
+    )
+}
+export default Customer;
+**********************************************************************************
+
+
+    const [cart,setCart]=useState([
+        {
+        id:1,
+        pname:'soap',
+        prate:10,
+        pqty:10
+    },
+{
+        id:2,
+        pname:'paste',
+        prate:15,
+        pqty:20
+    },
+    {
+        id:3,
+        pname:'oil',
+        prate:20,
+        pqty:30
+    }
+
+])
+const res= cart.reduce((sum,cart)=>sum+cart.prate*cart.pqty,0);
+
+**********************************************************************************
+
+ const [uname,setName]=useState("Saba");
+  const [pwd,setPwd]=useState("Qamar");
+  const [cnt,setCnt]=useState(0);
+  const [person,setPerson]=useState({fname:'babu',age:50});
+  const [persons,setPersons]=useState([{fname:'babu',lname:'sanu'}]);
+ const f2=(event)=>{
+   setPwd(event.target.value);
+ }
+ const f1=(event)=>{
+   setName(event.target.value);
+ }
+ const f3=()=>{
+  setCnt((prev)=>prev+1);
+ }
+ const f4=()=>{
+  setCnt((prev)=>prev-1);
+ }
+ const f5=()=>{
+  setPerson((prev)=>({...prev,age:prev.age+1}));
+ }
+ const f6=()=>{
+  setPersons((prev)=>[...prev,{uname:uname,lname:pwd}]);
+ }
+
+  return (
+    <>
+    <h1> Shankar I Love you </h1>
+    <h1> {person.fname}  {person.age} </h1>
+    <h1> {JSON.stringify(persons)}</h1>
+    <h2> cnt :- {cnt} </h2> 
+  <h2> {uname}  {pwd} </h2>
+    Uname :- <input type="text" name="uname" width="20" onChange={f1}/> <br/>
+    Pwd  :- <input type="text" name="pwd" width="20" onChange={f2}/> <br/>
+<button onClick={f3}> Incr</button>
+<button onClick={f4}> Decr </button>
+       <button onClick={f5}> Change </button>
+
+       <button onClick={f6}> Add </button>
+    </>
+  )
+
+************************************************************************************************************
+
+  const [persons,setPersons]=useState([{fname:'babu',lname:'sanu'}]);
+   const [search,setSearch]=useState('');
+   const [uname,setName]=useState('');
+   const [pwd,setPwd]=useState('');
+   const f2=(event)=>{
+   setPwd(event.target.value);
+ }
+ const f1=(event)=>{
+   setName(event.target.value);
+ }
+ const f3=()=>{
+  
+  setPersons((prev)=>[...prev,{fname:uname,lname:pwd}])
+ }
+
+ const f4=()=>{
+  const s= persons.filter((c)=>c.fname==='babu');
+  setSearch(s[0]);
+ }
+ 
+ const f5=()=>{
+  setPersons(persons.map((p)=>p.fname==='babu'?{...p,lname:pwd}:p));
+ }
+const f6=()=>{
+  setPersons(persons.filter((p)=>p.fname!=='babu'));
+ }
+  return (
+    <>
+    <h1> Shankar I Love you </h1>
+    <h1> Search {JSON.stringify(search)} </h1>
+    <h1> {JSON.stringify(persons)}</h1>
+    Uname :- <input type="text" name="uname" width="20" onChange={f1}/> <br/>
+    Pwd  :- <input type="text" name="pwd" width="20" onChange={f2}/> <br/>
+      <button onClick={f3}> Add</button>
+      <button onClick={f4}> Search</button>
+       <button onClick={f5}> Modify </button>
+
+       <button onClick={f6}> Delete </button>
+    </>
+  )
+
+*****************************************************************
+const [count,setCount]=useState(0);
+
+const memo= useMemo(
+    ()=>{
+    return count*2;
+    },[count]
+   )
+const f1=()=>{
+      setCount((p)=>p+1);
+
+    }
+ <h1> {count} , {memo} </h1>
+<button onClick={()=>setCount((p)=>(p+1)) }> Change </button>
+
+
+*********************************************************************************************
+const [cart,setCart]=useState([
+        {
+        id:1,
+        pname:'soap',
+        prate:10,
+        pqty:10
+    },
+{
+        id:2,
+        pname:'paste',
+        prate:15,
+        pqty:20
+    },
+    {
+        id:3,
+        pname:'oil',
+        prate:20,
+        pqty:30
+    }
+
+])
+
+const [num,setNum]=useState(0);
+const [res,setRes]=useState(0);
+
+// whenever cart changes the total price is calculated
+
+const myres=useMemo( ()=>{
+setRes(cart.reduce((sum,cart)=>sum+cart.prate*cart.pqty,0));
+return num*2;
+},[cart])
+
+<h1> Current Cart Price :- {res} {myres} </h1>
+
+
+
+**************************************************************************************
+import { use, useState } from 'react';
+import './App.css'
+import Student from './Student';
+
+function App() {
+  const [searchData, setSearch] = useState({});
+  const [food, setFood] = useState({
+    foodId: 0,
+    foodName: "",
+    foodType: "",
+    foodPrice: 0
+  })
+  const [foods, setFoods] = useState([
+    {
+      foodId: 1,
+      foodName: "Bread",
+      foodType: "Bakery",
+      foodPrice: 50
+    },
+    {
+      foodId: 2,
+      foodName: "Fish",
+      foodType: "Non-Vegeterian",
+      foodPrice: 500
+    }
+  ])
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFood((prev) => ({ ...prev, [name]: value }));
+  }
+
+  const add = () => {
+    setFoods((prev) => [...prev, food]);
+  }
+
+  const search = () => {
+    const s = foods.filter((f) => f.foodId == food.foodId);
+    if(s.length > 0)
+      setSearch(s[0])
+    else
+      alert("Sorry food id does not exist");
+  }
+
+  const update = () => {
+    setFoods(foods.map((f) => f.foodId == food.foodId ? food : f));
+  }
+
+  const handleDelete = () => {
+    setFoods(foods.filter((f) => f.foodId != food.foodId));
+  }
+
+  return (
+    <>
+      <div className="">
+        Search Data: {JSON.stringify(searchData)}
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Food ID</th>
+            <th>FOOD NAME</th>
+            <th>FOOD TYPE</th>
+            <th>FOOD PRICE</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            foods.map((f, index) => (
+              <tr key={index}>
+                <td>{f.foodId}</td>
+                <td>{f.foodName}</td>
+                <td>{f.foodType}</td>
+                <td>{f.foodPrice}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+      <div className="">
+        <label>
+          FOOD ID:
+          <input type="text" name="foodId" onChange={handleChange} />
+        </label>
+        <label>
+          FOOD NAME:
+          <input type="text" name="foodName" onChange={handleChange} />
+        </label>
+        <label>
+          FOOD TYPE:
+          <input type="text" name="foodType" onChange={handleChange} />
+        </label>
+        <label>
+          FOOD PRICE:
+          <input type="text" name="foodPrice" onChange={handleChange} />
+        </label>
+      </div>
+      <button className='btn btn-info' onClick={add}>ADD</button>
+      <button className='btn btn-success' onClick={search}>SEARCH</button>
+      <button className='btn btn-success' onClick={update}>UPDATE</button>
+      <button className='btn btn-danger' onClick={handleDelete}>DELETE</button>
+    </>
+  )
+
+}
+
+export default App
+
+***************************
+function App() {
+  const [person,setPerson]=useState({uname:'minu',pwd:'janu'});
+    const f1=(event)=>{
+      const {name,value}= event.target;
+      setPerson((prev)=>({...prev,[name]:value}));
+    }
+    const f2=()=>{
+     alert(person.uname+"  "+person.pwd);
+    }
+  return(
+<>
+<h1> {person.uname}  {person.pwd} </h1>
+
+  Uname :- <input type="text" name="uname" width="20" onChange={f1}/> <br/>
+    Pwd  :- <input type="text" name="pwd" width="20" onChange={f1}/> <br/>
+<button onClick={f2}> Show </button>
+
+</>
+
+  )
+*******************************************************************************************************************
+  const [userData, setUserData] = useState({
+    username: "aman",
+    password: "aman@123",
+    role: "admin",
+    cert:'Dipl',
+    courses:[]
+
+  });
+
+  const handleChange = (event) => {
+    // Write your code here
+    const {name, value,type,checked} = event.target;
+    setUserData((prev) => {
+if(type==='checkbox' && name==='courses')
+   return {...prev,courses:checked?[...prev.courses,value]:prev.courses.filter((c)=>c!=value)};
+  else
+    return  {...prev, [name]: value};
+
+    })
+    
+  
+
+  
+  }
+
+  const show = () => alert(JSON.stringify(userData));
+ 
+  return (
+    <div>
+      <h1>{JSON.stringify(userData)} </h1>
+      <label htmlFor="username">Username: </label>
+      <input type="text" name="username" width="20" onChange={handleChange}/>
+      <br/>
+      <label htmlFor="password">Password: </label> 
+      <input type="text" name="password" width="20" onChange={handleChange}/>
+      <br/>
+      <label htmlFor="role">Role: </label>
+      <input type="text" name="role" width="20" onChange={handleChange}/>
+      <br/>
+      <select name="cert" onChange={handleChange}> 
+  <option value="Dip"> Diploma </option>
+  <option value="PG Dip"> Pg Diploma </option>
+  <option value="Adv Dip"> Adv Diploma </option>
+
+</select>
+   <input type="checkbox" name="courses" value="c" onChange={handleChange}/>  C < br />
+   <input type="checkbox" name="courses" value="c++" onChange={handleChange}/> C++  < br />
+   <input type="checkbox" name="courses" value="java" onChange={handleChange}/> Java < br />
+
+      <button onClick={show}>Click</button>
+    </div>
+  )
+
+****************************************************************************************************************************
+
+NameContext.js
+
+import { createContext } from "react";
+
+const NameContext= createContext({uname:'saba',pwd:'qamar'});
+export default NameContext;
+
+Child.js
+
+import { useContext } from "react"
+import NameContext from "./NameContext"
+const Child=()=>{
+const name=useContext(NameContext);
+return(
+
+    <h1> Hello , {name.uname} {name.pwd} </h1>
+)
+
+
+}
+export default Child;
+
+App.js
+import { useState } from 'react'
+import './App.css'
+import NameContext from './NameContext'
+import Child  from './Child'
+
+function App() {
+  
+const obj={uname:"Shaista",pwd:'lodhi'};
+  return (
+    <>
+      <div>
+        <NameContext.Provider value={obj}>
+        <Child/>
+</NameContext.Provider>
+        </div>
+    </>
+  )
+}
+
+export default App
+
+****************************************************************************************
+import { useReducer } from "react";
+const Greeting=()=>{
+  const reducer=(state,action)=>{
+    if(action.type==='incr')
+      return { count:state.count+1};
+
+    if(action.type==='decr')
+      return { count:state.count+1};
+    
+  };
+  const initialState={'count':1};
+  const [state,dispatch]= useReducer(reducer,initialState);
+  
+  
+     
+    
+      const f1=()=>{
+      dispatch({type:'incr'});
+      };
+      const f2=()=>{
+     dispatch({type:'decr'});
+      }
+    return (
+      <div>
+  <h1> Hello Gundu Bandu Kaka is Learning, {state.count}</h1>
+  <button onClick={f1}> Increment </button>
+  <button onClick={f2}> Decrement </button>
+
+ </div>
+)};
+
+export default Greeting;
+
+*********************************************************************************************
+import { useReducer } from 'react';
+import './App.css'
+import Student from './Student';
+
+function App() {
+  const initialState = {
+    username: "piyush",
+    role: "admin"
+  }
+
+  const reducer = (state, action) => {
+    if (action.type === "updateUsername")
+      return { ...state, username: "ankit" };
+
+    if (action.type === "updateRoleVendor")
+      return { ...state, role: "vendor" };
+
+    if (action.type === "updateRoleAdmin")
+      return { ...state, role: "admin" };
+  }
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const updateUsername = () => {
+    dispatch({ type: "updateUsername" });
+  }
+
+  const updateRole = (role) => {
+    if (role === "vendor")
+      dispatch({ type: "updateRoleVendor" });
+
+    if (role === "admin")
+      dispatch({ type: "updateRoleAdmin" });
+  }
+
+  return (
+    <>
+      <h1>Username: {state.username}  |  Role: {state.role}</h1>
+      <hr />
+      <div className="d-flex gap-2 justify-content-center">
+        <button onClick={updateUsername}>Update username</button>
+        <button onClick={() => updateRole("admin")}>Make admin</button>
+        <button onClick={() => updateRole("vendor")}>Make vendor</button>
+      </div>
+    </>
+  )
+}
+
+export default App
+
+*****************************************************************
+function App() {
+  const initialState = {
+    username: "piyush",
+    role: "admin"
+  }
+
+  const reducer = (state, action) => {
+    if (action.type === "updateUsername")
+      return { ...state, username: action.payload };
+
+    if (action.type === "updateRole")
+      return { ...state, role: action.payload };
+
+  }
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const updateUsername = (username) => {
+    dispatch({ type: "updateUsername", payload: username});
+  }
+
+  const updateRole = (role) => {
+      dispatch({ type: "updateRole", payload: role });
+  }
+
+  return (
+    <>
+      <h1>Username: {state.username}  |  Role: {state.role}</h1>
+      <hr />
+      <div className="d-flex gap-2 justify-content-center">
+        <button onClick={() => updateUsername("vivek")}>Update username</button>
+        <button onClick={() => updateRole("admin")}>Make admin</button>
+        <button onClick={() => updateRole("vendor")}>Make vendor</button>
+      </div>
+    </>
+  )
+}
+
+export default App
+
+************************************************************************
+function App() {
+
+  const [obj,setObj]=useState({});
+const customers =[
+  {cid:10,cname:'bebo',age:20},
+    {cid:12,cname:'lolo',age:12},
+      {cid:11,cname:'aayesha',age:22}
+  
+
+]
+const data={
+  cart:customers
+}
+const reducer=(state,action)=>{
+  switch(action.type){
+
+    case "add":
+  return {...state,cart:[...state.cart,action.payload]};
+    
+    case "modify":
+return {...state,cart:state.cart.map((c)=>c.cid==action.payload.cid?action.payload:c)};
+
+  
+    case "search":
+      const myobj=state.cart.find((c)=>c.cid===action.payload.cid);
+      setObj(myobj);
+return {...state};
+ 
+    
+    case "del":
+return {...state,cart:state.cart.filter((c)=>c.cid!=action.payload.cid)};
+ 
+
+  }
+}
+const add=()=>{
+dispatch({type:'add',payload:{cid:4,cname:'saima',age:10}})
+}
+const modify=()=>{
+dispatch({type:'modify',payload:{cid:4,cname:'shiasta',age:25}})
+}
+const search=()=>{
+dispatch({type:'search',payload:{cid:4}})
+}
+const del=()=>{
+dispatch({type:'del',payload:{cid:4}})
+}
+
+
+
+const [state,dispatch]=useReducer(reducer,data);
+
+
+  return (
+    <>
+    <h1> {JSON.stringify(obj)}</h1>
+  <table>
+   <thead>
+    <tr>
+    <td> Cid </td>
+    <td> Cname </td>
+    <td> Age </td>
+    </tr>
+   </thead>
+   <tbody>
+    
+      { 
+      state.cart.map((c,index)=>(
+        <tr key={c.cid}>
+         <td>{c.cid} </td>
+       <td> {c.cname}</td>
+       <td> {c.age} </td>
+      </tr>
+      ))
+      }
+
+    
+   </tbody>
+
+  </table>
+<button onClick={add}> Add  </button>
+<button onClick={modify}> Modify </button>
+<button onClick={del}> Delete </button>
+<button onClick={search}> Search </button>
+    </>
+  )
+}
+
+
+
+
+***************************************************************************
+
+useEffect(
+ ()=> setTimeout( ()=>alert('Iam arrived after 5 sec'),5000),[]);
+
+
+******************************************************************
+function App() {
+  const [n,setN]=useState(0);
+  const [name,setName]=useState("Saba");
+ useEffect( ()=>setName("Aayesha"),[]);
+useEffect(()=>alert('changed '+n),[n]);
+
+ const f1=()=>{
+  setN((p)=>p+1); 
+ }
+  return (
+    <>
+      <div>
+        <h1> {n} </h1>
+           <h1> {name} </h1>       
+           <button onClick={f1}> Change</button>
+        </div>
+    </>
+  )
+}
+
+*********************************************************************************************
+//   React Native Forms 
+function App() {
+ const [cust,setCust]=useState({custId:0,custName:'',mobNo:0})
+ const [error,setError]=useState('');
+
+const [error1,setError1]=useState('');
+ const handleChange=(event)=>{
+ const {name,value}= event.target;
+ setCust((p)=>({...p,[name]:value}));
+ const regex=/^[0-9]{10}$/;
+   if(name==="mobNo") {
+      if( !regex.test(value) )
+    setError1('Invalid Mobno');
+      else
+    setError1(''); }
+  else if(name==="custName") {
+      if(cust.custName.trim().length>=10)
+     setError('lenght > 10');
+   else
+     setError('');
+ }
+}
+  const f1=(e)=>{
+  alert(JSON.stringify(cust));
+e.preventDefault();
+  }
+   return (
+    <>
+      <div>
+   <form onSubmit={f1}>
+
+    Cust Id <input type="text" name="custId" width="20" onChange={handleChange}/> <br/>
+  Cust Name <input type="text" name="custName" width="20" onChange={handleChange} /> <br/> 
+  <p> {error} </p>
+  Cust MobNo <input type="text" name="mobNo" width="20" onChange={handleChange}/> <br/>
+<button type="submit"> Submit </button>
+ <p style={{color:'red',backgroundColor:'yellow'}}> {error1}</p>
+   </form>
+ 
+        </div>
+    </>
+  )
+}
+
+****************************************************************************************
+
+import React from 'react';
+class Greeting extends React.Component{
+
+    constructor(props){
+    super(props);
+    this.state={
+    count:0,
+    msg:'hello'
+  }    
+
+  }
+  
+   f1=()=>{
+   this.setState((p)=>({...p,msg:'changed'}));
+  }
+    render(){
+  const {fname,lname}=this.props;
+  const {count,msg}=this.state;
+  return(<div>
+ <h1> Hello {fname} {lname} Count:- {count}  {msg} </h1>
+ <button onClick={this.f1}> Change </button>
+ </div>
+  );
+
+}
+}
+export default Greeting;
+************************************************************************************
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+ const MyForm=()=> {
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+
+    alert(  'Form Data:'+data.name+"  "+data.email);
+  };
+
+  return (
+
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        
+        <label>Name:</label>
+        <input 
+          {...register('name', { 
+            required: 'Name is required' ,
+            
+          
+        
+        })}
+        />
+        {errors.name && <p>{errors.name.name} :- {errors.name.message}</p>}
+      </div>
+
+      <div>
+        <label>Email:</label>
+        <input
+          {...register('email', {
+            required: 'Email is required',
+            pattern: {
+              value: /^\S+@\S+$/i,
+              message: 'Invalid email format',
+            },
+          })}
+        />
+        {errors.email && <p>{errors.email.message}</p>}
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+export default MyForm;
+***************************************************************************
+
+Router
+// npm install react-router react-router-dom
+// all must import from react-router-dom package
+// main.jsx
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path='/' element={<App />} >
+          <Route index element={<Home />} />
+          <Route path='about' element={<About />} />
+          <Route path='contact' element={<Contact />} />
+          <Route path='content' element={<Content />} />
+          <Route path='signout' element={<Signout />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </StrictMode>,
+)
+
+
+//  App.jsx
+
+function App() {
+  const token = sessionStorage.getItem("myToken")
+  if (token) {
+    const { state } = useLocation()
+    const username = state?.username
+    const password = state?.password
+    return (<>
+      <img src={Chef} alt="" height="100px" width="100px" />
+      <h1>Hello, Welcome {username}, your password is {password}</h1>
+      <div className="flex gap-3">
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
+        <Link to="/content">Content</Link>
+        <Link to="/signout">Signout</Link>
+      </div>
+      <Outlet />
+    </>
+    )
+  } else {
+    return <Navigate to="/login" /> 
+  }
+}
+
+export default App
+
+// Login.jsx
+
+const Login = () => {
+    const [userObj, setUser] = useState({
+        username: "",
+        password: ""
+    })
+    const nav = useNavigate();
+    const handleChange = (event) => {
+        const { name, value } = event.target
+        setUser(prev => ({ ...prev, [name]: value }))
+    }
+
+    const handleLogin = (event) => {
+        if (userObj.username.localeCompare("aman") == 0 && userObj.password.localeCompare("pune") == 0) {
+            sessionStorage.setItem("myToken", "jwtToken")
+            nav("/", {
+                state: {
+                    username: userObj.username,
+                    password: userObj.password,
+                }
+            })
+        } else
+            alert("Sorry, Invalid username or password")
+    }
+    return (
+        <div className='bg-sky-100 flex flex-col gap-6 p-6 border-1 rounded-3xl'>
+            <label className='flex gap-2'>
+                Username:
+                <input type="text" name='username' value={userObj.username} onChange={handleChange} />
+            </label>
+            <label className='flex gap-2'>
+                Password:
+                <input type="text" name='password' value={userObj.password} onChange={handleChange} />
+            </label>
+            <button className='bg-sky-400 px-6 py-2 rounded-md' onClick={handleLogin} >Login</button>
+        </div>
+    )
+}
+
+export default Login
+******************************************************************************************************
+// npm install axios
+
+import axios from "axios";
+
+function App() {
+const WEBURL='http://localhost:4000/books';
+const [books,setBooks]=useState([]);
+const [book,setBook]=useState({});
+const getBooks=async ()=> {
+  try{
+      const response= await axios.get(WEBURL);
+      setBooks(response.data)
+ }
+  catch(e){
+console.log(e);
+  }
+}
+const search=async ()=> {
+  try{
+      const response= await axios.get(WEBURL+"/7e9c");
+      setBook(response.data);
+ }
+  catch(e){
+console.log(e);
+  }
+}
+const add=async ()=> {
+  try{
+      const response= await axios.post(WEBURL,{bid:2,bname:'Java',bprice:200});
+      setBooks([...books,response.data])
+ }
+  catch(e){
+console.log(e);
+  }
+}
+const modify=async ()=> {
+  try{
+      const response= await axios.put(WEBURL+"/4c25",{bid:2,bname:'React',bprice:900});
+      setBooks(books.map((b)=>b.id==='4c25'?response.data:b));
+
+ }
+  catch(e){
+console.log(e);
+  }
+}
+const del=async ()=> {
+  try{
+      const response= await axios.delete(WEBURL+"/4c25");
+      setBooks(books.filter((b)=>b.id!='4c25'));
+      
+ }
+  catch(e){
+console.log(e);
+  }
+}
+
+useEffect(  ()=> {getBooks()},[]);
+const show=()=>{
+  getBooks();
+}
+  return(
+    <>
+    <h1> {JSON.stringify(book)} </h1>
+
+
+<h1> NOw Manoj Axois </h1>
+
+    { 
+      books.map((b,i)=><li key={i}>{b.id} {b.bid} {b.bname} {b.bprice}</li> )
+      }
+
+<button onClick={show}> Show Books </button>
+
+<button onClick={add}> Add  Books </button>
+<button onClick={search}> Search Books </button>
+<button onClick={modify}> Modify Books </button>
+<button onClick={del}> Delete  Books </button>
+
+
+
+    </>
+  )
+}
+
+export default App
+***************************************************************************************************************

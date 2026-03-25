@@ -1,0 +1,680 @@
+spring.application.name=SpringDataJPA
+spring.datasource.url=jdbc:mysql://localhost:3306/demo
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.username=root
+spring.datasource.password=root
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+
+****************************************************************************************
+  http://localhost:9091/swagger-ui/index.html
+  http://localhost:9091/v3/api-docs
+
+
+
+  <dependency>
+    <groupId>org.springdoc</groupId>
+    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    <version>2.8.15</version>
+  </dependency>
+
+
+****************************************************************************************
+@Configuration
+public class Springconfig {
+
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+		http
+		.formLogin()
+		.defaultSuccessUrl("/hello",true)
+		.permitAll()
+		.and()
+		.logout()
+		.permitAll()
+		.and()
+		.authorizeHttpRequests()
+		.requestMatchers("/admin").hasRole("admin")
+		
+		.requestMatchers("/user").hasRole("user")
+		
+		.anyRequest().authenticated();
+		return http.build();
+
+		
+	}
+	@Bean
+	public UserDetailsService userDetailService() {
+		return new InMemoryUserDetailsManager(
+				User.withUsername("anil")
+				.password(passwordEncoder().encode("anil"))
+				.authorities("ROLE_admin")
+				.build(),
+				
+				User.withUsername("vinod")
+				.password(passwordEncoder().encode("vinod"))
+				.authorities("ROLE_user")
+				.build()				
+				
+				);
+	}
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+
+
+
+}
+
+*********************************************************************************************
+
+server.port=8761
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+eureka.instance.hostname=localhost
+
+
+server.port=8300
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+
+
+server.port=8301
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+eureka.instance.hostname=localhost
+
+***************************************************************************************
+
+
+
+          <dependency>
+    		<groupId>org.springframework.cloud</groupId>
+    		<artifactId>spring-cloud-starter-openfeign</artifactId>
+	  </dependency>
+
+
+    <dependency>
+	<groupId>io.github.resilience4j</groupId>
+	<artifactId>resilience4j-spring-boot2</artifactId>
+    </dependency>
+
+
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-gateway</artifactId>
+		</dependency>
+
+spring.application.name=MSGateway
+server.port=8305
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+eureka.instance.prefer-ip-address=true
+eureka.instance.ip-address=127.0.0.1
+
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: MS1
+          uri: lb://MS1
+          predicates:
+            - Path=/producer/viewpay
+
+        - id: MS2
+          uri: lb://MS2
+          predicates:
+            - Path=/consumer/getpay
+******************************************************************************************
+
+spring.profiles.active=native
+spring.cloud.config.server.native.search-locations=classpath:/config
+
+        <dependency>
+        	<groupId>org.springframework.cloud</groupId>
+        	<artifactId>spring-cloud-config-server</artifactId>
+    	</dependency>
+
+
+
+
+spring.config.import=configserver:http://localhost:9091
+
+                 <dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+
+*********************************************************************************************
+logging.level.com.cts=debug
+
+logging.level.com.cts.service=info
+
+logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n
+
+logging.pattern.file=%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+
+logging.file.name=logs/app.log
+
+********************************************************************************************
+@GetMapping("/secure")
+	public String getName(Authentication awt) {
+		if(awt instanceof UsernamePasswordAuthenticationToken)
+		return "basic login";
+		if( awt instanceof OAuth2AuthenticationToken)
+			return "oauth Login";
+		return "other";
+	}
+
+spring.security.oauth2.client.registration.github.client-id=Ov23liWZCggJPldO0UsP
+spring.security.oauth2.client.registration.github.client-secret=2f0c823bc10e5bc84d88fc591cbc95b366e9d389
+
+
+Resource Owner :- YOu (user)
+Client--  Your Photo app
+Authorization Server--Google Oauth Server
+Resource Server--Google Photos
+
+http://localhost:9091/hello
+http://localhost:9091/login/oauth2/code/github
+
+*********************************************************************************************
+<dependency>
+  <groupId>org.junit.platform</groupId>
+  <artifactId>junit-platform-suite</artifactId>
+ 
+  <scope>test</scope>
+</dependency>
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+
+@Suite
+@SelectClasses({OauthProjectApplicationTests.class,MyTest1.class})
+
+<dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-core</artifactId>
+  
+    <scope>test</scope>
+</dependency>
+
+<dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-junit-jupiter</artifactId>
+
+    <scope>test</scope>
+</dependency>
+
+*******************************************************************************
+  axios.interceptors.request.use((config) => {
+    config.params = { ...config.params,myName: "Piyush Sinha" };
+
+    // config.headers = {Authorization : 'bearer jwt token'}
+    return config;
+  
+  })
+
+  const WEBURL = "http://localhost:9091/food";
+  const [foods, setFoods] = useState([]);
+  const [food, setFood] = useState({});
+  const [message, setMessage] = useState("");
+
+  const getFoods = async () => {
+    try {
+      const response = await axios.get(WEBURL + "/foods");
+      setFoods(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const getFood = async () => {
+    try {
+      const response = await axios.get(WEBURL + "/food/2");
+      setFood(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const addFood = async () => {
+    try {
+      const response = await axios.post(WEBURL + "/addfood", {
+        foodId: 5,
+        foodName: "Vada Pav",
+        foodType: "Veg"
+      });
+      setFood(response.data);
+      setMessage("Food added succuessfully.");
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const modifyFood = async () => {
+    try {
+      const response = await axios.put(WEBURL + "/modifyfood", {
+        foodId: 5,
+        foodName: "Kachori",
+        foodType: "Veg"
+      });
+      setFood(response.data);
+      setMessage("Food modified successfully.")
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const deleteFood = async () => {
+    try {
+      const response = await axios.delete(WEBURL + "/deletefood/5");
+      setFood(response.data);
+      setMessage("Food deleted successfully.")
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const getMessage = async () => {
+    try {
+      // const jwtToken = localStorage.getItem("jwttoken");
+      const response = await axios.get(WEBURL + "/hello", {
+        // params : { "myName" : "Saishwari"}
+        // headers : { "Content-Type" : "Application/json" , 
+        //             Authorization : jwtToken }
+        
+      });
+      setMessage(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    getFoods();
+  }, [food])
+
+  return (
+    <>
+      <h1>Spring Boot Integration</h1>
+      {message && <p>{message}</p>}
+      {food && <p>{JSON.stringify(food)}</p>}
+      <table>
+        <thead>
+          <th>Id</th>
+          <th>Food</th>
+          <th>Type</th>
+        </thead>
+        <tbody>
+          {foods.map(food => (<tr key={food.foodId}>
+            <td>{food.foodId}</td>
+            <td>{food.foodName}</td>
+            <td>{food.foodType}</td>
+          </tr>))}
+        </tbody>
+      </table>
+      <br />
+      <br />
+
+      <button className='btn btn-primary' onClick={addFood}>Add</button>
+      <br />
+      <br />
+      <button className='btn btn-info' onClick={getFood}>Search</button>
+      <br />
+      <br />
+      <button className='btn btn-success' onClick={modifyFood}>Modify</button>
+      <br />
+      <br />
+      <button className='btn btn-danger' onClick={deleteFood}>Delete</button>
+      <br />
+      <br />
+      <button className='btn btn-info' onClick={getMessage}>Get Message</button>
+
+    </>
+
+  )
+
+*********************************************************************
+ const getData=async ()=>{
+
+    try{
+          const response= await axios.get(WEBURL+"/hello",{
+            "params":{pname:'Paste'
+              
+            }
+           });
+           setData(response.data+response.status);
+    }
+    catch(e){
+
+    }
+  }
+
+  axios.interceptors.request.use((config)=>{
+      config.params={...config.params,pname:'interceptor'};
+      setFood(' Hey Interceptor here ');
+      return config;
+     })
+  const getData=async ()=>{
+
+    try{
+          const response= await axios.get(WEBURL+"/hello",{
+            "params":{pname:'Paste'
+              
+            }
+           });
+           setData(response.data+response.status);
+    }
+    catch(e){
+
+    }
+  }
+
+
+const config = {
+  url: "/hello",                   // endpoint (if using axios.request)
+  method: "get",                   // 'get' | 'post' | 'put' | 'patch' | 'delete' | ...
+  baseURL: WEBURL,                 // base URL to be prefixed to 'url'
+  
+  // Query string
+  params: { pname: "Paste" },      // -> /hello?pname=Paste
+  // Custom serializer for params (optional)
+  // paramsSerializer: (params) => new URLSearchParams(params).toString(),
+
+  // Body (for POST/PUT/PATCH, not for GET)
+  data: { foo: "bar" },            // JSON payload
+
+  // Headers
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  },
+
+  // Timeouts & credentials
+  timeout: 5000,                   // ms
+  withCredentials: true,           // send cookies for cross-site requests
+
+  // Response handling
+  responseType: "json",            // 'json' | 'text' | 'blob' | 'arraybuffer' | ...
+  validateStatus: (status) => status >= 200 && status < 300, // controls throw behavior
+
+  // Cancellation
+  signal: abortController.signal,  // AbortController for cancel
+
+  // Progress (browser only)
+  onUploadProgress: (e) => { /* e.loaded, e.total */ },
+  onDownloadProgress: (e) => { /* e.loaded, e.total */ },
+
+  // Transforms (advanced)
+  transformRequest: [(data, headers) => data],
+  transformResponse: [(data) => data],
+};
+***********************************************************************************
+  const webUrl = "http://localhost:4000/books";
+  const [books, setBooks] = useState([])
+  const [book, setBook] = useState({})
+  const [info, setInfo] = useState("")
+  const getBooks = async () => {
+    try {
+      const response = await axios.get(webUrl);
+      setBooks(response.data);
+    } catch (error) {
+
+    }
+  }
+
+  const searchBook = async () => {
+    const response = await axios.get(webUrl + "/56a0")
+    setBook(response.data)
+  }
+
+  const modifyBook = async () => {
+    const response = await axios.put(webUrl + "/56a0", {
+      "bookId": "3",
+      "bookName": "civics",
+      "bookPrice": "200"
+    })
+    setBooks(books.map((b) => b.id === "56a0" ? response.data : b))
+    setInfo("Book modified successfully");
+  }
+  
+  const deleteBook = async () => {
+    const response = await axios.delete(webUrl + "/56a0")
+    setBooks(books.filter(b => b.id !== "56a0"))
+    setInfo("Book deleted successfully")
+  }
+
+  const show = () => {
+    getBooks()
+  }
+
+  const add = async () => {
+    const response = await axios.post(webUrl, {
+      "bookId": "3",
+      "bookName": "history",
+      "bookPrice": "50"
+    })
+    setBooks(prev => ([...prev, response.data]))
+    setInfo("Book added successfully");
+  }
+
+
+  useEffect(() => { getBooks() }, []);
+  return (
+    <>
+      <table>
+        <thead>
+          <tr>
+            <th>BookId</th>
+            <th>BookName</th>
+            <th>BookPrice</th>
+          </tr>
+        </thead>
+        <tbody>
+          {books.map((book) => (
+            <tr key={book.id}>
+              <td>{book.bookId}</td>
+              <td>{book.bookName}</td>
+              <td>{book.bookPrice}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <button onClick={show}>Show Books</button>
+      <button onClick={add}>Add Book</button>
+      <button onClick={searchBook}>Search</button>
+      <button onClick={modifyBook}>Modify</button>
+      <button onClick={deleteBook}>Delete</button>
+
+      {info && <h2>{info}</h2>}
+      {book && <h2>{JSON.stringify(book)}</h2>}
+    </>
+  );
+****************************************************************************
+https://labs.play-with-docker.com
+
+Hardware---> HostOS---> Hypervisor---> VM---> Guest OS---> App
+
+Harware-->HostOS--> Docker Engine--> Container--> App
+
+
+
+hub.docker.com
+
+docker -v
+
+docker pull hello-world
+
+docker run hello-world
+
+docker images
+
+docker ps
+
+// to see all the containers
+docker ps -a
+ // to see docker container running
+docker ps
+// to stop container
+
+docker stop <containerid>
+
+// to remove container
+
+docker rm <container-id>
+
+// to remove image
+ docker rmi <image-name> or<imageid>
+docker rmi  hello-world
+
+
+docker run -d --name test -e MYSQL_ROOT_PASSWORD=cts -p3308:3306  mysql:8.0
+
+
+
+docker exec -it a57e2bfeb36d   mysql -uroot -p
+
+ docker pull nginx
+
+docker run -d --name mynginx -p 9091:80  nginx:latest
+                   
+
+
+
+docker pull ubuntu
+
+docker run -d --name mybunty  ubuntu
+
+docker run -it --name mybunty ubuntu
+
+
+docker run --rm -it eclipse-temurin:17-jdk jshell
+docker run -it eclipse-temurin:17-jdk jshell
+
+
+1. create Dockerfile in manoj folder
+
+FROM openjdk:17 or eclipse-temurin:17-jdk
+COPY . /app
+WORKDIR /app
+RUN javac Main.java
+CMD ["java", "Main"]
+
+2. create Main.java file 
+
+
+3. docker build -t my-java-app .
+
+4. docker run my-java-app
+
+
+docker network create mynetwork
+
+docker run -d --network mynetwork --name app1 nginx
+docker run -d --network mynetwork --name app2 nginx
+
+
+docker run -it --rm --network mynetwork busybox sh
+
+ping app2
+
+
+// rest application
+
+docker build -t my-java-app .
+
+docker run -d -p 9091:8080 my-java-app
+
+// docker-compose
+
+docker-compose up -d --build
+docker-compose down -v
+docker-compose logs -f app
+
+  or
+
+docker-compose down –v  ( -v optional)
+docker-compose build --no-cache
+docker-compose up –d
+********************************************************************************
+ Cloud Service Models in AWS 
+
+ IaaS – Infrastructure as a Service
+     AWS gives you raw infrastructure like servers, storage, networks.
+     You manage OS, runtime, apps.
+AWS Examples:
+
+EC2 Elastic Compute Cloud (virtual machines)
+EBS Elastic Block Storage (storage)
+VPC (network)
+
+Use when: You want full control over OS + environment.
+
+ PaaS – Platform as a Service
+   AWS provides infrastructure + runtime/platform, you just deploy your application.
+   You don’t manage OS, patches, scaling.
+AWS Examples:
+
+AWS Elastic Beanstalk
+AWS Lambda (serverless — write code only)
+AWS RDS (managed DB)
+
+Use when: You want to focus on code, not servers.
+
+ SaaS – Software as a Service
+   AWS provides a complete ready-to-use software.
+   You only use the application.
+AWS Examples:
+
+Amazon WorkMail (email service)
+Amazon Chime (meeting app)
+AWS Marketplace SaaS apps (Salesforce, Freshdesk, etc.)
+
+Use when: You don’t want to manage anything — just use the software.
+
+
+
+
+AWS
+
+1. Compute    
+          EC2 ( Elastic Compute Cloud )
+          Lamda
+          Elastic Beanstalk
+2. Storage
+        S3 Simple Storage Service
+        Elastic Block Store( EBS)
+3. Database ( serverless service) 
+     RDS--Relational Db Service
+    Aurora mysql ,postgresql,SQL, SqlServer
+   dynamo Db-- no sql
+
+4. Network & Content Delivery
+   VPC-- Virtual Private cloud
+  Cloud Front
+  ELB ( Elastic Load Balancer) 
+  API gateway
+
+
+
+5. Analytics
+
+6. ML
+
+
+7. Security
+          Iam -- Identity and Access Management
+          KMS--Key Management Service  ( Encry & Decrypt data) 
+8. Containers
+
+9. Monitoring
+
+
+*********************************************************************************************
