@@ -1,0 +1,139 @@
+
+
+<form #frm="ngForm" (ngSubmit)="onsubmit()">
+
+<input #refname="ngModel" type="text" name="user" minlength="4" pattern="[a-z]{5}" required  [(ngModel)]="user"  /> 
+    <div *ngIf="refname.invalid && (refname.touched || refname.dirty)"  class="alert alert-danger">
+            Name Must be Entered
+    </div>
+    <br>
+    <input type="text" name="pass" [(ngModel)]="pass">
+    <br>
+    <input [disabled]="! frm.valid" type="submit" />
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+input.ng-valid
+{
+    border-left : 5px solid green
+}
+input.ng-invalid{
+    border-left :5px solid red;
+}
+
+
+
+userForm:FormGroup;
+  constructor() {
+  this.userForm= new FormGroup({
+    id:new FormControl(),
+    title:new FormControl(null,[Validators.required,Validators.minLength(6)]),
+    year:new FormControl(null,[Validators.required,Validators.pattern("^[0-9]{4}$")]),
+    auth:new FormControl()
+  });
+}
+
+
+<form [formGroup]="userForm" (ngSubmit)="f1(userform.value)">
+    <input type="text" formControlName="id"/>
+    <br>
+    <input type="text" formControlName="title"/>
+    <div *ngIf="userForm.controls['title'].hasError('required') && userForm.controls['title'].touched">
+        Sorry
+    </div>
+    <div *ngIf="userForm.controls['title'].hasError('minlength')"  class="alert alert-danger">
+        Title name must be lass than 6 characters
+    </div>
+    <br>
+    <input type="text" formControlName="auth"/>
+    <br>
+    <input type="text" formControlName="year"/>
+    <br>
+    <div *ngIf="userForm.controls['year'].hasError('pattern')" >
+        Year must be 4 digit 
+         </div> 
+      
+    </form>
+
+******************************************************************************************************
+
+
+<form [formGroup]="userForm">
+    <input type="text" formControlName="id"/>
+    <br>
+    <input type="text" formControlName="title"/>
+    <div *ngIf="userForm.controls['title'].hasError('required') && userForm.controls['title'].touched">
+        Sorry
+    </div>
+    <div *ngIf="userForm.controls['title'].hasError('minlength')"  class="alert alert-danger">
+        Title name must be lass than 6 characters
+    </div>
+    <br>
+    <input type="text" formControlName="auth"/>
+    <br>
+    <input type="text" formControlName="year"/>
+    <br>
+    <div *ngIf="userForm.controls['year'].hasError('pattern')" >
+        Year must be 4 digit 
+         </div>
+
+         <div formArrayName="emails">
+            <label>Emails:</label>
+            <div *ngFor="let email of emails.controls; let i = index">
+              <input [formControlName]="i" />
+              <button type="button" (click)="removeEmail(i)">Remove</button>
+            </div>
+            <button type="button" (click)="addEmail()">Add Email</button>
+          </div>
+      <button type="submit" > Submit </button>
+    </form>
+
+
+
+
+
+userForm:FormGroup;
+
+  constructor() {
+    this.userForm = new FormGroup({
+     id:new FormControl(),
+     title:new FormControl(null,[Validators.required,Validators.minLength(6)]),
+     year:new FormControl(null,[Validators.required,Validators.pattern("^[0-9]{4}$")]),
+      auth: new FormControl(),
+      emails: new FormArray([this.createEmailControl()])
+   });
+  }
+  createEmailControl(): FormControl {
+    return new FormControl('', [Validators.required, Validators.email]);
+  }
+  get emails(): FormArray {
+    return this.userForm.get('emails') as FormArray;
+  }
+  addEmail(): void {
+    this.emails.push(this.createEmailControl());
+  }
+
+  removeEmail(index: number): void {
+    if (this.emails.length > 1) {
+      this.emails.removeAt(index);
+    }
+  }
+
+  f1(): void{
+   // alert(this.userForm.get('auth').value);
+    //  console.log(this.emails.value);
+    alert(this.userForm.value.auth);
+  }
+
+

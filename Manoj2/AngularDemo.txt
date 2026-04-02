@@ -1,0 +1,429 @@
+****************************************************************************************
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+************************************************************************************
+<h2 [ngStyle]="{'color':clr,'background-color':clr1}" > Hello Gundu Bandu</h2>
+
+<div *ngIf="n>2 else blk">
+    Yes gretae
+</div>
+<ng-template #blk>
+    No gretaer
+</ng-template>
+
+******************************************************************************************
+<div [ngSwitch]="cert">
+    <div *ngSwitchCase=" 'dip' ">
+        <h2> Diploma </h2>
+    </div>
+    <div *ngSwitchCase=" 'Pgdip' ">
+        <h2> Pg Diploma </h2>
+    </div>
+    <div *ngSwitchCase=" 'Advdip' ">
+        <h2> Adv Diploma </h2>
+    </div>
+    <div *ngSwitchDefault>Default Case </div>
+           
+</div>
+
+*******************************************************
+
+  // when you want to bind the object to drop down
+
+<h1> {{ course.deptId}}, {{ course.deptName}}</h1>
+<select name="course" [(ngModel)]="course">
+<option *ngFor="let c of courses"  [ngValue]="c">
+    {{c.deptName}}
+</option>
+
+courses: Department[] = [
+    
+    { deptId: 11, deptName: 'sales' },
+    { deptId: 12, deptName: 'mkt' }
+  ];
+  course: Department = new Department();
+
+
+
+****************************************************************
+<div  [hidden]="!submitted">
+  <h2> Record Added Sucesfully </h2>
+
+</div>
+
+<button (click)="sortById()"> Sort By Id </button>
+<button (click)="sortByName()"> Sort By Name  </button>
+Search by Name <input type="text" width="20"  (keyup)="searchByName()" [(ngModel)]="searchText"/>
+<div class="panel panel-primary">
+    <div class="panel panel-heading">
+        <h2> Person List </h2>
+    </div>
+<table  class="table" border="2">
+
+    <tr *ngFor="let p of persons | sort:n">
+ 
+        <td>{{p.pid}} </td>
+        <td>{{p.pname}} </td>
+        <td>{{p.page}} </td>
+
+        <td><button  (click)="show(p)"  class="btn btn-primary"> Show </button> </td>
+        <td><button  (click)="del(p)" class ="btn btn-danger"> Delete </button> </td>
+        <td><button  (click)="Modiy(p)" class="btn btn-success"> Modify </button> </td>
+        </tr>
+        </table>
+</div>
+<div [hidden]="submitted" class="jumbotron">
+ <div >
+     <h2> Person Details </h2>
+ </div>
+ <form class="form-group"> 
+Pid :-  <input type="text" width="20"  name="pid" [(ngModel)]="person.pid" class="form-control"/> <br>
+PName :-  <input type="text" width="20"  name="pname" [(ngModel)]="person.pname" class="form-control" /> <br>
+Page :-  <input type="text" width="20"  name="page"  [(ngModel)]="person.page" class="form-control" /> <br>
+</form>
+</div>
+
+<button  (click)="f1()"> Add Person</button>
+<button  (click)="search()"> Search </button>
+<button  (click)="search()"> Update Details </button>
+
+<app-first>
+    
+</app-first>
+
+***************************************************************************************
+(Mphasis)
+
+<h1> {{"Welcome"|uppercase}}</h1>
+<h1> {{"Welcome"|lowercase}}</h1>
+
+<h1> {{"Welcome"|titlecase}}</h1>
+<h1> {{"Nikita"|reverse}}</h1>
+<h1> {{n|percent}}</h1>
+<h1> {{myemp|json}}</h1>
+<h1> {{dob|date:'dd:MM:yyyy'}}</h1>
+<h1> {{dob|date:'dd:MMM:yyyy'}}</h1>
+<h1> {{dob|date:'short'}}</h1>
+<h1> {{dob|date:'medium'}}</h1>
+<h1> {{arr|slice:1:3}}</h1>
+<h1> {{5|square}}</h1>
+<input type="text" [(ngModel)]="title" />
+<input type="text" name="e.eno" [(ngModel)]="eno" />
+<input type="text" name="e.ename" [(ngModel)]="ename" />
+<input type="text" name="e.sal" [(ngModel)]="sal" />
+
+<h1> {{title}}</h1>
+
+<button (click)="add()" class="btn btn-success"> Add </button> <br>
+<button (click)="mod()" class="btn btn-success"> Modify </button> <br>
+<button (click)="sorteno()" class="btn btn-success"> Sort By eno</button> <br>
+<button (click)="sortename()" class="btn btn-success"> sort By name </button> <br>
+
+<table border="1">
+  <tr *ngFor="let c of emps|sort:flag">
+  <td>{{c.eno}}</td>
+  <td>{{c.ename}}</td>
+  <td>{{c.sal}}</td>
+  <td> <button (click)="del(c.eno)" class="btn btn-danger"> Delete </button> <br> </td>  
+  <td> <button (click)="view(c)" class="btn btn-info" > Select </button> <br> </td>  
+
+  
+  </tr>
+  
+  </table>
+  
+  
+
+
+
+ flag: number=0;
+   n: number = 0.9;
+  dob: Date = new Date();
+  myemp: any = { strno: 1, stname: 'Sanam' };
+  arr:number[] = [1, 2, 3, 4, 5];
+  title = 'Janu';
+  emps: Emp[] = [
+    { eno: 1, ename: 'bebo', sal: 900 },
+    { eno: 2, ename: 'lolo', sal: 900 },
+    { eno: 3, ename: 'sana', sal: 900 },
+
+  ];
+  eno: number;
+  ename: string;
+  sal: number;
+  e: Emp;
+    
+  sorteno(): void{
+    this.flag = 1;
+  }
+  sortename(): void{
+    this.flag = 2;
+  }
+
+  add(): void{
+    this.e = { eno: this.eno, ename: this.ename, sal: this.sal };
+
+    this.emps.push(this.e);
+  }
+  del(n:number): void{
+    let dummy=this.emps.filter((e) => e.eno != n);
+    this.emps = dummy;
+  }
+  mod(): void{
+    let dummy = this.emps.filter((e) => e.eno != this.eno);
+    this.emps = dummy;
+    let dummy1: Emp = { eno: this.eno, ename: this.ename, sal: this.sal };
+    this.emps.push(dummy1);
+  }
+  view(e:Emp):void {
+    this.eno = e.eno;
+    this.ename = e.ename;
+    this.sal = e.sal;
+
+  }
+
+********************************************
+<form class="form form-group"  #frm="ngForm" (ngSubmit)="login(frm.value)"  >
+Customer Id: <input class="form form-control" #myid type="text"   placeholder="customer Id" name="custId"  [(ngModel)] = "custId"><br>
+    Customer Name: <input #refName="ngModel" #myname class="form form-control" type="text" placeholder="customer name" name="custName"  [(ngModel)] = "custName" pattern="[a-zA-Z]{5,10}"><br>
+  <div *ngIf="refName.invalid &&( refName.touched || refName.dirty)" class="alert alert-danger">
+  sory yaar namya
+  </div>
+    Customer City: <input class="form form-control" #mycity type="text"  placeholder="customer city" name="custCity"   [(ngModel)] = "custCity"><br>
+    <button class="btn btn-info" type="button" (click)="add()">Add customer</button>
+    <button class="btn btn-info" (click)="modify()">Modify customer</button><br>
+    <button class="btn btn-info" (click)="sortById()">Sort by Id</button>
+    <button class="btn btn-info" (click)="sortByName()">Sort by Name</button>
+<br><br><br>
+<div align="center" class="container">
+    <table class="table table-bordered table-striped" border="1">
+        <tbody>
+            <tr *ngFor = "let cust of custArr | sort:flag">        
+                <td>{{cust.cid}}</td>
+                <td>{{cust.cname}}</td>
+                <td>{{cust.ccity}}</td>
+                <td><button class="btn btn-primary" (click)="view(cust)">Select</button></td>
+                <td><button class="btn btn-danger" (click)="delete(cust)">Delete</button></td>
+            </tr>
+        </tbody>
+        </table>
+</div>
+<input [disabled]="!frm.valid"  type="submit" /> 
+<button (click)="f1(myid.value,myname.value,mycity.value)"> click here yaar</button>
+</form>
+
+input.ng-invalid{
+    border-left: 5px solid red
+}
+input.ng-valid{
+    border-left: 5px solid green
+}
+*************************************************
+
+Mapping
+
+  getAllDept(): Observable<any>{
+    return this.h.get<any>(this.URL1 + "/getalldept");
+  }
+  addEmployee(e: Emp): Observable<any>{
+    return this.h.post(this.URL1+"/addemp", e, { responseType: 'json' });
+  }
+  getAllEmployee(): Observable<any>{
+    return this.h.get<any>(this.URL1+"/getemps");
+  }
+  getEmp(id: number): Observable<any>{
+    return this.h.get<any>(this.URL1 + "/getemp/" + id);
+  }
+
+
+getAllDept(): void {
+    this.m.getAllDept().subscribe((d) => this.depts = d);
+  }
+  save() {
+    this.m.addEmployee(this.emp).subscribe((e) => this.emp = e);
+    console.log('emp added');
+  }
+  getAllEmps(): void {
+    this.m.getAllEmployee().subscribe((e) => this.emps = e);
+  }
+  getEmp(): void {
+    this.m.getEmp(15).subscribe((e) => {
+      if (e['msg'] != undefined)
+        this.msg = e['msg'];
+      else
+        this.emp = e;
+    });
+  }
+
+ getEmployee(): void {
+    this.m.getEmployee(this.emp.empId).subscribe(
+      (e) => this.emp = e, (err: HttpErrorResponse) => {
+        if (err.status == 404)
+          this.msg = err.error;
+      }
+    );
+
+<button (click)="getAllEmps()"> View Emps</button>
+<button (click)="getEmp()"> get Emp</button> <br>
+<table border="1">
+    <tr *ngFor="let e of emps">
+       <td>{{e.empId}}</td>
+       <td>{{e.empName}}</td>
+       <td>{{e.empSal}}</td>
+       <td>{{e.did.deptId}}</td>
+       <td>{{e.did.deptName}}</td>
+       
+    </tr>
+    
+    </table>
+    <h1> Erro:- {{msg}} </h1>
+
+       Eid <input type="text" name="emp.empId" [(ngModel)]="emp.empId"/> <br>
+       EName <input type="text" name="emp.empName" [(ngModel)]="emp.empName"/> <br>
+       ESal <input type="text" name="emp.empSal" [(ngModel)]="emp.empSal"/> <br>
+       Deptid <input type="text" name="emp.did.deptId" [(ngModel)]="emp.did.deptId"/> <br>
+       Deptname <input type="text" name="emp.did.deptName" [(ngModel)]="emp.did.deptName"/> <br>
+    <button type="button" (click)="save()"> Save </button>
+
+
+****************************************************
+
+npm install json-server
+npm run json-server
+
+include in package.json
+"json-server": "json-server --watch Products.json"
+
+http://localhost:3000/products
+http://localhost:3000/products?pid=101
+http://localhost:3000/products?pname=soap
+
+************************************************
+
+*******************************************************
+	
+   passing state to a router
+
+                          this.r.navigate(['/first'], { state: { myobj: this.mydept } });
+
+    // recving in another component in a constructor
+ 
+const nav = this.r.getCurrentNavigation();
+    if (nav?.extras.state) {
+      console.log(' hey navya ' + nav.extras.state['myobj']);
+      let d = nav.extras.state['myobj'];
+      console.log(d.deptId+'   '+d.deptName+'  ');
+    }
+
+  or in a Simple way
+              // receiving in onInit() 
+   const state = history.state;
+    console.log('saala statya');
+    if (state?.myobj)
+    {
+      this.e = state.myobj;
+    }
+************************************************************************
+
+frm: FormGroup;
+  constructor(private fb: FormBuilder) {
+    this.frm = fb.group({
+      cid: fb.control(""),
+      cname: fb.control(""),
+      cage: fb.control("")
+    });
+
+  } 
+  get getCustomerId() {
+    return this.frm.get('cid').value;
+  }
+  get getCustomerName() {
+    return this.frm.get('cname').value;
+  }
+  get getCustomerAge() {
+    return this.frm.get('cage').value;
+  }
+  f1(): void{
+//    console.log(this.frm.value);
+    console.log(this.getCustomerId + " " + this.getCustomerName + "  " + this.getCustomerAge);
+    
+}
+
+
+<form [formGroup]="frm"  (ngSubmit)="f1()">
+
+cid :- <input type="text" formControlName="cid" ><br>
+cname :- <input type="text" formControlName="cname" ><br>
+age :- <input type="text" formControlName="cage" ><br>
+<button > Submit </button>
+</form>
+
+
+*******************************************************************
+
+ frm: FormGroup;
+  constructor(private fb: FormBuilder) {
+    this.frm = fb.group({
+      cid: fb.control(""),
+      cname: fb.control(""),
+      cage: fb.control(""),
+      city: fb.array([fb.control("")])
+   });
+  } 
+  
+  get customerId() {
+    return this.frm.get("cid");
+  }
+
+  get customerName() {
+    return this.frm.get("cname");
+  }
+  get customerAge() {
+    return this.frm.get("cage");
+  }
+  get city() {
+    return this.frm.get('city') as FormArray;
+  }
+  f1(): void {
+    for (let c of this.city.value) {
+    alert(c);
+  }
+  }
+
+  addcity(): void{
+    this.city.push(this.fb.control(''));
+  }
+  remove(i:number): void{
+    this.city.removeAt(i);
+  }
+
+    ngOnInit(): void {
+    
+    }
+}
+
+
+  // Template Code
+
+<form [formGroup]="frm"  (ngSubmit)="f1()">
+
+cid :- <input type="text" formControlName="cid" ><br>
+cname :- <input type="text" formControlName="cname" ><br>
+age :- <input type="text" formControlName="cage" ><br>
+<div formArrayName="city">
+   <div *ngFor="let c of city.controls; let i= index">
+    city :- <input type="text" [formControlName]="i" ><br>
+    <button (click)="remove(i)"> Remove </button>
+</div>
+</div>
+<button type="button" (click)="addcity()" > Add City </button>
+
+
+<button type="submit"> Submit </button>
+
+</form>
+
+********************************************************************************************
+
+

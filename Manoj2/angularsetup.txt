@@ -1,0 +1,638 @@
+ 
+ 
+
+//Angular Question & Answer
+
+https://www.youtube.com/watch?v=-jeoyDJDsSM  (questpond)
+
+// Hard Questions 
+https://www.youtube.com/watch?v=TDo--zM9Yrk
+
+
+// to see the angular path from run command
+
+%appdata%
+// to install typescript
+
+npm install -g typescript
+tsc Test.ts 
+or 
+tsc Test.ts --lib "es2015"
+or
+tsc test.ts --module "commonjs"
+
+node Test.js
+
+
+
+
+npm install angular-pipes --save
+npm uninstall -g @angular/cli
+npm install -g @angular/cli@6.1.1
+ng update @angular/cli
+npm install --save rxjs-compat@6.3.3
+
+
+
+
+
+
+
+https://nodejs.org/en/
+
+lts recommended for most user
+(latest)
+
+cmpt :-  npm -version
+
+npm install -g @angular/cli
+
+ng --version
+
+npm install -g typescript
+	
+npm install --save core-js@^2.5.0
+
+
+
+
+
+after downloading and installing nodejs,(https://nodejs.org/en/download/current/)(choose current Latest Features)
+check wheter npm properly installed 
+1)npm -version
+node -v
+2)npm install -g @angular/cli(installing angular cli globally on the machine,to install the latest version)
+npm install -g @angular/cli@1.0.0
+(to install a particular version we can say  npm install -g angular@1.6.6)
+angular cli can report its version when you run it with the version flag
+
+ng --version
+angular will be installed under /node_modules/angular/angular.js from where it was executed
+(npm uninstall -g @angular/cli
+npm cache clean
+npm install -g angular-cli@latest,
+npm install -g @angular/cli@1.0.0 for version 4)
+3)ng new my-dream-app
+4)ng serve
+to test it type http://localhost:4200/
+to change default port number,type ng serve --port 4201(default port no is 4200)
+5)to install bootstrap,whcih is a css framework
+	npm install --save bootstrap
+--------------------------------------------------------------
+whenever u make changes (and save) to app.component.ts or app.component.html,the server (at port 4200) will restart
+and the changes or reflected in the web browser at port 4200.
+make changes to title and observe the corr. changes in the browser.
+angular2 is a spa whcih looks for index.html and serves it.In the index.html there is a app-root tag,which refers to the
+app under src.angular will look for app.component.ts under app folder.These folder name and file name is fixed.giving
+any other name will not work.it will give a compile time error.app.component.ts is s typescript file which gets
+compiled to javascript.typescript is an advanced version of javascript which supports classes,interfaces etc.
+the app-root is  a selector for the app.component.ts. The html and css are also mentioned here.
+
+ng new hello-world --skip-tests true
+npm install bootstrap@3 --save
+ng -serve o
+
+// to change the port
+
+ng serve --port 9001
+
+name: string; // <-- added name property
+
+names=['chidu','puttu'];
+
+var cities: Array<string>[] = [
+    ["jaipur", "delhi", "noida"],
+    ["blore", "chennai", "hyde"]
+  ];
+
+ employees:any[]=[
+    {"firstName":'shankar','lastName':'Kulkarni','emailId':'shan@gmail.com'},
+    {"firstName":'shankar','lastName':'Kulkarni','emailId':'shan@gmail.com'}
+ 
+
+  ];
+
+
+<h2 [ngStyle]="{'background-color':'red'}">
+
+
+<ul> 
+<li *ngFor="let name of names">Hello {{ name }}</li> </ul>
+
+<option *ngFor="let i of months">
+    {{ i}}
+
+  </option>
+
+ <span *ngIf="str=='suresh';then condition1 else condition2">
+condition is valid
+
+  </span>
+  <ng-template #condition1> Perfect </ng-template>
+  <ng-template #condition2> Not Perfct </ng-template>
+
+<span *ngIf="n%2==0;else elseblock">
+    <h1> Positive</h1>
+</span>
+<ng-template #elseblock>
+    Negative
+</ng-template>
+
+<button (click) ="f1($event)">
+
+  Login 
+</button>
+
+f1(event)
+  {
+    alert('Hi Button');
+  }
+
+<select (change) ="f2($event)">
+
+  <option *ngFor="let m of months">
+    {{ m }}
+  </option>
+</select>
+
+
+pipes
+
+ Welcome to {{ title | lowercase }}!
+
+<h2> {{ tday | date:'d/M/y'}} </h2>
+
+
+<form #frm="ngForm" (ngSubmit)="f1(frm.value)">
+   Eid <input type="text" name="eid" [(ngModel)]='eid'/>
+
+   <br>
+   Ename <input type="text" name="ename" [(ngModel)]='ename'/>
+
+   <br>
+   Esal <input type="text" name="esal" [(ngModel)]='esal'/>
+
+   <br>
+
+   <input type="submit" value="Submit"/>
+</form>
+	
+    Uname <input type="text" name="username" size="10" ngModel/>
+  
+    <br>
+  
+    <input type="submit" value="Login"/>
+  
+  </form>
+
+
+onClickSubmit(data)
+  {
+    alert("Hello "+data.username);
+
+
+  }
+		// two way binding
+
+    RouterModule.forRoot([
+      {
+         path: 'new-cmp',
+         component: NewComponentComponent
+      }
+   ])
+
+<input type="text" name="t1" [(ngModel)]="t1"/>
+
+<a routerLink = "new-cmp">New component</a>
+
+  <router-outlet>
+    
+  </router-outlet>
+ 
+  // passing parameters to router
+
+<a routerLinkActive="active" [routerLink]="['/new-cmp1',e.ename]"> First </a>
+<a routerLinkActive="active" [routerLink]="['/new-cmp2']"> Second </a>
+
+Component Class
+import {ActivatedRoute,Params} from '@angular/router';
+
+  constructor(private route:ActivatedRoute) { 
+this.str=this.route.snapshot.params['p1'];
+
+or r is a Router Class injected in constructor
+this.r.navigate(['/r1']);
+
+
+
+
+
+
+// creating object
+
+emp:Employee[]=[];
+  
+this.emp[0]= new Employee();
+  this.emp[0].ename='saba';
+     or
+this.emp[0]= {eid:100,ename:'sana',esal:900};
+
+
+
+
+<table border='2'>
+
+<tr *ngFor="let s of stud " >
+  <td> {{ s.id }} </td>
+    <td> {{ s.name }} </td>
+      <td> {{ s.marks }} </td>
+      <td> <button (click)="remove(s)">
+
+        Remove Emp
+        </button>
+        </td>
+</tr>
+
+</table>
+
+<input #id size="20"/>
+<br>
+<input #name size="20"/>
+<br>
+
+<input #marks size="20"/>
+<br>
+<button (click)="add(id.value,name.value,marks.value)">
+
+Add Emp 
+</button>
+
+stud:student[]=[];
+
+  constructor() {
+this.stud=[ new student(1,'saba',90),
+            new student(2,'sara',100)
+];
+
+
+   }
+   remove(s:student)
+   {
+      let index= this.stud.indexOf(s);
+     this.stud.splice(index);
+
+   }
+
+   add(id:number,name:string,marks:number)
+   {
+      let s1= new student(id,name,marks);
+      this.stud.push(s1);
+     
+
+   }
+
+export class EmpDb{
+
+       emp:Employee[]=[];
+       add(e:Employee){
+           this.emp.push(e);
+       }
+        
+       list():Employee[]{
+      return this.emp;
+       }
+
+     remove(e:Employee):void{
+         let index= this.emp.indexOf(e);
+         this.emp.splice(index);
+     }
+}
+
+
+
+// Filtering
+
+emp:Employee[] =[ new Employee(1,'sana',9000),
+                    new Employee(2,'saba',9000)
+];
+
+e:Employee[]=[];
+ this.e= this.emp.filter(Employee=>Employee.eid===2);
+                     or
+   this.person=[ {pid:100,pname:'saba'},
+    {pid:101,pname:'sara'},
+    {pid:100,pname:'shaista'},
+    ];
+  p=[];
+
+  this.p=this.person.filter(person=>data.t1==person.pid);
+
+
+Templates render HTML. In a template you can use data, property binding and event binding. This is occomplished with the following sytax:
+
+# - variable declaration
+
+() - event binding
+
+[] - property binding
+
+[()] - two-way property binding
+
+{{ }} - interpolation
+Templates render HTML. In a template you can use data, property binding and event binding. This is occomplished with the following sytax:
+
+
+
+
+getting Model Data
+
+<input name="t2" size="20" [ngModel]="str" />
+
+two way binding data
+<input name="t2" size="20" [(ngModel)]="str" />
+
+// Child Component 
+
+  <p>
+    {{childdata.eno}} , {{childdata.ename}}, {{childdata.sal}}
+ </p>
+ <button (click)="sendData()"> Send data</button>
+
+  @Input()
+childdata: Emp;
+  @Output()
+  mydata:EventEmitter<Emp> = new EventEmitter<Emp>();
+  sendData() {
+    let e: Emp = { eno: 10, ename: 'Lolo', sal: 1000 };
+    this.mydata.emit(e);
+  }
+
+// app component
+
+  <h1> {{title}} </h1>
+   <h2> Eno:- {{mydata.eno}} </h2>
+
+   <h2> Eno:- {{mydata.ename}} </h2>
+
+   <h2> Eno:- {{mydata.sal}} </h2>
+
+   <app-first [childdata]='cdata' (mydata)="f1($event)"  ></app-first>
+  
+  cdata: Emp = this.emp;
+  mydata: Emp={eno:11,ename:'Sana',sal:10};
+  f1($event): void{
+    this.mydata = $event;
+   }  
+
+
+
+ <div *ngFor="let e of emp" style="height: 50px;width: 200px;background-color:blue" >
+    <hr>
+    <div style="height: 50px;width: 200px;background-color:voilet" (click) ="f1(e)">
+                        {{ e.eid }}  {{ e.ename }}
+                    </div>
+
+                </div>
+
+
+<app-new-comp (str)="f1($event)">
+
+</app-new-comp>
+or for input
+
+<app-book [parentData]="f1('Hello Dada')">
+
+
+  </app-book>
+
+parent component
+
+e:Employee= new Employee(1,'janya',9000);
+
+f1(event:Employee)
+{   
+  this.e=event;
+  
+}
+        
+// Router Example 
+
+const routes: Routes = [
+  {
+path:'',
+redirectTo:'/book',
+pathMatch:'full'
+  },
+  
+  {
+  path:'book',
+  component:BookComponent,
+  canActivate:[AuthguardService]
+},
+{path:'login',
+component:LoginComponent},
+{
+  path:'**',
+  component:LoginComponent
+}
+];
+
+
+export class AuthguardService implements CanActivate{
+
+
+  constructor() { }
+
+  canActivate():boolean{
+    if(sessionStorage.getItem("status")){
+      return true;
+    }
+    return false;
+
+  }
+}
+
+// App Router Module.ts code
+
+const routes: Routes = [
+  {
+path:''",
+redirectTo:'/book',
+pathMatch:'full'
+  },
+  
+  {
+  path:'book',
+  component:BookComponent,
+  canActivate:[AuthguardService]
+},
+{path:'login',
+component:LoginComponent},
+{
+  path:'**',
+  component:LoginComponent
+}
+];
+
+// form 
+
+<form #frm="ngForm" (ngSubmit)="onsubmit(frm.value)">
+
+<input #refname="ngModel" type="text" name="user" minlength="4" pattern="[a-z]+" required  [(ngModel)]="user"  /> 
+    <div *ngIf="refname.invalid && (refname.touched || refname.dirty)"  class="alert alert-danger">
+            Name Must be Entered
+    </div>
+    <br>
+    <input type="text" name="pass" [(ngModel)]="pass">
+    <br>
+    <input [disabled]="! frm.valid" type="submit" />
+
+</form>
+
+
+input.ng-valid
+{
+    border-left : 5px solid green
+}
+input.ng-invalid{
+    border-left :5px solid red;
+}
+
+onsubmit(){
+
+  if(this.user.localeCompare("rani")==0 )
+    {
+      sessionStorage.setItem("status","success");
+      alert('login succ');
+
+    }
+    else
+    {
+      sessionStorage.removeItem("status");
+      alert('falied');
+
+    }
+
+}
+
+
+
+public getBookDetails():Observable<Book[]>{
+        return  this.http.get<Book []>(this.url);
+
+   }
+
+this.service.getBookDetails().subscribe(data=>
+      { this.book=data; 
+        this.searchBook=data;
+ }
+      );
+
+
+
+
+include ReactiveFormsModule from @angular/forms
+
+userForm:FormGroup;
+  constructor() {
+  this.userForm= new FormGroup({
+    id:new FormControl(),
+    title:new FormControl(null,[Validators.required,Validators.minLength(6)]),
+    year:new FormControl(null,[Validators.required,Validators.pattern("^[0-9]{4}$")]),
+    auth:new FormControl()
+  });
+}
+
+
+<form [formGroup]="userForm" (ngSubmit)="f1(userform.value)">
+    <input type="text" formControlName="id"/>
+    <br>
+    <input type="text" formControlName="title"/>
+    <div *ngIf="userForm.controls['title'].hasError('required') && userForm.controls['title'].touched">
+        Sorry
+    </div>
+    <div *ngIf="userForm.controls['title'].hasError('minlength')"  class="alert alert-danger">
+        Title name must be lass than 6 characters
+    </div>
+    <br>
+    <input type="text" formControlName="auth"/>
+    <br>
+    <input type="text" formControlName="year"/>
+    <br>
+    <div *ngIf="userForm.controls['year'].hasError('pattern')" >
+        Year must be 4 digit 
+         </div> 
+      
+    </form>
+
+
+
+
+
+
+
+
+ getEmployees():Observable<any>{
+    return this.h.get("http://localhost:8080/SpringHib/rest/empall");
+
+  }
+
+
+searchEmp(n:number):Observable<any>{
+  return this.h.get("http://localhost:8080/SpringHib/rest/search/"+n);
+
+} 
+modEmp(e:Emp):Observable<any>{
+
+return this.h.put("http://localhost:8080/SpringHib/rest/modemp",e,{responseType:'text'});
+
+}
+
+addEmp(e:Emp):Observable<any>{
+
+  return this.h.put("http://localhost:8080/SpringHib/rest/addemp",e,{responseType:'text'});
+
+  or
+
+return this.h.post("http://localhost:8080/SpringHib/rest/addemp",e,{headers:Headers},{responseType:'text'});
+  
+  }
+
+  delEmp(e):Observable<any>{
+
+    return this.h.delete("http://localhost:8080/SpringHib/rest/delempbyno/"+e);
+  }
+
+
+
+
+.subscribe(data=>,
+
+  (error:Response)=> {
+
+if(error.status===404)
+alert('sorry')
+
+http.delete.pipe(catchError((err:Response)=>
+
+
+throwError(new NotFoundError()
+
+
+
+this.service.placeOrder(this.items).subscribe(resp=>
+    {
+      if(resp['errorMessage']!=undefined)
+    {
+      this.message=resp['errorMessage'];
+    }
+    
+else
+    {
+ 
+    this.message=resp;
+     alert(this.message);
+    //  this.data.setProduct(this.order.cart.product.productId);
+     this.route.navigate(["/viewallorders"]);
+  
+  }

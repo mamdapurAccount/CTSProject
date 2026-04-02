@@ -1,0 +1,148 @@
+   1. Template Driven Form
+  2. Model Driven Form or Reactive form
+
+
+  userForm: FormGroup;
+  constructor() {
+    this.userForm = new FormGroup({
+      id: new FormControl(),
+      title: new FormControl("C Prog", [Validators.required, Validators.minLength(6)]),
+      year: new FormControl("2025", [Validators.required, Validators.pattern("[0-9]{4}")]),
+      auth: new FormControl()
+    });
+  }
+  f1(val: any) {
+    alert(val.id+"  "+val.title);
+  }
+
+
+
+<form [formGroup]="userForm" (ngSubmit)="f1(userForm.value)">
+   <input type="text"  formControlName="id"  />
+   <br>
+   <input type="text"  formControlName="title"/>
+   <div *ngIf="userForm.controls['title'].hasError('required') && userForm.controls['title'].touched">
+       Sorry Title reqd
+   </div>
+   <div *ngIf="userForm.controls['title'].hasError('minlength')"  class="alert alert-danger">
+       Title name must be lass than 6 characters
+   </div>
+   <br>
+   <input type="text" formControlName="auth"/>
+   <br>
+   <input type="text" formControlName="year"/>
+   <br>
+   <div *ngIf="userForm.controls['year'].hasError('pattern')" >
+       Year must be 4 digit 
+          </div> 
+    <button type="submit"> Submit </button>  
+   </form>
+ 
+
+
+
+
+<button (click)="showDept()">Show Dept</button>
+<body>
+    <table border="1" class="table table-hover">
+        <tbody>
+            <tr *ngFor = "let d of depts">
+                <td>{{d.deptId}}</td>
+                <td>{{d.deptName}}</td>
+                <td *ngFor = "let e of d.empList">
+                    <ol>
+                        <li>{{e.empId}}</li>
+                        <li>{{e.empName}}</li>
+                        <li>{{e.empSal}}</li>
+                    </ol>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+import { Component, ErrorHandler } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MyserviceService } from './myservice.service';
+import { Prod } from './Prod';
+import { Product } from './Product';
+import { Observable } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
+import { EmpServiceService } from './emp-service.service';
+import { Department } from './Department';
+import { Employee } from './Employee';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  emp: Employee = new Employee();
+  depts: Department[] = [];
+  constructor(private m: EmpServiceService) { }
+  showDept(): void {
+    this.m.getAllDept().subscribe((d) => this.depts = d);
+  }
+  addEmployee(): void {
+    this.m.addEmployee(this.emp).subscribe((e) => this.emp = e);
+    alert("Reecord Added Successfully");
+  }
+}
+
+
+
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Product } from './Product';
+@Injectable({
+  providedIn: 'root'
+})
+export class MyserviceService {
+  URL: string = "http://localhost:3000/products";
+  
+  constructor(private h: HttpClient) { }
+
+
+  getProducts(): Observable<any>{
+    return this.h.get<any>(this.URL);    
+  }
+  addProduct(p: Product): Observable<any>{
+    return this.h.post(this.URL, p, { responseType: 'json'});
+  }
+  modifyProduct(id:string,p: Product): Observable<any>{
+    return this.h.put(this.URL+"/"+id, p, { responseType: 'json' });
+  }
+  delProduct(id: string): Observable<any>{
+    return this.h.delete(this.URL + "/" + id,{responseType:'json'});
+  }
+  getProduct(id: string): Observable<any>{
+    return this.h.get<any>(this.URL + "/" + id);
+  }
+
+
+}
+
+
+
+
+Employee ID: <input type="text" name="emp.empId" [(ngModel)]="emp.empId">
+<br>Employee Name: <input type="text" name="emp.empName" [(ngModel)]="emp.empName">
+<br>Employee Sal: <input type="text" name="emp.empSal" [(ngModel)]="emp.empSal">
+<br>Department ID: <input type="text" name="emp.dept.deptId" [(ngModel)]="emp.dept.deptId">
+<br>Department Name: <input type="text" name="emp.dept.deptName" [(ngModel)]="emp.dept.deptName">
+<br><button (click)="addEmployee()">Add Employee</button>
+
+<div>
+    Record Added<br>
+    Emp Id: {{emp.empId}}<br>
+    Emp Name: {{emp.empName}}<br>
+    Emp Sal: {{emp.empSal}}<br>
+    Emp Dept ID: {{emp.dept.deptId}}<br>
+    Emp Dept Name: {{emp.dept.deptName}}
+</div>
+
+
+
+

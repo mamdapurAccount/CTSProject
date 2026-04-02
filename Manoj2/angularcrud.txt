@@ -1,0 +1,88 @@
+// Bootstrap Link
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" > 
+
+//Adding Record
+
+<div class="jumbotron">
+
+  <h1> Employee Details</h1>
+
+  <div>
+
+    <form class="form-group">
+     FirstName <input type="text" [(ngModel)]="employee.firstName" class="form-control" name="employee.firstName"> 
+      <br>
+     LastName <input type="text" [(ngModel)]="employee.lastName" class="form-control" name="employee.lastName" > 
+      <br>
+     EmailId  <input type="text" [(ngModel)]="employee.emailId" class="form-control" name="employee.emailId"> 
+      <br>
+      <button class="btn btn-success"> Submit </button>
+      <br>
+      </form>
+
+  </div>
+</div>
+
+
+
+// Listing Records
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Employee List</h2>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td>{{employee.firstName}}</td>
+          <td>{{employee.lastName}}</td>
+          <td>{{employee.emailId}}</td>
+          <td><button (click)="deleteEmployee(employee.id)" class="btn btn-danger">Delete</button>
+              <button (click)="updateEmployee(employee.id)" class="btn btn-info" style="margin-left: 10px">Update</button>
+              <button (click)="employeeDetails(employee.id)" class="btn btn-info" style="margin-left: 10px">Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+// Adding Record
+
+<h3>Create Employee</h3>
+<div [hidden]="submitted" style="width: 400px;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">First Name</label>
+      <input type="text" class="form-control" id="firstName" required [(ngModel)]="employee.firstName" name="firstName">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Last Name</label>
+      <input type="text" class="form-control" id="lastName" required [(ngModel)]="employee.lastName" name="lastName">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Email Id</label>
+      <input type="text" class="form-control" id="emailId" required [(ngModel)]="employee.emailId" name="emailId">
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
+
+<div [hidden]="!submitted">
+  <h4>You submitted successfully!</h4>
+  <!-- <button class="btn btn-success" (click)="newEmployee()">Add</button> -->
+</div>
