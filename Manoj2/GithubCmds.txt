@@ -1,0 +1,88 @@
+
+// Actions contents Metadata    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
+
+git config --global core.autocrlf true
+
+
+
+git init  -- markted as a git repo
+git config --global user.name "Mk"
+git config --global user.email "Manatharv"
+git remote add origin https:// git repository uri
+git checkout -b First  // create branch
+or
+git checkout  First  // switch branch
+
+git branch -a  // Show all branches
+
+
+
+git status
+
+
+git add . ( add to staging area )
+
+git commit  -m "mc"
+
+
+git pull origin First
+
+git push origin First 
+
+
+git pull origin master --allow-unrelated-histories
+
+
+
+git add MyFirst/...
+
+git checkout  // to comeout branch
+
+git checkout MyFirst/...  // to discard the changes
+
+
+git push origin --delete first(branchname) --- to delete the remote branch
+git branch -d first -- to delete local branch
+
+// store the current work with untracked file
+
+To save changes made when they’re not in a state to commit them to a repository.
+This will store the work and give a clean working directory. 
+For instance, when working on a new feature that’s not complete, 
+but an urgent bug needs attention.
+
+git stash -u
+
+
+// Bring stashed work back to the working directory
+git stash pop
+
+
+
+
+ // important git cmds
+
+      git clone  <clone url name >   -- to clone the project locally
+     git checkout -b <branch name>   --- to create a new branch
+       git checkout  branch   -- to move to the specific branch
+      git branch     -- to list all the branch     
+     git add .      ---- to add to the staging area
+    git commit -m "comments"  - to save
+    git status   --- to see the current status
+    git log   -- loggging info
+
+    git push origin master --- to push to the central repository
+
+    git merge <branchname>--- to merge the contents of one branch  to another branch
+
+   git pull origin <barnchname>-- the good practice is always pull first and push
+
+
+   git branch -d <branchname>--- to delete the local branch
+   
+  git push origin --delete <branch name> -- to delete the branch from main repository
+
+
+ // url of git
+
+https://github.com/mamdapurAccount/Demo.git
