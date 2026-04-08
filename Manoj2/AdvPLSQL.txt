@@ -1,0 +1,175 @@
+*   Key Components - PL/SQL Engine, Context Switching, PL/SQL Optimizer
+
+   PL/SQL Engine:- Executes PL/SQL code
+   Context Switching:- Control transfer between PL/SQL and SQL engines
+   PL/SQL Optimizer:- Improves PL/SQL execution performance
+*******************************************************************
+Definer vs Invoker Rights (AUTHID CURRENT_USER)
+
+
+******************************************************
+   Package State
+
+CREATE OR REPLACE PACKAGE counter_pkg AS
+  total_calls NUMBER := 0;
+  PROCEDURE increment;
+END counter_pkg;
+/
+
+CREATE OR REPLACE PACKAGE BODY counter_pkg AS
+  PROCEDURE increment IS
+  BEGIN
+    total_calls := total_calls + 1;
+    DBMS_OUTPUT.PUT_LINE('Total Calls: ' || total_calls);
+  END;
+END counter_pkg;
+/
+output Total calls: = 2
+
+it maintain the state between procedure calls
+
+
+*    Package Initialization Block
+
+Package State:
+
+Package state is the persistent value of package variables maintained across calls within a session.
+
+Package Initialization Block:
+
+A block in the package body that executes once per session to initialize package variables.
+
+************************************************************************************************
+Private vs Public Subprograms
+
+
+CREATE OR REPLACE PACKAGE math_pkg AS
+  FUNCTION add_nums(a NUMBER, b NUMBER) RETURN NUMBER; -- PUBLIC
+END math_pkg;
+/
+CREATE OR REPLACE PACKAGE BODY math_pkg AS
+
+  FUNCTION add_nums(a NUMBER, b NUMBER) RETURN NUMBER IS
+  BEGIN
+    RETURN a + b;
+  END add_nums;
+
+  FUNCTION multiply_nums(a NUMBER, b NUMBER) RETURN NUMBER IS
+  BEGIN
+    RETURN a * b;
+  END multiply_nums;
+
+END math_pkg;
+/
+SELECT math_pkg.add_nums(2, 3) FROM dual;     -- ✅ Works
+SELECT math_pkg.multiply_nums(2, 3) FROM dual; -- ❌ Error
+***************************************************************************************
+
+
+Dynamic SQL
+    What is Dynamic SQL?
+	Dynamic SQL means building and executing SQL statements at runtime
+ 	instead of writing fixed (static) SQL at compile time.
+    
+  static SQL
+          SELECT salary INTO v_sal FROM employees WHERE emp_id = 101;
+        
+        sql_stmt := 'SELECT salary FROM employees WHERE emp_id = :id';
+        EXECUTE IMMEDIATE sql_stmt INTO v_sal USING 101;
+
+    EXECUTE IMMEDIATE
+     Dynamic DDL, DML
+
+        DECLARE
+  v_sql VARCHAR2(200);
+BEGIN
+  v_sql := 'INSERT INTO employees (emp_id, emp_name)
+            VALUES (:1, :2)';
+
+  EXECUTE IMMEDIATE v_sql USING 101, 'Manoj';
+END;
+
+  DECLARE
+  v_sql VARCHAR2(200);
+BEGIN
+  v_sql := 'UPDATE employees SET salary = :sal WHERE emp_id = :id';
+
+  EXECUTE IMMEDIATE v_sql USING 60000, 101;
+END;
+
+
+
+
+    Using bind variables for performance & security
+*********************************************************************
+Security
+   Invoker rights
+   Privilege management
+   SQL Injection protection patterns
+   Code-based access control
+**********************************************
+Concurrency & Locking
+    Lock types
+    Deadlock avoidance
+    Autonomous transactions
+    Serializable vs read committed   
+******************************************************
+Adv Packages
+  --      DBMS_SQL
+
+     DBMS_SQL is used to execute dynamic SQL statements where the SQL structure 
+    (number of columns, data types, etc.) is not known at compile time.
+
+     DECLARE
+  cur NUMBER;
+  rows NUMBER;
+BEGIN
+  cur := DBMS_SQL.OPEN_CURSOR;
+  DBMS_SQL.PARSE(cur, 'UPDATE emp SET sal = sal + 500 WHERE deptno = 10',
+                 DBMS_SQL.NATIVE);
+  rows := DBMS_SQL.EXECUTE(cur);
+  DBMS_SQL.CLOSE_CURSOR(cur);
+END;
+
+             sql_stmt := 'UPDATE emp SET ' || col_name || ' = :1';
+
+
+  --     UTL_FILE (file I/O)
+  UTL_FILE allows PL/SQL programs to read from and write to files on the database server filesystem.
+  
+  CREATE DIRECTORY my_dir AS '/u01/app/files';
+  GRANT READ, WRITE ON DIRECTORY my_dir TO user;
+
+  DECLARE
+  f UTL_FILE.FILE_TYPE;
+BEGIN
+  f := UTL_FILE.FOPEN('MY_DIR', 'test.txt', 'W');
+  UTL_FILE.PUT_LINE(f, 'Hello Oracle');
+  UTL_FILE.FCLOSE(f);
+END;
+
+
+       
+---  DBMS_METADATA
+  Used to extract database object definitions (DDL) in SQL format.
+  SELECT DBMS_METADATA.GET_DDL('TABLE', 'EMP', 'HR') FROM dual;
+
+
+  DBMS_SCHEDULER
+  Used to schedule jobs in Oracle (replacement for DBMS_JOB).
+➤ Features
+
+Run jobs at specific times
+Repeat jobs (daily, weekly, etc.)
+Monitor job status
+Handle failures & logging
+
+  DBMS_UTILITY
+  Provides utility functions for database maintenance, debugging, and analysis.
+
+  EXCEPTION
+  WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE(DBMS_UTILITY.FORMAT_ERROR_BACKTRACE);
+END;
+
+****************************************
