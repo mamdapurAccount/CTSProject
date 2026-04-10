@@ -6,6 +6,31 @@
 *******************************************************************
 Definer vs Invoker Rights (AUTHID CURRENT_USER)
 
+--    Definer = the owner (creator) of the PL/SQL object
+When we say “Definer”, we mean:
+
+The database user who CREATES the procedure, function, package, or view
+
+by default he has rights to access the subprograms
+
+--   Invoker Rights (AUTHID CURRENT_USER)
+
+What it means
+Invoker rights means a PL/SQL program executes with the privileges of the user who calls it, 
+not the user who owns it.
+
+(Deepak User)
+
+CREATE OR REPLACE PROCEDURE p1
+AUTHID CURRENT_USER
+AS
+  v_sal hr.emp.sal%TYPE;
+BEGIN
+  SELECT sal INTO v_sal FROM hr.emp WHERE empid = 101;
+  DBMS_OUTPUT.put_line(v_sal);
+END;
+
+Give Grant permission 
 
 ******************************************************
    Package State
@@ -61,8 +86,8 @@ CREATE OR REPLACE PACKAGE BODY math_pkg AS
 
 END math_pkg;
 /
-SELECT math_pkg.add_nums(2, 3) FROM dual;     -- ✅ Works
-SELECT math_pkg.multiply_nums(2, 3) FROM dual; -- ❌ Error
+SELECT math_pkg.add_nums(2, 3) FROM dual;     -- Works
+SELECT math_pkg.multiply_nums(2, 3) FROM dual; -- Error
 ***************************************************************************************
 
 
@@ -104,15 +129,90 @@ END;
 *********************************************************************
 Security
    Invoker rights
+    1. Invoker Rights (AUTHID CURRENT_USER)
+What it means
+Invoker rights means a PL/SQL program executes with the privileges of the user who calls it,
+ not the user who owns it.
+
+  CREATE OR REPLACE PROCEDURE get_emps
+AUTHID CURRENT_USER
+AS
+BEGIN
+  SELECT * FROM employees;
+END;
+
+
    Privilege management
+
+   --    GRANT SELECT ON employees TO report_user;
+
+
+
    SQL Injection protection patterns
-   Code-based access control
+
+  sql_stmt := 'SELECT * FROM users WHERE username = ''' || p_user || '''';
+   EXECUTE IMMEDIATE sql_stmt;  ( never do this)
+
+   sql_stmt := 'SELECT role from  users WHERE username = :1';
+   EXECUTE IMMEDIATE sql_stmt INTO v_rec USING p_user;
+  
+
+
+
+
+
+
 **********************************************
 Concurrency & Locking
+
+   What is Concurrency?
+Concurrency means multiple users or sessions accessing and modifying database data at the same time.
+Example:
+
+User A updates a row in EMPLOYEES
+User B tries to update the same row at the same time
+
     Lock types
+   Oracle has automatic locking 
+          when update product set price=100 where pid=100;
+             this row is locked till its gets updated
+
     Deadlock avoidance
-    Autonomous transactions
-    Serializable vs read committed   
+  What is a Deadlock?
+A deadlock occurs when:
+
+Session A holds Lock 1 and waits for Lock 2
+Session B holds Lock 2 and waits for Lock 1
+ Neither can proceed.
+
+
+  eg
+        Session1 
+  UPDATE emp SET sal = sal + 100 WHERE empno = 7369;
+-- waits
+UPDATE dept SET loc = 'NY' WHERE deptno = 10;
+  
+   Session2
+  UPDATE dept SET loc = 'NY' WHERE deptno = 10;
+-- waits
+UPDATE emp SET sal = sal + 100 WHERE empno = 7369;
+
+Oracle automatically detects deadlock and it rollback one session 
+
+
+
+
+--     Autonomous transactions
+  
+ What is an Autonomous Transaction?
+An autonomous transaction is a separate, independent transaction inside another transaction.
+
+It has its own commit/rollback
+Does not affect the parent transaction
+
+
+
+     
 ******************************************************
 Adv Packages
   --      DBMS_SQL
