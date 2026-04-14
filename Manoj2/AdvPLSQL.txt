@@ -1,8 +1,12 @@
+
+   Final 
+
 *   Key Components - PL/SQL Engine, Context Switching, PL/SQL Optimizer
 
    PL/SQL Engine:- Executes PL/SQL code
    Context Switching:- Control transfer between PL/SQL and SQL engines
    PL/SQL Optimizer:- Improves PL/SQL execution performance
+
 *******************************************************************
 Definer vs Invoker Rights (AUTHID CURRENT_USER)
 
@@ -19,7 +23,7 @@ What it means
 Invoker rights means a PL/SQL program executes with the privileges of the user who calls it, 
 not the user who owns it.
 
-(Deepak User)
+(HR User )
 
 CREATE OR REPLACE PROCEDURE p1
 AUTHID CURRENT_USER
@@ -32,6 +36,13 @@ END;
 
 Give Grant permission 
 
+grant execute on hr.p1 to deepak;
+grant select on hr.emp to deepak;
+
+Login deepak user
+
+sql> execute hr.p1;
+
 ******************************************************
    Package State
 
@@ -39,7 +50,7 @@ CREATE OR REPLACE PACKAGE counter_pkg AS
   total_calls NUMBER := 0;
   PROCEDURE increment;
 END counter_pkg;
-/
+
 
 CREATE OR REPLACE PACKAGE BODY counter_pkg AS
   PROCEDURE increment IS
@@ -48,7 +59,7 @@ CREATE OR REPLACE PACKAGE BODY counter_pkg AS
     DBMS_OUTPUT.PUT_LINE('Total Calls: ' || total_calls);
   END;
 END counter_pkg;
-/
+
 output Total calls: = 2
 
 it maintain the state between procedure calls
@@ -63,6 +74,33 @@ Package state is the persistent value of package variables maintained across cal
 Package Initialization Block:
 
 A block in the package body that executes once per session to initialize package variables.
+
+
+create or replace package countPkg as
+ tcount number;
+procedure p1;
+end;
+
+
+CREATE OR REPLACE PACKAGE BODY countPkg AS
+
+procedure p1 is
+begin
+
+dbms_output.put_line(' total count '||tcount);
+end p1;
+
+begin
+tcount:=100;
+dbms_output.put_line('Main Package count');
+
+end countPkg;
+
+begin
+countPkg.p1;
+end;
+
+
 
 ************************************************************************************************
 Private vs Public Subprograms
