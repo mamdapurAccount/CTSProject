@@ -1,0 +1,72 @@
+
+The State Electricity Board was finding it tough to deal with the billing process of their domestic consumers. 
+Validating the consumer number, making a note of  the respective units consumed, calculating the bill amount based on the units consumed,
+ and other  processes were done manually  which was very time consuming.  
+
+So, the Electricity Board decides to out source the billing process of their domestic consumers to Global Tek Software Company. 
+Help the Global Tek to automate the above task.
+
+The Electricity Board has the following business processes that must be automated.
+
+1.	Parse data and generate a bill for all the customer
+2.	Store the ElectricityBill of each customer
+3.               Search a Consumer No from a Db
+
+1. Create a table Consumer with following fields
+
+       consumer_no ,consumer_name,consumer_addr,bill_date,consumer_noofunits,bill
+
+
+2. Create a class Consumer with following fields
+  
+       consumer_No ,consumer_Name,consumer_Addr,bill_date,consumer_NoOfUnits,bill
+
+   
+3. Create a class ElectrictyBoard with Following method
+
+    public void store_Data(FileReader fr){
+     // write your code here to store the data from a file to DB
+    }
+
+       public void   generateBill(){
+
+   // write your code here to generate the bill for each customer  from a file 
+  // and store it in a table      
+            
+
+      }
+
+   public List<Consumer> getAllConsumers(){
+                // write your code here to get all the consumer details froma table
+
+         } 
+      public Consumer getConsumer(int consumerNo){
+
+  // write your code to search a consumer no from a db and return a Consumer data
+    }
+ 
+4. Create a Class ElectricityMain to test the above functionalities 
+
+5. Create a text file Customers.txt 
+( read the data from the file and generate the bill for each customer and store it in a table)
+
+111,Deepak,Pune,12/06/2022,60
+222,Sachin,Blore,15/06/2022,160
+333,Vinod,Chennai,10/06/2022,220
+444,Anil,Kolkata,15/06/2022,350
+555,Kunal,Delhi,10/06/2022,150
+
+Note: To calculate the bill
+
+
+Units Consumed	Rate per unit in rupees
+<=100	                  Free(0)
+>100 and <=300	2
+>300 and <=600	3
+>600 and <=1000	4
+>1000	                  5
+	
+
+
+
+
