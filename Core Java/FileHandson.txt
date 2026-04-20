@@ -1,0 +1,68 @@
+
+
+1. Write a java program to read the input character stream and identify patterns provided by the user. As the
+program output display the number of times the pattern occurred in the input character stream.
+Read the character stream from the input file (team.txt) that contains the team names and 
+display the output
+in the console.
+Input and Output Format:
+First input corresponds to the number of strings to be searched and followed by each string.
+Refer sample input and output for formatting specifications.
+
+Sample Input/Output :
+Enter number of words
+2
+Enter the strings to be searched
+en
+perk
+Given string is chennaisuperkingsvsroyalchallengersbanglore
+Word:en Count:2
+Word:park Count:1
+
+
+
+
+2. Count of Each Words
+Miss.Jane, an experienced English professor, gives practice tests to her students to improve their written skills. Everyday students write an article and they submit it to Jane. Jane is particular that the students use only special characters like , ; : . ? ! in the article.
+[Note : Using the above mentioned special characters will help to split the words in a sentence. 
+All other special characters when used will be considered as a part of the word itself. ]
+She counts the total number of words used and the count of each word in the article. Based on this analysis she gives her feedback 
+to the students.  
+Difficulty arises when the number of students increase. So she wanted to automate the process in the following format. 
+Help her to write a java program to display the words and the number of times it has been used in the article and to display the words using lower case and in alphabetical order.
+Enter Student's Article
+hello Hello HEllo hi hi: hi! Welcome,   welcome
+Number of words 8
+Words with the count
+hello: 3
+hi: 3
+welcome: 2
+Number o characters 25
+Number of lines 4
+
+
+
+
+
+
+
+3. 
+Write a java program to record the player details into the file. 
+Get the player details name, teamName and
+number of matches played from the user and 
+write those information in a comma seperated format (CSV).
+Below is the format of the output file.
+<name>,<teamName>,<numberOfMatches>
+eg: Virat Kohli,Royal Challengers Bangalore,16
+Create a main class "Main.java"
+
+Input and Output Format:
+Get the player details name, teamName and noOfMatches from the user
+
+Sample Input/Output :
+Enter the name of the player
+Virat Kohli
+Enter the team name
+Royal Challengers Banglore
+Enter the number of matches played
+16

@@ -1,0 +1,146 @@
+
+1. Write a java program to parse the fixed size format and display the match details. 
+The matches.txt file
+contains fixed length values using trim() method to trim the blank space in the string and create match
+objects.
+Format of the matches.txt file,
+
+eg:
+CSK RCB Chinnasamy Stadium 25-09-2016
+MI KKR Eden Gardens 15-10-2016
+Create a main class "Main.java"
+Create Match class with below attributes,
+teamOne - String
+teamTwo - String
+venue - String
+matchDate - String
+Add appropriate getter and setter methods
+Create Match constructor with argument teamOne, teamTwo, price, venue and matchDate.
+Create displayMatch(Match, Integer) method to display match details as shown in the output format
+Create MatchFileStore class to read the information from matches.txt file and return the list of match
+objects
+List<Match> obtainMatchFromFile(InputStream)
+
+Sample Input/Output :
+The Match Details are :
+Match 1
+TeamOne : CSK
+TeamTwo : RCB
+Venue : Chinnasamy Stadium
+MatchDate : 25-09-2016
+Match 2
+TeamOne : MI
+TeamTwo : KKR
+Venue : Eden Gardens
+MatchDate : 15-10-2016
+
+
+
+
+
+2. Write a java program to read the input character stream and identify patterns provided by the user. As the
+program output display the number of times the pattern occurred in the input character stream.
+Read the character stream from the input file (team.txt) that contains the team names and display the output
+in the console.
+Input and Output Format:
+First input corresponds to the number of strings to be searched and followed by each string.
+Refer sample input and output for formatting specifications.
+
+Sample Input/Output :
+Enter number of words
+2
+Enter the strings to be searched
+en
+perk
+Given string is chennaisuperkingsvsroyalchallengersbanglore
+Word:en Count:2
+Word:park Count:1
+
+
+
+
+3. Count of Each Words
+Miss.Jane, an experienced English professor, gives practice tests to her students to improve their written skills. Everyday students write an article and they submit it to Jane. Jane is particular that the students use only special characters like , ; : . ? ! in the article.
+[Note : Using the above mentioned special characters will help to split the words in a sentence. 
+All other special characters when used will be considered as a part of the word itself. ]
+She counts the total number of words used and the count of each word in the article. Based on this analysis she gives her feedback 
+to the students.  
+Difficulty arises when the number of students increase. So she wanted to automate the process in the following format. 
+Help her to write a java program to display the words and the number of times it has been used in the article and to display the words using lower case and in alphabetical order.
+Enter Student's Article
+hello Hello HEllo hi hi: hi! Welcome,   welcome
+Number of words 8
+Words with the count
+hello: 3
+hi: 3
+welcome: 2
+Number o characters 25
+Number of lines 4
+
+
+
+
+
+
+
+4. Write a java program to record the player details into the file. Get the player details name, teamName and
+number of matches played from the user and write those information in a comma seperated format (CSV).
+Below is the format of the output file.
+<name>,<teamName>,<numberOfMatches>
+eg: Virat Kohli,Royal Challengers Bangalore,16
+Create a main class "Main.java"
+Using File class create a new file(player.csv) and write using the OutputStream.
+Input and Output Format:
+Get the player details name, teamName and noOfMatches from the user
+
+Sample Input/Output :
+Enter the name of the player
+Virat Kohli
+Enter the team name
+Royal Challengers Banglore
+Enter the number of matches played
+16
+
+
+
+
+
+
+
+
+
+
+5. Write a Java program to read the player information from text file (input.txt) and order the player details
+based on the cap number and write into another file (output.csv) in the same format as the input file.
+Input File Format:
+<cap number>,<name>,<skill>,<country>,<matches played>
+eg:
+251,Dhoni,AllRounder,India,443
+
+Create a main class "Main.java"
+Create Player class with below attributes,
+capNumber - Integer
+playerName - String
+skill - String
+country - String
+matchesPlayed - Integer
+Add appropriate getter and setter methods
+
+Create Player constructor with argument capNumber,playerName, skill, country and matchesPlayed
+
+Create FileUtility class to read the information from input.txt file and return the list of player objects
+List<Player> readFileData(BufferedReader ) - Reads the input file (CSV) parse the information and
+construct Player objects and return the list of players.
+void writeDataToFile(List<Player> playerList) - Write all the players from the player list to the output
+file after in the same format as the input. Player details string in the CSV format is returned by toString()
+method.
+The program generates the output file and no console output is produced by the system
+
+
+
+
+
+
+
+
+

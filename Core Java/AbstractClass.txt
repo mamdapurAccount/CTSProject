@@ -1,0 +1,135 @@
+
+1. Create a class called GeneralBank which acts as base class for all banks. 
+ This class has functionality getSavingInterestRate and getFixedInterestRate methods, 
+ which return the saving a/c rate of interest and fixed account rate of interest the specific bank gives. 
+ Since GeneralBank cannot say what percentage which bank would give, make it abstract.
+
+. Create 2 subclasses of GeneralBank called ICICIBank and KotMBank. Override the methods from base class.
+ ICICI - Savings 4% Fixed 8.5% and KotMBank.  - Savings 6% Fixed 9%
+
+. Create a main method to test the above classes. Try one by one and absorb your finding.
+a) ICICIBank object reference instantiated with ICICIBank class.
+b) KotMBank object reference instantiated with KotMBank class.
+c) GeneralBank object reference instantiated with KotMBank class.
+d) GeneralBank object reference instantiated with ICICIBank class.
+
+
+	
+2.Create an abstract class Instrument which is having the abstract method play. 
+Create three more sub classes from Instrument which is Piano, Flute, Guitar. Override the play method inside all three classes 
+printing a message 
+“Piano is playing  tan tan tan tan  ”  for Piano class
+“Flute is playing  toot toot toot toot”  for Flute class
+“Guitar is playing  tin  tin  tin ”  for Guitar class 
+You must not allow the user to declare an object of Instrument class.
+Create an array of 3 Instruments.
+Assign different type of instrument to Instrument reference.
+Check for the polymorphic behavior of  play method.
+print  which object stored at which index of instrument array.
+
+
+
+3.
+Anchor College offers both graduate and postgraduate courses. The college records name of the 
+students, their test scores, and the final result for each student. 
+Each student has to take 4 tests in total.
+
+
+Implement classes Student, UndergraduateStudent and GraduateStudent, according to following 
+class diagram:
+
+
+Method Description: 
+
+
+generateResult(): This is a method that generates the final result.
+
+
+ 
+
+UndergraduateStudent:
+
+Method Description: 
+
+generateResult(): This method provides the implementation for  method in Student class 
+and generates result for an undergraduate student, according to the following condition.
+                      
+                  avg>60   Pass
+                 <60 Fail
+ 
+
+GraduateStudent:
+
+Method Description: 
+
+generateResult(): This method provides the implementation for  method in Student class and 
+generates the result for a graduate student, according to the following condition.
+
+          avg>70 Pass
+          <70 Fail
+
+                      
+
+To test the above functionality, use a Tester class with the inputs mentioned below.
+
+
+Sample:
+
+Input (for GraduateStudent):
+             Chaya
+             70 60 90 80
+
+                 
+Output:
+                                
+Output:
+      Chaya   
+    70 
+    60
+   90 
+   80
+       Result:-  Pass
+                  
+
+Input (for UndergraduateStudent):
+             Lavanya
+             20 30 40 10
+                   
+
+
+Output:
+      Lavanya   
+    20 
+    30
+   40 
+   10
+       Result:-  Fail
+              
+
+abstract class Student{
+	private String name;
+	private int[] test;
+	private String result;
+
+                Student(name,test){
+              }
+                          
+     generateResult();
+             
+}
+
+class UndergraduateStudent extends Student{
+	//code here
+}
+
+class GraduateStudent extends Student{
+	//code here
+}
+
+class Tester{
+	public static void main(String[] args) {
+                               // code here 
+		
+	}
+}
+ 

@@ -1,0 +1,170 @@
+Q.
+
+Long over;
+Long ball;
+Long runs;
+String batsman
+String bowler
+String nonStriker
+Include getter setter and Parameterized Constructor
+
+
+
+Q. 
+
+String name;
+String coach;
+String location;
+String players
+String captain
+
+Enter the Team Details
+
+CSK#Stephen Fleming#Chennai#MS
+Dhoni,Aswin,Raina,Hussey,Maxwel,Bravo,Morkel,Jadeja,Mohit Sharma,Hayden,du plessis,Abhinav
+Mukund#MS Dhoni
+
+Team : CSK
+Coach : Stephen Fleming
+Location : Chennai
+Players : MS Dhoni,Aswin,Raina,Hussey,Maxwel,Bravo,Morkel,Jadeja,Mohit Sharma,Hayden,du
+plessis,Abhinav Mukund
+Captain : MS Dhoni
+
+
+Q. 
+
+Create a class named Wicket with the following private member variables / attributes
+
+Long over
+Long ball
+String wicketType
+String playerName
+String bowlerName
+
+
+Sample Input and Output :
+Enter the number of wickets
+3
+
+Wicket Details
+Enter the details of wicket 1
+5,2,LBW,Gautam Gambir,Aswin
+Enter the details of wicket 2
+6,6,Bowled,Brad Hogg,Dwayne Bravo
+Enter the details of wicket 3
+7,3,Stumped,Robin Uthappa,Ravindra Jadeja
+Wicket Details
+Over : 5
+Ball : 2
+Wicket Type : LBW
+Player Name : Gautam Gambir
+Bowler Name : Aswin
+Over : 6
+Ball : 6
+Wicket Type : Bowled
+Player Name : Brad Hogg
+Bowler Name : Dwayne Bravo
+Over : 7
+Ball : 3
+Wicket Type : Stumped
+Player Name : Robin Uthappa
+Bowler Name : Ravindra Jadeja
+
+
+
+1. 
+   eg Method Overloading
+
+class ArrayDemo
+
+       printArray(int [])
+       printArray(char [])
+      printArray(Double []);
+
+demonstrate this class in main
+
+2. 
+  class Account
+          // fields
+         acno,acname,bal
+   <constructor> <getter & setter>
+  void printBal()
+   void  withdraw(int amt)
+   void deposit(int amt)
+
+  Accout sbi = new Account(121,"Lavanya",5000);
+  
+  task ... to perform following menu operations
+
+      Main -Menu
+    1. PrintBal
+    2. Withdraw
+   3. Deposit
+  4. Exit
+  5. Enter your choice
+
+
+3. 
+  class  Book
+
+     bid,bname,bprice
+
+     <constructor> <getter & setter>
+
+   task
+              void discountedPrice(int dis);
+
+
+  eg 
+   Book bk = new Book(456,"Java",5000);
+  bk.discountedPrince(5);
+     250
+   5000-250
+   4750
+
+
+4. 
+
+ class Course
+           cid,cname,fees
+  < getter & setter>
+
+   5 Courses 
+
+   Array of Objects
+
+   print all those course details along with total fees
+
+
+o/p
+
+    c1 1 java 5000
+   c2   2 net  2000
+  c3    3  pyton 3000
+ 
+        total fees 10000
+
+     
+6.      Course
+                                   task 
+
+                       how many course details u want to enter
+
+                    3
+
+           Enter course 1 details 
+                                 100    Java 9000
+          Enter course 2 details
+                       101  C 2000
+     enter 
+  o/p
+
+     total Fees for all the above course is 120000
+
+
+
+
+
+
+

@@ -1,0 +1,208 @@
+                                                                                Hands On Inheritence
+
+
+
+1 Give the definition of a class named Doctor whose objects are records for a clinic’s doctors. 
+This class will be a derived class SalariedEmployee of the class Doctor  Base class.
+ A Doctor record has the doctor’s specialty (such as "Pediatrician",
+"Obstetrician", "General Practitioner", and so forth; so use the type String) and office visit fee (use type double). 
+Be sure your class has a reasonable complement of constructors, accessor and mutator methods,
+ and suitably defined equals and toString methods. Write a program to test all your methods.
+
+
+2. Define a class named Document that contains a member variable of type String named text that stores any textual content for the document. Create a method named toString that returns the text field and also include a method to set this value.
+
+3. Next, define a class for Email that is derived from Document and includes member variables for the sender, recipient, and title of an email message. Implement appropriate accessor and mutator methods. [An accessor  is a member function that accesses the contents of an object but does not modify that object; eg: int getX(return x;)A mutator  is a member function that can modify an object void setX(int x){this.x=x;} ]The body of the email message should be stored in the inherited variable text. Redefine the toString method to concatenate all text fields.
+
+
+4	Write a program to create a class Company with the following attributes:
+CompId, name, HO, CEO
+Inherit the class Company to BranchOffices with the following details:
+BrId, location,dept
+Create 5 branches of the company and display the details.
+
+5. Write a program to create a class AccountHolder with the following attributes:
+AcNo, Name, contactNo.
+Inherit the class AccountHolder to AccountDetails with the following attributes:
+AcNo,AcType (SB,FD,CR), bal.
+Create three account Holders : a1 and a2,a3. Populate the details and display the details in a neat format.
+
+
+6 .Declare one same variable in both parent and child class and try to access the variable of parent class in child class.
+	
+7 . Create a class called Person with a member variable name. Save it in a file called Person.java
+Create a class called Employee who will inherit the Person class.The other data members of the employee class are annual salary (double), the year the employee started to work, and the national insurance number which is a String.Save this in a file called Employee.java
+Your class should have a reasonable number of constructors and accessor methods.
+Write another class called TestEmployee, containing a main method to fully test your class definition.
+	
+8 . 
+A HighSchool application has  The Person superclass.
+             fName,lName,age
+ Using inheritance, 
+in this lab you will create two new classes, Teacher and CollegeStudent. 
+A Teacher will be like Person but will have additional properties such as salary 
+(the amount the teacher earns) and subject (e.g. “Computer Science”, “Chemistry”,  “English”, “Other”). 
+The CollegeStudent class will extend the Student class by adding a year (current level in college) 
+and major (e.g. “Electrical Engineering”, “Communications”, “Undeclared”).
+
+
+9.
+Create a class named Movie that can be used with your video rental business. The Movie class should track the Motion Picture Association
+ of America (MPAA) rating (e.g., Rated G, PG-13, R), ID Number, and movie title with appropriate accessor and mutator methods. 
+Also create an equals() method that overrides Object’s equals() method, where two movies are equal if their ID number is identical. 
+Next, create three additional classes named Action, Comedy, and Drama that are derived from Movie.
+Each of these movies will have a method named calcLateFees that takes as input the number of days a movie is late 
+and returns the late fee for that movie. The default late fee is $2/day. Action movies have a late fee of $3/day, 
+comedies are $2.50/day, and dramas are $2/day. Test your classes from a main method.
+
+10.       create a class Employee
+                     eid,ename,sal
+
+      1. create two sub classes PermantEmployee 
+                                               desig, hike
+
+                       calcualteSalary()
+
+
+   class TempEmployee
+                int    serviceperiod
+              
+                   calcualteSalary()
+                  
+
+
+11. 
+                    class Hotel
+                              hotelId,hotelName,rateperSqft,totalsqft
+                             boolean  wifi,Tv
+                      calcualteTariff()
+
+           Deluxe
+                  totalsql 1000
+                    ratepersqft 2
+                         200 extra 100 extr
+           SuperDeluxe
+                       1200
+                             5
+                         500 extr tv  300 extra wi
+           UltraDeluxe
+                             1500
+                              8
+
+                        1000 extr tv   500 extr wifi
+
+                                     Main-Menu
+                               1.Deluxe
+                               2. SuperDelx
+                              3. Ultra
+                              4. Exit 
+                Enter your choice 1
+                 Enter Deluxe
+                     101  oberoi 
+                      do u want tv
+                             y
+                     do u want wifi
+                                 y
+                     Entered Details are 
+                      Hotel Id :- 101  
+                    Hotel Name :- oberoi 
+                    tv  : yes
+                   wifi :yes
+                     The Total Cost would be  Rs 2300.
+               
+
+
+12. I want you all must do this
+
+                           class Pizza{ 
+                                        size,price,qnt
+                                      Pizza(size,qnt);
+
+                      size-medium    100
+                             large          200
+                           regular        50
+
+                              }
+
+               Foodie {
+                                fid,foodieName,city, mobileno,totalprice;
+
+                             calcuatePrice(Pizza []){
+
+                      }
+
+
+	}
+                               
+                  Pizza p1 = new Pizza("Medium",10);  1000
+
+                  Pizza p2 = new Pizza("Regular",10);  500
+
+                  Pizza p3 = new Pizza("Medium",10);  1000
+                             
+                   Pizza []pizzas={p1,p2,p3};
+
+      task
+              
+              Superfoodie
+                                   discount
+             UltraFoodie
+                        reward
+
+13.   create a class User
+          uid,uname,email
+         walletBalance
+   
+             makePayment(double amt)
+
+    create a class PremiumUser
+              int rewardPoint
+ 
+                       makePayment(double amt)
+
+
+   Congratulation Deepak, payment of Rs 70 was done succesfully
+   your wallet balance is Rs 500.
+
+   Congratulation Rani, payment of Rs 50 was done succesfully
+   your wallet balance is Rs 800.
+   you have 20 points
+
+   Sorry Vinod you do not have enough balance to pay the bill
+  your walle balance is Rs 50
+ you have 30 points
+
+
+
+
+
+
+          
+
+
+
+  
+    
+
+
+
+
+
+
+                                 
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+
+

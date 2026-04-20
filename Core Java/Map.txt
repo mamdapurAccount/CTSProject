@@ -1,0 +1,174 @@
+1. 
+Write a Java program to register all the player details [Bowler] and provide a quick view of number of
+wickets taken by the player based on the name of the player. 
+Use HashMap to store all the wickets, Key will be the name of the player and value contains the
+ player count. 
+Multiple wickets for a user is
+provided using a delimiter pipe "|".
+Create a main class "Main.java"
+
+Create Player class with below attributes,
+bowlerName - String
+wicketCount - Integer
+
+Add appropriate getter and setter methods for Player class
+Create constructor for Player class with arguments name and wicket count
+Provide search option to search based on the name of the bowler and display the number of wickets taken
+by him.
+Input and Output Format:
+Refer sample input and output for formatting specifications.
+
+Sample Input/Output :
+Enter the player name
+Aswin
+Enter wickets - seperated by "|" symbol.
+Virat Kohli|Shane Watson|Ajinkya Rahane
+Do you want to add another player (yes/no)
+yes
+Enter the player name
+Bravo
+Enter wickets - seperated by "|" symbol.
+Robin Uthapa
+Do you want to add another player (yes/no)
+no
+Enter the player name to search
+Morkel
+No player found with the name Morkel
+Do you want to search another player (yes/no)
+yes
+Enter the player name to search
+Aswin
+Player name : Aswin
+Wicket Count : 3
+Do you want to search another player (yes/no)
+no
+
+
+
+
+
+
+2. BCCI, for the upcoming IPL season in 2023  decided to give unique cap numbers to every player. Player
+capNumber is a string. The capNumber and player details are stored in a Treemap.
+Create a class named Player with the following private attributes --- name,team and skill. 
+Cap number is the key and player details is the value. 
+Write a program to display the details of all the
+players stored in this TreeMap.
+Input and Output Format:
+Refer sample input and output for formatting specifications.
+Sample Input and Output:
+Enter the number of players
+2
+Enter the details of the player 1
+57
+Jaspirit Bumrah
+Mumbai Indians
+Bowler
+Enter the details of the player 2
+55
+MS Dhoni
+Rising Pune Supergiants
+All Rounder
+Player Details
+55--MS Dhoni--Rising Pune Supergiants--All Rounder
+57--Jaspirit Bumrah--Mumbai Indians--Bowler
+
+
+
+
+
+
+
+
+
+
+
+Q3.   HashMap - Scores to Bin
+Write a Java program to group the set of scores into corresponding bin. The number of bins are fixed as
+10,20,30,40. Input consists of set of scores with in a range of 1 - 40. Classify each score and increment the
+corresponding bin.
+Maintain the bin's in HashMap with key as 10,20,30,40 and their corresponding integer count as value.
+Create a main class "Main.java"
+First input corresponds to the number of overs and followed by N number of scores in each over.
+Create a class Histogram with below specification,
+Access
+Modifier
+Attribute/Method Type/Return type Name Description
+
+private Attribute HashMap<Integer,Integer> bins
+Maintains the 4 bins and their corresponding count
+
+public Method void addScore(Integer)
+Add the input score to  corresponding bin
+
+public Method void displayHistogram()
+Display the histogram represented by number of stars for each bin
+Refer the sample input/output
+Read the input numbers in the main class and call addScore() method in the Histogram class to add the
+scores to the corresponding bin.
+Input and Output Format:
+First input corresponds to the number of overs (N). Followed by N scores in each over.
+Refer sample input and output for formatting specifications.
+
+
+Sample Input/Output :
+11
+6
+17
+21
+7
+35
+22
+4
+18
+33
+7
+31
+Histogram
+10 : ****
+20 : **
+30 : **
+40 : ***
+
+
+
+******************************************
+
+Q4. Write a Java program to calculate the character frequency in a sentence. The input consist of a single
+sentence and the output displays a graphical chart displaying the freqency of each character by number of
+asterisk (*). Display the character in the output in alphabetical order. Compute the frequence of all letters
+except space.
+Use TreeMap to store the characters and frequency since the tree map maintains the entries sorted based on
+their natural ordering.
+Create a main class "Main.java"
+Create a class LetterSequence and include below methods and attributes,
+Include a constructor to get the sentence as the input
+Method/Attribute Details
+public TreeMap<Character,Integer> computeFrequency()
+Compute the frequency of each character in the sentence and store it in the TreeMap.
+Return the TreeMap after the computation.
+public void displayLetterFrequency(TreeMap<Character,Integer> frequencyMap)
+Iterate the tree map and get all the entries and print the information in a
+graphical view as shown the sample output
+private String sentence 
+Input sentence is stored in this attribute
+
+Input and Output Format:
+Refer sample input and output for formatting specifications.
+
+Sample Input/Output :
+Enter the input string
+Kohli is the man of the match
+K : *
+a : **
+c : *
+e : **
+f : *
+h : ****
+i : **
+l : *
+m : **
+n : *
+o : **
+s : *
+t : ***

@@ -1,0 +1,11 @@
+
+
+
+1 Write a program to create a class named Geometry. 
+In this class we have three sub classes circle, triangle and square each class 
+has two member method named draw () and erase (). Create these using polymorphism concepts.
+
+2.  There is an animal class which has the common characteristics of all animals. Dog, Horse, Cat are animals(sub-class). 
+Each can shout, but each shout is different. Use polymorphism to create objects of same and using an animal variable, 
+make each of the animals shout.
+
