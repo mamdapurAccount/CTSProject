@@ -1,0 +1,204 @@
+1.Write a program to find if the number entered is positive or negative.
+
+Example1:
+
+     C:\>java Sample 10 
+
+     O/P Expected : 10 is a positive number
+
+Example2:
+    C:\>java Sample -10 
+
+     O/P Expected : -10 is a negative number
+
+Example3:
+    C:\>java Sample 0 
+
+     O/P Expected : 0 is neither negative or positive
+
+Example4:
+    C:\>java Sample 
+
+     O/P Expected : An integer number as argument is expected
+
+[Hint: Use args.length to determine the length of the args array]
+	
+2.Write a Java program to find if the given number is prime or not.
+
+Example1:
+
+     C:\>java Sample 
+
+     O/P Expected : Please enter an integer number 
+
+Example2:
+
+     C:\>java Sample 1
+
+     O/P Expected : 1 is neither prime nor composite
+
+Example3:
+
+     C:\>java Sample 0
+
+     O/P Expected : 0 is neither prime nor composite
+ 
+ Example4:
+
+     C:\>java Sample 10
+
+     O/P Expected : 10 is not a prime number
+
+Example5:
+
+     C:\>java Sample 7
+
+     O/P Expected : 7 is a prime number
+
+
+
+3.Write a Java program to find if the given number is palindrome or not
+
+Example1:
+
+     C:\>java Sample 121
+
+     O/P Expected : 121 is a palindrome
+
+Example2:
+
+     C:\>java Sample 1234
+
+     O/P Expected : 1234 is not a palindrome
+
+Control Structures and Operators	
+
+4. Write a program that will accept a number and print the sum of all the digits. 
+
+Example1:
+
+     C:\>java Sample 1234
+
+     O/P Expected : The sum of the digits of 1234 is 10
+
+Example2:
+
+     C:\>java Sample 12
+
+     O/P Expected : The sum of the digits of 12 is 3
+
+5 .Write a program to print Multiplication of N ( while loop)
+
+Example1:
+
+     C:\>java Sample 
+
+     O/P Expected : Please enter an Integer number
+
+Example2:
+
+     C:\>java Sample 5
+
+     O/P Expected : 
+
+5 * 0 = 0
+5 * 1 = 5
+5 * 2 = 10
+5 * 3 = 15
+..
+..
+5 * 10 = 50
+
+
+
+
+	
+6. Write a program to print month in words, based on input month in numbers.(using switch case)
+
+Example1:
+
+     C:\>java Sample 12
+
+     O/P Expected : December
+
+
+
+Example2:
+
+     C:\>java Sample 15
+
+     O/P Expected : Invalid month
+	
+Example3:
+
+     C:\>java Sample
+
+     O/P Expected : Please Enter the Number
+
+
+7.Write a program to print factorial of N ( using do—while loop)
+
+Example1:
+
+     C:\>java Sample 
+
+     O/P Expected : Please enter an Integer number
+
+Example2:
+
+     C:\>java Sample 0
+
+     O/P Expected : The factorial of 0 is 1
+
+Example3:
+
+     C:\>java Sample 5
+
+     O/P Expected : The factorial of 5 is 120
+	
+8  Write a program to print * in Floyds format (using for and while loop)
+
+*
+*  *
+*  *   *
+
+
+
+Example1:
+
+     C:\>java Sample 
+
+     O/P Expected : Please enter an integer number
+
+Example1:
+
+     C:\>java Sample 3
+
+     O/P Expected : *
+                   *  * 
+                   *  *  *
+	
+9 .Write a program to print the result for given input of a specific expression(Using Switch)
+
+Example1:
+
+     C:\>java Sample 
+
+     O/P Expected : Please enter an Valid Expression
+
+Example2:
+
+     C:\>java Sample 10 + 3
+
+     O/P Expected : The Result is 13
+
+Example3:
+
+     C:\>java Sample 5 * 3
+
+     O/P Expected : The Result is 15
+Example4:
+
+     C:\>java Sample 5 ? 3
+
+     O/P Expected : Invalid Expression

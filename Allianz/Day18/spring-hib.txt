@@ -1,0 +1,10 @@
+Develop an small Application using spring-hibernate Integration to perform on Following Bean
+
+Product
+    Prid
+    Pname
+    PRate
+   PQnt
+  Pamt
+
+try to implement CRUD operation using MVC Structure

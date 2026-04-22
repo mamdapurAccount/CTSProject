@@ -1,0 +1,98 @@
+1:
+            Write a java program that recieves a index number of a array through command line argument and print the number of given index from an initialized array.
+
+Example1:
+
+     C:\>java Sample 
+
+     O/P Expected : Please enter  a index number
+
+Example2:
+
+     C:\>java Sample  3
+
+     O/P Expected : 42
+
+2:
+            Write a java program that initialzes a array and search a number through command line argument .
+
+Example1:
+
+     C:\>java Sample 
+
+     O/P Expected : Please enter  a Number
+
+Example2:
+
+     C:\>java Sample  5 
+
+     O/P Expected : Number Found
+
+Example3:
+
+     C:\>java Sample  23
+
+     O/P Expected : Not Found
+
+
+
+3:
+            Write a java program that receives 5 number through command line argument and sort them .
+
+Example1:
+
+     C:\>java Sample 
+
+     O/P Expected : Please enter  min 4 integer numbers
+
+Example2:
+
+     C:\>java Sample  5 3 1 4 7
+
+     O/P Expected : 1 3 4 5 7
+
+
+
+4. Write a program to find greatest number in a  3*3 array. The program is supposed to receive 9 integer numbers as command line arguments.
+
+
+Example1:
+
+     C:\>java Sample 1 2 3
+
+     O/P Expected : Please enter 9 integer numbers
+
+Example2:
+
+     C:\>java Sample 1 23 45 55 121 222 56 77 89
+
+     O/P Expected : 
+The given array is :
+1 23 45 
+55 121 222 
+56 77 89 
+The biggest number in the given array is 222
+
+
+5. Write a program to reverse the elements of a given 2*2 array. Four integer numbers needs to be passed as Command Line arguments.
+
+Example1:
+
+     C:\>java Sample 1 2 3
+
+     O/P Expected : Please enter 4 integer numbers
+
+Example2:
+
+     C:\>java Sample 1 2 3 4
+
+     O/P Expected : 
+     
+  The given array is :
+  1 2 
+  3 4 
+  The reverse of the array is :
+  4 3 
+  2 1
+
+ 

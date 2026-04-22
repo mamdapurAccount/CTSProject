@@ -1,0 +1,10 @@
+1.Create an abstract parent class called Shape with an abstract draw method and create subclasses of this class like Rectangle, Triangle and Parallelogram. Define a simple java class called DrawShape, which will instantiate an object depending on the dependency injection and calls appropriate draw method. 
+SpringBasics_InversionControl	
+2	
+ Create a class called DefaultMessage with a single member variable called message which is initialized with a default value "Spring". Instantiate this class using Inversion control and test
+SpringBasics_InversionControl	
+3	
+ Create a class called ConstructorMessage with a single member variable called message which is initialized with null.The class will have a parameterized constructor which initializes the member variable called message. Instantiate this class using Inversion control and test. [Perform Constructor Injection]
+SpringBasics_InversionControl	
+4	
+ Create a class called SetterMessage with a single member variable called message which is initialized with null. Instantiate this class using Inversion control and test[ Perform Setter Injection ]

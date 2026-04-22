@@ -1,0 +1,14 @@
+1.Display the details of all cars from the following table using HQL.
+
+RegNo Model Color Manufacturer
+KL-07 AB 123 Polo White Volkswagen
+KL-07 AB234 Vento Black Volkswagen
+KL-07 AC 345 Corolla Silver Toyota
+Hibernate	
+2	
+ Write a Hibernate program to display only the RegNo and the Manufacturer's name in the above program
+Hibernate	
+3	
+ Write a Hibernate program which will ask the user  to enter a registration number and display the details of that Vehicle. Assign the value to the query using a label.
+
+4. Do all the above assignment using criteria interface

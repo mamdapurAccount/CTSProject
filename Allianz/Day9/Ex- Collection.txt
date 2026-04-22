@@ -1,0 +1,531 @@
+
+Write a Java program to get the team name and number of matches played by the team from the user and
+display a report with team name and number of matches sorted based on the number of batches in
+ascending order. 
+
+Create a main class "Main.java"
+Create Team class with below attributes,
+name - String
+numberOfMatches - Long
+Include a constructor accepting Team name and number of matches as arguments
+Add appropriate getter and setter methods for Team class
+Create TeamComparator implementing Comparator interface
+Implement compare method to compare two team objects based on their number of matches played.
+
+Input and Output Format:
+First input corresponds to the number of teams and followed by each team information.
+Refer sample input and output for formatting specifications.
+
+Sample Input/Output :
+Enter number of teams:
+3
+Enter team 1 detail
+Enter Name
+Chennai super Kings
+Enter number of matches
+132
+Enter team 2 detail
+Enter Name
+Royal Challengers Bangalore
+Enter number of matches
+139
+Enter team 3 detail
+Enter Name
+Delhi Daredevils
+Enter number of matches
+131
+
+Team list after sort by number of matches
+Delhi Daredevils – 131
+Chennai super Kings – 132
+Royal Challengers Bangalore - 139
+
+
+
+
+
+
+
+Write a program to display the ranking list of IPL players based on their scores ranked from highest to
+lowest.
+
+
+Get all the player names and their corresponding scores from the user and store it in a list. Use
+Collections.sort() method to sort the list and display the result as shown in the sample input and output.
+
+Create a main class "Main.java"
+Create Ranking class with the attributes name(String) and score(long) implementing Comparable interface
+and implementing compareTo() method
+Include a constructor with the arguments player name and score
+Include appropiate getter and setter for the Ranking class
+Input and Output Format:
+First input corresponds to the number of players.
+Display the ranking details separated by single space.
+
+Sample Input/Output :
+Please provide the number of players
+3
+Enter the name of the player 1
+Kohli
+Enter the score of the player 1
+1093
+Enter the name of the player 2
+Dhoni
+Enter the score of the player 2
+1135
+Enter the name of the player 3
+Ashwin
+Enter the score of the player 3
+335
+Player Details by Score(High to Low)
+1 Dhoni 1135
+2 Kohli 1093
+3 Ashwin 335
+
+
+
+
+Write a java program to get all the match details from the user and display the match details sorted based
+on date in descending order. The match details consist of match date, teamOne and teamTwo.
+Create a main class "Main.java"
+
+Create Match class with below members,
+matchDate - Date
+teamOne - String
+teamTwo - String
+Add appropriate getter and setter methods for Match class
+
+Example:
+Attribute - matchDate
+Method - getMatchDate (), setMatchDate (String matchDate)
+
+Include a constructor for Match with the arguments matchDate, teamOne, teamTwo
+Implement Comparable interface and implement compareTo method to do the sorting based on the date
+
+Input and Output Format:
+First input corresponds to the number of matches and followed by each match information.
+Refer sample input and output for formatting specifications.
+
+
+Sample Input/Output :
+Enter the number of matches
+3
+Enter match date in (MM-dd-yyyy)
+09-11-2016
+Enter Team 1
+RCB
+Enter Team 2
+KKR
+Enter match date in (MM-dd-yyyy)
+08-31-2016
+Enter Team 1
+MI
+Enter Team 2
+KKR
+Enter match date in (MM-dd-yyyy)
+09-21-2016
+Enter Team 1
+CSK
+Enter Team 2
+RCB
+
+Match Details
+Team 1 CSK
+Team 2 RCB
+Match held on 09-21-2016
+Team 1 RCB
+Team 2 KKR
+Match held on 09-11-2016
+Team 1 MI
+Team 2 KKR
+Match held on 08-31-2016
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Rahul, cricket follower believes that an essential characteristic of excellence is consistency.He analyzes the
+best bowler / spinner based on his consistency in bowling from the statistics of the two season. List
+contains “n” top wicket takers.
+Write a program to get 2 list of players i.e name of bowlers as input and store them in 2 sets 1 and 2 and
+then find the difference of 2 sets.
+Input Format :
+First line of the input corresponds the value of n,number of best bowlers in season 4
+Next n+1 lines corresponds to the name of players.
+Second line of the input corresponds the value of n,number of best bowlers in season 5
+Next n+1 lines corresponds to the name of players.
+Output Format:
+Output should display the set of players correspondingly and Display the names using Difference
+operation.
+
+Sample Input and Output:
+Enter the number of best bowlers in season 4
+4
+Enter the name of players
+Zaheer Khan
+Anil Kumble
+Bhuvaneshwar Kumar
+Ravichandran Ashwin
+Enter the number of best bowlers in season 5
+3
+Enter the name of players
+Ravichandran Ashwin
+Kapil Dev
+Mohit Sharma
+
+Player Set 1
+Bhuvaneshwar Kumar
+Zaheer Khan
+Ravichandran Ashwin
+Anil Kumble
+Player Set 2
+Mohit Sharma
+Kapil Dev
+Ravichandran Ashwin
+
+Difference
+Bhuvaneshwar Kumar
+Zaheer Khan
+Anil Kumble
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sachin Tendulkar, regarded as one of the greatest batsmen of all the time.He is the highest run scorer. But
+he too was dismissed by several bowlers.
+Write a program to read the name of bowlers using ArrayList who have dismissed Sachin Tendulkar,store
+them in treeset and display it in sorted order.
+Input Format :
+First line of input corresponds to n,number of bowlers.
+Next n+1 lines corresponds to name of players.
+Output Format:
+Output should display the bowlers name in sorted order.
+
+Sample Input and Output :
+Enter the number of bowlers
+4
+Brett Lee
+Muttiah Muralitharan
+Glenn McGrath
+Dale Steyn
+Players list in ascending order
+Brett Lee
+Dale Steyn
+Glenn McGrath
+Muttiah Muralitharan
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Navin,employee of Sports Broadcasting Channel has to now get the statistics of all matches in the last IPL
+season and display name of the players who have won the Player of the match title. The statistics should contain
+only  distinct players in sorted order.
+Write a program to get the number of matches ‘n’ and the players who have won the player of the match
+title in  those ‘n’ matches in a list. Store them in a set and display the name of distinct players who have won the
+title in a sorted order.
+Note: Use TreeSet
+
+Input Format:
+First line of the input corresponds the value of n, number of matches.
+Next n+1 lines corresponds to the player names who have won player of the match title for those ‘n’
+matches.
+
+Output Format:
+Output should display the name of distinct players who have won the title in sorted order.
+Refer sample input and output for formatting specifications.
+Sample Input :
+5
+Virat Kohli
+MS Dhoni
+Rohit Sharma
+Virat Kohli
+Gautam Gambir
+
+Sample Output :
+Gautam Gambir
+MS Dhoni
+Rohit Sharma
+Virat Kohli
+
+
+
+
+
+1. 
+ Write a java program to register all the player details [Bowler] and provide a quick view of number of
+ wickets taken by the player based on the name of the player.
+Use HashMap to store all the wickets, Key will be the name of the player and value contains the player
+object. Multiple wickets for a player is provided using a delimiter pipe "|".
+Create a main class "Main.java"
+
+Create Bowler class with below attributes,
+name - String
+Add appropriate getter and setter methods for Bowler class
+Create constructor for Bowler class with argument name
+
+Create Wicket class with below attributes,
+playerName - String
+Bowler - Bowler object
+
+Add appropriate getter and setter methods for Wicket class
+Create constructor for Wicket class with arguments description and Bowler object
+Provide search option to search based on the name of the bowler and display all the wickets taken by him.
+Input and Output Format:
+Refer sample input and output for formatting specifications.
+
+Sample Input/Output :
+Enter the player name
+Ashwin
+Enter wickets - seperated by "|" symbol.
+Virat Kohli|Shane Watson|Ajinkya Rahane
+Do you want to add another player (yes/no)
+yes
+Enter the player name
+Bravo
+Enter wickets - seperated by "|" symbol.
+Robin Uthapa
+Do you want to add another player (yes/no)
+no
+Enter the player name to search
+Morkel
+No player found with the name Morkel
+Do you want to search another player (yes/no)
+yes
+Enter the player name to search
+Ashwin
+Player Name : Ashwin
+Wickets :
+Virat Kohli
+Shane Watson
+Ajinkya Rahane
+
+Do you want to search another player (yes/no)
+no
+
+
+
+
+
+
+
+2. 
+Write a Java program to register all the player details [Bowler] and provide a quick view of number of
+wickets taken by the player based on the name of the player. Use HashMap to store all the wickets, Key
+will be the name of the player and value contains the player object. Multiple complaints for a user is
+provided using a delimiter pipe "|".
+Create a main class "Main.java"
+
+Create Player class with below attributes,
+bowlerName - String
+wicketCount - Integer
+
+Add appropriate getter and setter methods for Player class
+Create constructor for Player class with arguments name and complaint count
+Provide search option to search based on the name of the bowler and display the number of wickets taken
+by him.
+Input and Output Format:
+Refer sample input and output for formatting specifications.
+
+Sample Input/Output :
+Enter the player name
+Aswin
+Enter wickets - seperated by "|" symbol.
+Virat Kohli|Shane Watson|Ajinkya Rahane
+Do you want to add another player (yes/no)
+yes
+Enter the player name
+Bravo
+Enter wickets - seperated by "|" symbol.
+Robin Uthapa
+Do you want to add another player (yes/no)
+no
+Enter the player name to search
+Morkel
+No player found with the name Morkel
+Do you want to search another player (yes/no)
+yes
+Enter the player name to search
+Aswin
+Player name : Aswin
+Wicket Count : 3
+Do you want to search another player (yes/no)
+no
+
+
+
+
+
+
+BCCI, for the upcoming IPL season in 2017 decided to give unique cap numbers to every player. Player
+capNumber is a string. The capNumber and player details are stored in a Treemap.
+Create a class named Player with the following private attributes --- name,team and skill. Create a list of
+objects of Player type.
+Cap number is the key and player details is the value. 
+Write a program to display the details of all the
+players stored in this TreeMap.
+Input and Output Format:
+Refer sample input and output for formatting specifications.
+Sample Input and Output:
+Enter the number of players
+2
+Enter the details of the player 1
+57
+Jaspirit Bumrah
+Mumbai Indians
+Bowler
+Enter the details of the player 2
+55
+MS Dhoni
+Rising Pune Supergiants
+All Rounder
+Player Details
+55--MS Dhoni--Rising Pune Supergiants--All Rounder
+57--Jaspirit Bumrah--Mumbai Indians--Bowler
+
+
+
+
+
+
+
+
+
+
+
+HashMap - Scores to Bin
+Write a Java program to group the set of scores into corresponding bin. The number of bins are fixed as
+10,20,30,40. Input consists of set of scores with in a range of 1 - 40. Classify each score and increment the
+corresponding bin.
+Maintain the bin's in HashMap with key as 10,20,30,40 and their corresponding integer count as value.
+Create a main class "Main.java"
+First input corresponds to the number of overs and followed by N number of scores in each over.
+Create a class Histogram with below specification,
+Access
+Modifier
+Attribute/Method Type/Return type Name Description
+
+private Attribute HashMap<Integer,Integer> bins
+Maintains the 4 bins and their corresponding count
+
+public Method void addScore(Integer)
+Add the input score to  corresponding bin
+
+public Method void displayHistogram()
+Display the histogram represented by number of stars for each bin
+Refer the sample input/output
+Read the input numbers in the main class and call addScore() method in the Histogram class to add the
+scores to the corresponding bin.
+Input and Output Format:
+First input corresponds to the number of overs (N). Followed by N scores in each over.
+Refer sample input and output for formatting specifications.
+
+
+Sample Input/Output :
+11
+6
+17
+21
+7
+35
+22
+4
+18
+33
+7
+31
+Histogram
+10 : ****
+20 : **
+30 : **
+40 : ***
+
+
+
+******************************************
+
+Write a Java program to calculate the character frequency in a sentence. The input consist of a single
+sentence and the output displays a graphical chart displaying the freqency of each character by number of
+asterisk (*). Display the character in the output in alphabetical order. Compute the frequence of all letters
+except space.
+Use TreeMap to store the characters and frequency since the tree map maintains the entries sorted based on
+their natural ordering.
+Create a main class "Main.java"
+Create a class LetterSequence and include below methods and attributes,
+Include a constructor to get the sentence as the input
+Method/Attribute Details
+public TreeMap<Character,Integer> computeFrequency()
+Compute the frequency of each character in the sentence and store it in the TreeMap.
+Return the TreeMap after the computation.
+public void displayLetterFrequency(TreeMap<Character,Integer> frequencyMap)
+Iterate the tree map and get all the entries and print the information in a
+graphical view as shown the sample output
+private String sentence 
+Input sentence is stored in this attribute
+
+Input and Output Format:
+Refer sample input and output for formatting specifications.
+
+Sample Input/Output :
+Enter the input string
+Kohli is the man of the match
+K : *
+a : **
+c : *
+e : **
+f : *
+h : ****
+i : **
+l : *
+m : **
+n : *
+o : **
+s : *
+t : ***
+
+
+

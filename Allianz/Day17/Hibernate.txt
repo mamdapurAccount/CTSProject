@@ -1,0 +1,57 @@
+1. Write a Hibernate program  to perform Collection Element in a given Entity class
+Table
+
+ Album
+    Id
+    Name
+    Collection pictures
+Picture
+   Id
+   Info
+
+Perform the above operation using Hashset
+
+2. Write a Hibernate program  to perform Collection Element in a given Entity class
+Table
+
+ Continent
+    Id
+    Name
+    Map countries
+Country
+   Id
+   CountryName
+   CountryCapital
+
+Perform the above operation using HashMap
+
+3.
+1. Write a Hibernate program  to perform Collection Element in a given Entity class
+Table
+
+ MusicCD
+    Id
+    Name
+    Collection Songs
+Songs
+   Id
+   Info
+
+Perform the above operation using ArrayList
+
+4. Write a Hibernate Program to Fetch the Id Details for all the above Assignment program
+
+5. Write a Hibernate Program to Perform the Inheritence for below entities
+
+	Person
+	Id
+	Name
+
+                 Employee  extends Person
+                    dept
+                 
+	Customer extends Person
+                    accType;
+
+      *  Perform all the 3 types of inheritance
+ 

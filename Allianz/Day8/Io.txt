@@ -1,0 +1,15 @@
+Exercise 1: Write a Java program that reads a line of integers and then displays each integer and the sum of all integers. 
+
+
+Exercise 2: Write a Java program that reads a file and displays the file on the screen, with a line number before each line?
+
+Exercise 3: Write a Java program that displays the number of characters, lines and words in a text? 
+
+Exercise 4: Write a Java program that reads on file name from the user, then displays information about whether the file exists, whether the file is readable, whether the file is writable, the type of file and the length of the file in bytes?  
+
+Exercise 5: Create a method that accepts a String and checks if it is a positive string. A string is considered a positive string, if on moving from left to right each character in the String comes after the previous characters in the Alphabetical order. For Example: ANT is a positive String (Since T comes after N and N comes after A). The method should return true if the entered string is positive.
+
+Exercise 6: Create a method to accept date and print the duration in days, months and years with regards to current system date.
+
+Exercise 7: You are asked to create an application for registering the details of jobseeker. The requirement is:
+Username should always end with _job and there should be at least minimum of 8 characters to the left of _job. Write a function to validate the same. Return true in case the validation is passed. In case of validation failure return false.

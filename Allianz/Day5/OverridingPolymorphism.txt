@@ -1,0 +1,22 @@
+1.Write a program and use overloaded methods for printing different types of array (integer, double and character).
+
+2 
+  Create  a base class Fruit which has name ,taste and size as its attributes. 
+  A method called eat() is created which describes the name of the fruit and its taste.
+  Inherit the same in 2 other class Apple and Orange and override the eat() method to represent 
+ each fruit taste.
+
+3 Write a program to create a class named shape. In this class we have three sub classes circle, triangle and square each class has two member function named draw () and erase (). Create these using polymorphism concepts.
+
+4. Write a program to create a class named Figure. 
+In this class we have constructor to populate dimension1 & dimension2. 
+Create 2 subclasses Triangle and Rectangle , each having method area() to calculate its own area.
+Create these using polymorphism concepts.
+
+5.  
+  There is an animal class which has the common characteristics of all animals. 
+  Dog, Horse, Cat are animals(sub-class). 
+  Each can shout, but each shout is different. 
+  Use polymorphism to create objects of same and using an animal reference, 
+  make each of the animals shout.
+

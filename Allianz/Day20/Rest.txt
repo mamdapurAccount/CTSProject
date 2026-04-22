@@ -1,0 +1,6 @@
+1. write a restful webservice to implement following http methods on Map Object
+
+GET
+POST
+PUT
+DELETE

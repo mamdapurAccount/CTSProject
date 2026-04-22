@@ -1,0 +1,25 @@
+1.Create a table with the following structure.
+Column Name Datatypes
+FlowerID Varchar2
+FlowerName Varchar2
+Color Varchar2
+Price Number
+
+Create proper bean class and insert a record into this table.
+Hibernate	
+
+2.Using Hibernate create an employee table in the backend and insert 5 employee objects into the database.
+The following are the details of the employee table. 
+Name varchar2
+Id Number
+Designation varchar2
+Salary Number
+The Employee Id should be auto incremented
+[ Hint : ]
+
+3.Using Hibernate create a Product table in the backend and insert 5 Product objects into the database.
+The following are the details of theProduct table. 
+ProductName varchar2
+ProductId Number
+Price Number
+ ]

@@ -1,0 +1,10 @@
+1.Write a Program that will check whether a given String is Palindrome or not
+
+2.Write a Program to understand the difference between == and equals method in a String
+
+3.Write a Program which displays a menu, with 2 options. 1. String Functions and 2. StringBuffer functions.If option1 is chosen, it should demonstrate the use of 5 String functions. If option 2 is selected, it should demonstrate the use of 5 StringBuffer functions
+
+4. Write a Program to sort the Strings in Ascending Order.
+
+
+

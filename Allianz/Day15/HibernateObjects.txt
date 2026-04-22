@@ -1,0 +1,13 @@
+1.Assume that the following data exists in the table that you have created earlier
+FlowerID FlowerName Color Price
+1                 Rose                  Red       10
+2                 Carnation       White   15
+
+Retrieve and display the details of the flower- ‘2’.
+Hibernate
+	
+2.Write a Hibernate Program to Delete a Flower with its Id from the table that you have created earlier. If there is no Flower with that id exists, then an appropriate error message needs to be stored to the user.
+
+
+3.Write a Hibernate Program that will ask the user to enter an id and price. Using that the corresponding Flower's price need to be updated.
+After updating, show that the value is updated, by displaying that record.

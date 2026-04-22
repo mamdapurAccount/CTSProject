@@ -1,0 +1,27 @@
+1.Create a Thread by extending the Thread class.
+Thread creation	
+2.Create two threads and assign names ‘Chennai’ and 'Blore’ to the two threads. Display both thread names.
+Setting the name of the thread.	
+3.Create three threads A, B and C by extending Thread class. Change the priority of each thread and observe the order of execution. 
+Setting the priority of the thread.	
+4.Create a thread class T1 by extending Thread class. Create a thread object. Start the thread using start() method. Try to start the same thread again. Observe the output.
+
+5.Create a Thread by implementing Runnable interface
+	
+6. Create two threads by implementing Runnable interface. Each thread will calculate the value of Pi( p) 10 times and print the same.
+
+7s.Create a thread class that checks whether a given number is prime or not.(Using:  Thread class / Implementing  Runnable Interface)
+
+8.Create a program in which one thread prints odd numbers and another thread displays even numbers. The threads should be executed in a way that the output should be like :1 2 3 4 5 6 7 8 9 10…
+
+9.Create a program to find if the given number is odd or even using threads. If the number is even it should print the Square of that number. If that number is odd another thread should display the Cube of that number. The threads should be executed in a way that the output should be like :  1-odd-1  2-EVEN-4  3-odd-27 and so on based on the input.
+
+10.Simulate the functioning of ATM machine by creating Threads for Withdrawl /Deposit/Balance Enquiry. Ensure that data is properly synchronized for every transaction.   
+
+11	Write a program to assign the current thread to t1. Change the name of the thread to MyThread. Display the changed name of the thread. Also it should display the current time. Put the thread to sleep for 10 seconds and display the time again.
+
+12	Write a Java Program, where one thread prints a number ( Generate a random number using Math.random) and another thread prints the factorial of that given number. Both the outputs should alternate each other.
+Eg: Number : 2
+       Factorial of 2 : 2
+       Number : 5
+       Factorial of 5 : 120

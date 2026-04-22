@@ -1,0 +1,53 @@
+Case Study 1:
+
+                     Write a java program that receives 5 number through command line argument and sort them 
+
+
+
+Case Study 2:
+
+Given the following , containing information about employees of an organization , 
+develop a small java based console application which accepts  employee id from the command prompt 
+and display the folllowing output.
+
+
+EMPNO   EMPNAME    JOINING_DATE     DESIGNATION   DEPT    BASIC     HRA   IT
+  
+ 100          Ajay               01/04/2009                     e                         R&D       2000     8000    3000
+
+ 101          Sameer          23/08/2012                    c                         PM         3000    12000   9000
+
+ 102        Soumya          12/11/2008                   k                         ACCT    10000    8000    1000 
+
+ 103        Kunal           16/07/1009                   m                         ENGG     5000     2000    2000
+
+Salary is calculated as   BASIC+ HRA+ DA+IT
+
+Designation_Code    Designation   DA
+e                    Engineer       20000
+
+c                     Consultant   32000
+
+k                    clerk          12000
+
+m                     Manager       40000
+  
+
+use switch case to print the designation in the output and to findout the value of DA for a particular employee.
+
+O/P expected 
+
+Assuming your class name is CaseStudy1 and you exxcute your code as,
+
+Enter the id
+102
+
+The output should be,
+
+EMPNO   EMPNAME DEPARTMENT DESIGNATION SALARY
+102            Soumya    ACCT                   Cleark                29000    
+
+Enter the id
+90
+
+There is no employee with empid: 90    

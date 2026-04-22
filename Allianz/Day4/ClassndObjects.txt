@@ -1,0 +1,36 @@
+1 Create a class Box that uses a parameterized constructor to initialize the dimensions of a box.(dimensions are width, height, depth of double type). The class should have a method that can return volume. Obtain an object and print the corresponding volume in main() function.
+	
+2.Create a new class called “Stock” which contains the following: 
+1. A String for the stock name
+2. A String for the stock symbol
+3. A double storing the previous closing price of the stock
+4. A double storing the current closing price of the stock
+5. A constructor that allows you to define a stock’s name, symbol, previous closing price and current closing price
+6. A method getChangePercentage() that returns the percentage change from the previous closing price to the current closing price
+	
+
+3.Design a class that implements a Cooler. Here’s what your class should contain: 
+1. Static constants SLOW, MEDIUM and FAST that store the integers 1, 2 and 3
+2. Private int named speed that defaults to SLOW
+3. Private boolean named on that defaults to false
+4. Private double named radius that defaults to 5
+5. Private String named color that defaults to “red”
+6. A no-arg constructor
+7. Getters and setters for each field, making sure to perform appropriate data vaildation prior to making changes to any field
+8. A method display() that returns a String summary of the current status of your Cooler.
+
+4.Create a new class called “RandomHelper” which contains the following: 
+1. A static method called randint that accepts two integers and returns a random integer between them. Make sure that the numbers are inclusive (i.e. if you call randomint(1,10) you should be able to generate both 1 and 10.
+2. A static method called randdouble that accepts two integers and returns a random double between them. For this method you should be able to generate numbers such that 1 <= x < 10 for the method call randdouble(1,10)
+
+
+
+4	
+ Design a class that can be used by a health care professional to keep track of a patient’s vital statistics. Here’s what the class should do: 
+1. Construct a class called Patient
+2. Store a String name for the patient
+3. Store weight and height for patient as doubles
+4. Construct a new patient using these values
+5. Write a method called BMI which returns the patient’s BMI as a double. BMI can be calculated as BMI = ( Weight in Pounds / ( Height in inches x Height in inches ) ) x 703
+6. Next, construct a class called “Patients” that creates 10 patients and stores them in an array. Defautl each patient to a random height and weight. Iterate over the array and report all patient’s who’s BMI is over 25.0
+Classes and Objects, Constructor, static	

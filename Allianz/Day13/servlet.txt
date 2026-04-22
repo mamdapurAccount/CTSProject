@@ -1,0 +1,20 @@
+1	Create a simple Servlet program that displays a message 
+“My First servlet”
+2. Create s Servlet to display the folllowing data in tabular format
+
+Strno	stname	Marks
+1	XYZ	90
+2	Sachin	80
+
+3.	Modify the above program. accept a name from user (on URL itself), and print 
+Hello <name>
+This is output from My First Servlet
+In this program the Hello <name> should be using a heading level h1 and the font color is red. The second line should be printed with a font color blue and heading level h3
+
+4.Create an HTML page with 3 textfields name, address and phone number. Once the user presses the submit button, it invokes a Servlet which prints all the 3 details in a tabular format.
+
+5. Generate a Servlet by creating a hyperlink and generate the values through Query String
+
+6. Create a login form and generate the sevlet which keep track of users in HashMap and display the same.
+
+

@@ -1,0 +1,102 @@
+1.	Write a program to create a class Book with the following 
+- attributes:
+      -isbn, title, author, price
+  - methods :
+      
+       i. displaydetails() to display the details of the book
+       ii. discountedprice() : pass the discount percent, calculate the discount on price and find the amount to be paid after discount
+  - task : 
+     Create an object book, initialize the book and display the details along with the discounted price
+
+2.
+
+Write a program to create a class College with the following :
+ - attributes :
+   StudentId, Name, sub1,sub2,sub3,total,avg,grade.
+ - methods :
+   
+   i. display()  method to display the details of the students with total,avg & grade
+
+    grade: -   
+      for avg 
+            >70   "Dist"
+         60-70  "First"
+          50-60 "Second"
+         <50 "Fail" 
+
+
+
+
+3. Implement a class Employee with appropriate state and behavior. Write Demo java program to test Employee object behavior.
+- attributes :
+   EmpId, EmpName, BasicPay
+ - methods :
+   
+   i. display function to display the details of the Employee
+   ii. display function to display the bonus,da,hra,tax,loan,pf,gross,ded & NetSal( any Percentage on BasicPay)
+
+4.
+
+Write a program to create a class Student with the following :
+ - attributes :
+   StudentId, Name, contactNo, course,fees.
+ - methods :
+   
+   i. display function to display the details of the students
+  i. return the coursefees
+ - task : 
+   Create 3 students and perform the following :
+    
+   i display the total fees of all the students
+
+5. Write a program to create a class Vehicle with the following
+ - attributes :
+    Regno, brand, price, mileage
+ - methods :
+   
+   i. display function to display the details of the vehicles
+  ii. return only the price of the vehicle
+ - task :
+Create 2 vehicles, enter the details. Display the vehicle with lowest price and display the vehicle with best mileage
+
+6. Create an Account class with the following structure.
+ 
+
+Create objects of the account class and test that all the functionalities are implemented properly.
+
+ - attributes
+       Acno,Acname,Bal=9000;
+- methods :
+     
+    --   withdraw(int amt);
+     --   deposit(int amt);
+    --  printBal();
+
+task:  to perform the above methods
+
+7. Create a Class Complex with the Following Structure.
+
+- Attriubutes
+     real,img
+
+task:
+1. Create 2 Complex Objects & display it
+
+2. Define a method  to add 2 complex objects
+
+
+8. Create a Class customer with Following Structure
+
+-   CustId   int
+- CustName  string
+- CustAddress  string
+- Account  account
+
+---methods
+getAccount()
+setAccount()
+
+    task
+Perform the behaviour of the above class , considering the same Account Class observed earlier assignment
+
+
