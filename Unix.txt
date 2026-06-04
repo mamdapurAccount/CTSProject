@@ -1,0 +1,334 @@
+Unix Operating System :
+
+
+Unix is a multi-user, multitasking operating system that manages computer hardware and software resources efficiently. It allows multiple users to work simultaneously and run many programs at the same time.
+
+Multi User Operating system, Multi Task Operating system
+
+
+Multiuser
+Multitasking
+Portable
+Secure
+Reliable
+Command-based
+File-oriented
+
+ It consists of three main parts:
+
+Kernel – Core of the system (manages memory, processes, devices)
+Shell – Interface between user and kernel (command interpreter)
+File System – Organizes and stores data in files and directories
+
+Kernel manages system resources like CPU, memory, files, and devices, and enables communication between hardware and software.
+It Manages Process Management, Memory Management, File Management , Device Management
+
+
+User ----> Shell ( Command Interpretor) ----> Kernel ( Core part of OS )---> Hardware ( CPU,Memory,Device, Disk)
+
+
+ Important Directories
+
+    File Types in Unix
+
+ 1. / (root)
+ Starting point of everything
+
+ 2. /bin
+    System commands (executables)
+Examples:
+Shells, cp, mv, shShow more lines
+
+ 3. /home
+ User directories
+Example:
+/home/manoj
+
+
+ 4. /etc
+ Configuration files
+
+ 5. /tmp
+      Temporary files
+
+ 6. /dev
+    Device files (keyboard, disk, etc.)
+
+ 7. /usr
+  User programs and applications
+
+$ chmod ugo+rwx deepu.sh
+$ ./deepu.sh    to execute the file 
+$ sh deepu.sh
+vi
+    :q!   -- force to quit
+
+$ adduser deepu
+$ su deepu ( to login)
+$ sudo userdel -r deepu
+$ id deepu
+
+
+ps -p $$ -- to display the current shell
+echo $SHELL -- to display the current shell
+sh,csh,ksh,bash--- to change the shell 
+
+whoami
+history
+
+head -5 cts.txt
+tail -5 cts.txt
+wc cts.txt -- counts the no of lines/words/characters filename
+sort cts.txt
+
+grep "Hello" cts.txt
+grep -i "hello" cts.txt ignores case
+grep -n "Hello" cts.txt  shows line number
+grep -c "Hello" cts.txt  shows no of lines containing Hello
+grep -v "Hello" cts.txt exclude the searching text
+
+grep "^a" cts.txt          Lines starting with 'a'
+grep "end$" cts.txt        Lines ending with 'end'
+grep "[0-9]" cts.txt       Lines with digits
+grep -E "^[a-zA-Z]{3}" cts.txt
+grep -E "^s...$" cts.txt
+
+cut -c3 cts.txt  --- it will cut 3 character
+cut -c3-6 cts.txt --- it will cut from 3 till 6 character
+cut -d ',' -f 1 cts.txt
+cut -d ',' -f 1,2 cts.txt
+
+ Job Control
+
+Manage background and foreground processes
+
+sleep 60 &        # & means Run in background and donot block the terminal
+jobs              # List running jobs
+sleep 15
+
+  Press Ctrl Z ( Suspend the job not Terminated )
+
+fg %1             # Bring job 1 to foreground with terminal block
+bg %1             # Resume job in background without blocking the terminal
+kill %1           # Stop a job
+
+  Signals used to control process
+
+ps                    to display all the process of your own session
+sleep 5(seconds) &    --- run this command in backend
+   [1] 2195 o/p
+kill 2195
+ps aux
+ps -ef -- to show commonly used process in a detailed 
+
+
+kill -SIGTERM 1234    Gracefully stop process
+kill -9 1234          Force kill (SIGKILL)
+kill -l               List all signals
+
+Common Signals
+SIGINT → Interrupt
+SIGTERM → Stop safely
+SIGKILL → Force stop
+
+
+Pipe character taken the output for one command  and gives input to another command
+
+ps -ef | head -5
+ps -ef | grep ssh
+ls | wc -l  counts the no of lines
+cat file.txt | sort
+
+
+
+
+#!/bin/bash
+
+*******************************************************************
+a=11
+
+if [ $a -eq 10 ]; then
+echo "yes";
+else
+echo "no"
+fi
+
+
+***********************************************************************
+
+
+echo "Enter any 2 Strings"
+read n
+read m
+if [ "$n" = "$m" ]; then
+echo "Strings are same"
+else
+echo "Not same"
+fi
+
+
+******************************************************
+a=10;
+b=20
+if [ $a -gt $b ]; then
+echo "$a is greatest";
+else
+echo "$b is greatest";
+fi
+
+************************************************************************
+echo "Enter any no"
+read n
+if [ $n -gt 0 ]; then
+echo "$n is greater than 0"
+elif [ $n -lt 0 ]; then
+echo "$n is less than 0"
+else
+echo "Equal to 0"
+fi
+
+**********************************************
+a=7
+if [ $((a%2)) -eq 0 ]; then
+echo "$a is Even";
+else
+echo "$b is Odd";
+fi
+*******************************************************************
+for i in 1 2 3 4 5 
+do
+echo "Number $i"
+done
+***********************************************************
+echo "Enter your name"
+read name
+
+echo "Hello $name"
+****************************************************************
+count=0
+while [ $count -le 10 ]
+do
+echo $count
+count =$((count+1))
+done
+*****************************************
+
+a="saba"
+b="saba"
+if [ $a = $b ]; then
+echo "yes";
+else
+echo "no"
+fi
+************************************************
+a="Deepak"
+
+echo "${a:1:4}"
+echo "${#a}"
+echo "${a^^}" upper case
+echo "${a,,}" lower case
+echo "${a/e/p} replace a character
+
+Length → ${#str}
+Compare → [ "$a" = "$b" ]
+Substring → ${str:start:length}
+Replace → ${str/old/new}
+Case change → ${str^^}, ${str,,}
+
+#!/bin/bash
+
+echo "Enter a string:"
+read str
+
+if [[ $str =~ ^[A-Za-z]+$ ]]; then
+    echo "Only alphabets"
+else
+    echo "Contains other characters"
+fi
+
+#!/bin/bash
+
+str="HelloWorld"
+
+echo "Enter character to search:"
+read ch
+
+found=0
+
+for (( i=0; i<${#str}; i++ ))
+do
+    if [ "${str:$i:1}" = "$ch" ]; then
+        echo "Character found at index $i"
+        found=1
+        break
+    fi
+adone
+
+if [ $found -eq 0 ]; then
+    echo "Character not found"
+fi
+
+
+****************************************************
+
+trap "echo 'Interrupted!'; exit 0" SIGINT
+
+while true
+do
+  echo "Running..."
+  sleep 2
+done
+Press Ctrl+c  it will print message instead of stopping immediately
+*****************************************************************
+
+str="Deepaks"
+str1="Deepak"
+len=${#str}
+
+echo $len
+
+if [ $str = $str1 ]; then
+echo "Yes"
+else
+echo "No"
+fi
+
+if [[ $str =~ ^[a-zA-Z]{6}$ ]]; then
+echo "Regex Yes"
+else
+echo "Regex No"
+fi
+
+c="e"
+for (( i=0;i<${#str};i++ ))
+do
+if [ ${str:$i:1} = $c ]; then
+echo "Found"
+else
+echo "NOt found"
+fi
+done
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
