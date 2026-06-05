@@ -1,0 +1,206 @@
+************************************************************************************
+
+<dependency>
+    <groupId>jakarta.servlet</groupId>
+    <artifactId>jakarta.servlet-api</artifactId>
+    <version>5.0.0</version>
+    <scope>provided</scope>
+</dependency>
+
+  <dependency>
+    <groupId>jakarta.ws.rs</groupId>
+    <artifactId>jakarta.ws.rs-api</artifactId>
+    <version>3.1.0</version>
+   
+</dependency>
+
+   
+  <dependency>
+    <groupId>org.glassfish.jersey.core</groupId>
+    <artifactId>jersey-server</artifactId>
+    <version>3.1.5</version>
+</dependency>
+
+<dependency>
+    <groupId>org.glassfish.jersey.containers</groupId>
+    <artifactId>jersey-container-servlet</artifactId>
+    <version>3.1.5</version>
+</dependency>
+
+<dependency>
+    <groupId>org.glassfish.jersey.inject</groupId>
+    <artifactId>jersey-hk2</artifactId>
+    <version>3.1.5</version>
+</dependency>
+ 
+  <dependency>
+        <groupId>org.glassfish.jersey.media</groupId>
+        <artifactId>jersey-media-json-jackson</artifactId>
+        <version>3.1.5</version>
+    </dependency>
+ <dependency>
+    <groupId>org.glassfish.jersey.media</groupId>
+    <artifactId>jersey-media-multipart</artifactId>
+    <version>3.1.5</version>
+</dependency>
+ <dependency>
+    <groupId>jakarta.xml.bind</groupId>
+    <artifactId>jakarta.xml.bind-api</artifactId>
+    <version>4.0.0</version>
+</dependency>
+
+<dependency>
+    <groupId>org.glassfish.jaxb</groupId>
+    <artifactId>jaxb-runtime</artifactId>
+    <version>4.0.3</version>
+</dependency>
+
+<dependency>
+    <groupId>org.glassfish.jersey.media</groupId>
+    <artifactId>jersey-media-jaxb</artifactId>
+    <version>3.1.5</version>
+</dependency>
+
+****************************************************************************************
+
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee 
+         https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+
+    <servlet>
+        <servlet-name>jersey-servlet</servlet-name>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>com.aditi</param-value>
+        </init-param>
+
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>jersey-servlet</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>
+*********************************************************************************************
+
+@Path("/hello")
+public class HelloService {
+	static DbUtil db = new DbUtil();
+	@GET
+	@Path("/msg")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String sayHello() {
+		return "Dada I Miss you";
+	}
+	@GET
+	@Path("/person")
+	@Produces(MediaType.APPLICATION_XML)
+	public Person getPerson() {
+		return new Person("Murali","Krishna",90);
+	}
+	@POST
+	@Path("/addperson")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getName(Person p) {
+		return p.getFname()+"  "+p.getLname();
+	}
+	@GET
+	@Path("/getusers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Login> getAllusers() {
+		return db.getUsers();
+	}
+	
+	@POST
+	@Path("/adduser")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.TEXT_PLAIN)
+	public String AddUser(Login l) {
+		return db.addUser(l);
+	}
+	@GET
+	@Path("/getuser/{p1}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	
+	public Login getUser(@PathParam("p1") String s) {
+		return db.getUser(s);
+	}
+	@PUT
+	@Path("/updateuser")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String updateUser(Login l) {
+		return db.updatePwd(l);
+	}
+	@DELETE
+	@Path("/deluser/{p1}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String delUser(@PathParam("p1") String u) {
+		return db.delUser(u);
+	}
+	@GET
+	@Path("/getmyusers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getUsers() {
+		return Response.ok("[{\"username\":lolo},{\"username\":bebo}]").build();
+	}
+	@POST
+	@Path("/addmyuser")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response addUser(String str) {
+          return Response.status(201).entity("User Created "+str).build();
+	}
+	@GET
+	@Path("/getmyuser/{p1}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getUser(@PathParam("p1") int id) {
+		if(id<=5)
+          return Response.status(401).entity("Invalid Id").build();
+		else
+			return Response.status(201).entity("User "+id).build();
+	}
+	
+	@GET
+	@Path("/admin")
+	@RolesAllowed("ADMIN")
+	public Response adminOnly() {
+	    return Response.ok("Admin access granted").build();
+	}
+
+	@OPTIONS
+    @Path("/getmyusers")
+	@Produces(MediaType.APPLICATION_JSON)
+    public Response handleOptions() {
+        return Response.ok()
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Authorization")
+                .build();
+    }
+
+	@GET
+	@Path("/myadmin")
+	public Response adminOnly(@HeaderParam("Authorization") String authHeader) {
+		
+		return Response.ok(authHeader).build();
+//		String str= authHeader.substring(7);
+//		if (str.equals("Deepak")) 
+//          	return Response.ok(authHeader).build();
+//    else
+//    			return Response.status(401).entity("Missing token").build();
+    }
+
+
+}
+*********************************************************************************************************
